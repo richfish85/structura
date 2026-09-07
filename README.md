@@ -98,11 +98,13 @@ Checklist:
 - [x] Read-only local HTML explorer
 - [x] Automated schema and web tests
 - [ ] Agree what counts as a product versus a family, chip, or board
-- [ ] Research the first 1998 CPU/GPU/HDD candidate batch
+- [x] Scout the first bounded 1998 CPU candidate batch
+- [ ] Independently verify and audit the CPU candidates
+- [ ] Expand the pilot to GPU and HDD candidates after the CPU criteria review
 - [ ] Define the human promotion gate from verified to canonical
 - [ ] Test the ontology on one deeply modelled object
 - [ ] Select a licence before publishing or accepting contributions
 
 ## Current decisions and open questions
 
-See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), and [Decision log](docs/decision-log.md).
+See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [draft research criteria](docs/research-criteria-v0.1.md), [CPU scout batch](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).

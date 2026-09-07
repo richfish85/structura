@@ -28,3 +28,22 @@
 ### Rationale
 
 The durable asset is the ontology, evidence, and normalized records. Storage engines and presentation layers can change. Starting with inspectable SQL and plain HTML lets real use expose modelling failures before design or infrastructure becomes expensive to revise.
+
+## 2026-09-08 — CPU scout pass 01
+
+### Observed
+
+- Manufacturer sources distinguish announcement, introduction, system availability, component availability, boxed availability, first shipment, and volume shipment.
+- Family-level launch dates cannot safely be inherited by speed grades or SKUs.
+- Quarter-only and retrospective evidence is common enough to require explicit treatment.
+- Frequency labels do not provide stable ordering part numbers, and suffixes such as `300A` are identity-bearing.
+- The Pentium II Xeon 400 MHz cache options immediately challenge a one-row-per-frequency model.
+
+### Candidate decisions for review
+
+- Add typed product events rather than expanding the meaning of `release_date`.
+- Track source independence separately from source tier and source count.
+- Decide whether the first 1998 population is a launch cohort or a full commercially-present census.
+- Define family, model/variant, and orderable SKU boundaries before normalization.
+
+No scout candidate was verified, normalized, imported, or promoted.
