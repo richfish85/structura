@@ -47,7 +47,7 @@ Source tier is not a truth score. A primary source may omit an inconvenient fact
 
 ## Initial pilot
 
-Scope: products commercially present or credibly released in 1998 across CPU, GPU, and HDD categories.
+Scope: the 1998 launch cohort across CPU, GPU, and HDD categories. A candidate must have evidence of a new product introduction or first commercial shipment during 1998. Products launched earlier and merely remaining on sale are outside this first dataset.
 
 The three categories intentionally stress different modelling problems:
 
@@ -56,3 +56,5 @@ The three categories intentionally stress different modelling problems:
 - HDD: capacities, interfaces, model families, and regional availability
 
 Compatibility, openness, repairability, scarcity, and market conclusions are outside this first batch.
+
+Announcement-only records remain candidates until verification establishes whether a qualifying introduction or commercial shipment occurred in 1998. Channel-specific availability should be preserved rather than collapsed into one date.

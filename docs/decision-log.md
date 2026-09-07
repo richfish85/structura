@@ -47,3 +47,17 @@ The durable asset is the ontology, evidence, and normalized records. Storage eng
 - Define family, model/variant, and orderable SKU boundaries before normalization.
 
 No scout candidate was verified, normalized, imported, or promoted.
+
+## 2026-09-08 — First census population locked
+
+### Adopted
+
+- The first dataset is the **1998 launch cohort**.
+- It covers products newly introduced or first commercially shipped during 1998.
+- Products launched earlier and merely remaining commercially available in 1998 are outside this first dataset.
+- This cohort must not be described as a full census of the 1998 market.
+
+### Still open
+
+- Whether manufacturer announcement alone can ever qualify when introduction or first-shipment evidence is unavailable
+- Which launch event controls public year navigation when introduction, system availability, component shipment, and boxed availability differ

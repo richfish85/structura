@@ -2,6 +2,8 @@
 
 Status: **candidate criteria for review**. These rules are not yet a locked research policy.
 
+Approved population decision: the first dataset is the **1998 launch cohort**, not a full commercially-present census.
+
 ## What
 
 These criteria define what a researcher must record before a historical hardware candidate can advance beyond scouting.
@@ -86,8 +88,8 @@ A scout record is ready for verification when it has:
 
 ## Questions created by the pilot
 
-1. Is the first dataset a **1998 launch cohort** or a **full commercially-present 1998 census**?
-2. Should different cache configurations at one frequency be variants beneath one model, or separate product records?
-3. Do we want product events as first-class rows before verification begins?
-4. Should `quarter` become an explicit date precision, or should quarters remain bounded ranges?
-5. Which event qualifies a product for the public-facing year navigation?
+1. Should different cache configurations at one frequency be variants beneath one model, or separate product records?
+2. Do we want product events as first-class rows before verification begins?
+3. Should `quarter` become an explicit date precision, or should quarters remain bounded ranges?
+4. Which event qualifies a product for the public-facing year navigation?
+5. How should an announcement-only candidate be treated when first shipment cannot be established?

@@ -20,7 +20,7 @@ This may eventually support investigation of replaceability, standardisation, in
 
 ### MVP 0 — product census
 
-Start with 1998 CPU, GPU, and HDD products. Capture identity, manufacturer, category, model number, announcement/release evidence, source quality, confidence, and conflicts.
+Start with the 1998 launch cohort for CPU, GPU, and HDD products: products newly introduced or first commercially shipped during 1998. Capture identity, manufacturer, category, model number, typed launch evidence, source quality, confidence, and conflicts. Do not claim coverage of older products that remained on sale during the year.
 
 ### Ontology exercise
 

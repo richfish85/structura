@@ -7,7 +7,7 @@
 
 ## What
 
-This first bounded pass records ten CPU candidates from Intel and AMD primary sources. It is intentionally not a complete 1998 CPU census.
+This first bounded pass records ten CPU candidates from Intel and AMD primary sources. The approved population is the **1998 launch cohort**: products newly introduced or first commercially shipped during 1998. It is intentionally not a census of every CPU still sold during that year.
 
 ## Why
 
@@ -34,4 +34,4 @@ The pass tests whether the current intake format preserves product identity, fam
 
 ## Current boundary
 
-This sample is a **1998 launch cohort**, not yet a census of every CPU commercially present during 1998. That distinction requires an explicit project decision before completeness can be measured.
+This sample is a **1998 launch cohort**, not a census of every CPU commercially present during 1998. The remaining boundary question is which evidence event qualifies a candidate for inclusion when announcement, introduction, shipment, and channel availability occur at different times.
