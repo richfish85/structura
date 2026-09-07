@@ -37,24 +37,42 @@ Then open `http://127.0.0.1:8000`. The explorer is deliberately plain and read-o
 
 The generated database is `data/structura.db` and is ignored by Git. Schema and proposed ontology changes live in versioned SQL files instead.
 
+### Run the launch-cohort mini demo
+
+This builds a separate disposable review database, imports the scout and independent-verification artifacts without promoting them, and renders plain static HTML from SQL:
+
+```powershell
+python -m structura init --db data/mini-demo.db
+python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/01_scout_candidates.csv --sources research_batches/pilot-1998-cpu/01_sources.csv --stage scouting
+python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-cpu/02_verification.csv
+python -m structura render-review --db data/mini-demo.db --output exports/mini-demo
+python -m structura check --db data/mini-demo.db
+```
+
+Open `exports/mini-demo/index.html`. Repeating either import is safe: the exact input digest is recognized and no duplicate run or assertion rows are added.
+
 ## Implementation
 
 ```text
 research intake
      |
      v
-candidate -> verification -> normalization -> audit -> human review
-                                                     |
-                                                     v
-                                              canonical SQLite
-                                                 /    |    \
-                                                v     v     v
-                                             HTML    CSV   graph export
-                                                           (later)
+agent files -> validate/hash -> non-canonical SQL review staging
+                                      |
+                                      +----> plain static HTML
+                                      |
+                verification -> normalization -> audit -> human review
+                                                               |
+                                                               v
+                                                        canonical status
+                                                               |
+                                                               v
+                                                    CSV / graph export later
 ```
 
 - `schema/001_initial.sql` defines entities, product details, relationships, sources, and evidence links.
 - `schema/002_seed_ontology.sql` supplies a proposed, revisable relationship vocabulary.
+- `schema/003_research_intake.sql` through `005_verification_report_intake.sql` preserve immutable import runs, raw candidate rows, and verification evidence separately from canonical promotion.
 - `data/intake/` contains blank handoff templates for research stages.
 - `structura/` contains database setup, validation, and the local HTML explorer.
 - `docs/` records product boundaries, architecture, research workflow, ontology, and risks.
@@ -99,7 +117,9 @@ Checklist:
 - [x] Automated schema and web tests
 - [ ] Agree what counts as a product versus a family, chip, or board
 - [x] Scout the first bounded 1998 CPU candidate batch
-- [ ] Independently verify and audit the CPU candidates
+- [x] Independently verify the CPU candidates
+- [ ] Audit the CPU candidates
+- [x] Demonstrate idempotent SQL intake and plain static HTML generation
 - [ ] Expand the pilot to GPU and HDD candidates after the CPU criteria review
 - [ ] Define the human promotion gate from verified to canonical
 - [ ] Test the ontology on one deeply modelled object

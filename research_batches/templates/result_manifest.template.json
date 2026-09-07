@@ -1,0 +1,62 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "replace-with-batch-key",
+  "job_id": "job-replace-with-unique-id",
+  "run_id": "run-20260101T000000Z-worker-01",
+  "artifact_id": "artifact-job-replace-with-run",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-01-01T00:00:00Z",
+  "completed_at_utc": "2026-01-01T00:00:00Z",
+  "worker": {
+    "agent_id": "replace-with-agent-id",
+    "model": "replace-with-model-id",
+    "capability_route": "luna-or-terra",
+    "tool_versions": ["replace-with-tool-version"],
+    "independence_group": "replace-with-group-id"
+  },
+  "inputs": [
+    {
+      "artifact_id": "replace-with-input-artifact-id",
+      "sha256": "replace-with-input-sha256"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "output.csv",
+      "sha256": "replace-with-output-sha256",
+      "row_count": 0,
+      "schema": "replace-with-stage-schema-name"
+    }
+  ],
+  "coverage": {
+    "record_keys_attempted": [],
+    "record_keys_completed": [],
+    "record_keys_blocked": [],
+    "unknowns": [],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [],
+    "primary_sources_used": [],
+    "retrospective_sources_used": [],
+    "independence_limitations": []
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "replace-with-limitations-and-method-notes"
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": [],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}

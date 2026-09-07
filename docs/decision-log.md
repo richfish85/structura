@@ -61,3 +61,27 @@ No scout candidate was verified, normalized, imported, or promoted.
 
 - Whether manufacturer announcement alone can ever qualify when introduction or first-shipment evidence is unavailable
 - Which launch event controls public year navigation when introduction, system availability, component shipment, and boxed availability differ
+
+## 2026-09-08 — Launch-cohort mini demo
+
+### Adopted
+
+- Agent workers write isolated, immutable CSV/JSON artifacts rather than sharing a database writer.
+- One coordinator validates and hashes accepted artifacts before importing them.
+- Pre-review imports are explicitly non-canonical candidate/staging records.
+- Exact retries are idempotent; changed payloads that collide with existing candidate keys require a human merge decision.
+- The demonstration renders deterministic, unstyled static HTML from SQLite and requires no JavaScript, framework, or running server.
+- Canonical promotion remains a separate transaction after a recorded human decision.
+
+### Verification outcome
+
+- All ten bounded CPU candidates retain enough first-party evidence to remain in the human-review queue.
+- The Celeron 266 has an exact introduction date but an unresolved exact commercial-availability date.
+- Pentium II Xeon 400 cache variants remain a product-granularity question.
+- AMD-K6-2 350 and 400 timing remains quarter-precision and must not be converted into exact dates.
+
+### Still open
+
+- Wire job/result manifest identity directly into the SQL import ledger.
+- Define the normalization proposal format and independent omission/duplicate audit.
+- Define and test the recorded human canonical-promotion transaction.

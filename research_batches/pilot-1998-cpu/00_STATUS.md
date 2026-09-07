@@ -2,7 +2,7 @@
 
 - Batch key: `pilot-1998-cpu-gpu-hdd`
 - Subset: CPU scout pass 01
-- Status: **scouting complete; verification not started**
+- Status: **independent verification complete; awaiting normalization, audit, and human review**
 - Access date: 2026-09-08
 
 ## What
@@ -18,7 +18,8 @@ The pass tests whether the current intake format preserves product identity, fam
 - Seven Intel candidates come from contemporary Intel press releases and Intel's processor chronology.
 - Three AMD candidates come from AMD press releases filed with the SEC and AMD's annual report.
 - Raw manufacturer wording is preserved.
-- No candidate has been verified, normalized, imported into SQLite, or promoted to canonical status.
+- A separate agent independently verified the bounded ten-candidate set. All ten remain candidates for human review; none has been normalized or promoted to canonical status.
+- The scout and verification artifacts can now be imported into a disposable SQL review database and rendered as plain static HTML.
 
 ## Stage gates
 
@@ -26,7 +27,7 @@ The pass tests whether the current intake format preserves product identity, fam
 - [x] Primary sources registered
 - [x] Scout observations recorded
 - [x] Draft research criteria produced
-- [ ] Independent verification
+- [x] Independent verification
 - [ ] Normalization against approved terminology
 - [ ] Omission and duplicate audit
 - [ ] Human review

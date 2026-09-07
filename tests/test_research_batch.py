@@ -29,10 +29,11 @@ class ResearchBatchTests(unittest.TestCase):
         self.assertTrue(all(urlparse(row["url"]).hostname in allowed_hosts for row in rows))
         self.assertTrue(all(row["accessed_date"] == "2026-09-08" for row in rows))
 
-    def test_batch_remains_before_verification_gate(self):
+    def test_batch_remains_before_canonical_gate(self):
         status = (BATCH / "00_STATUS.md").read_text(encoding="utf-8")
-        self.assertIn("scouting complete; verification not started", status)
-        self.assertIn("[ ] Independent verification", status)
+        self.assertIn("independent verification complete", status)
+        self.assertIn("[x] Independent verification", status)
+        self.assertIn("[ ] Human review", status)
         self.assertIn("[ ] Canonical import", status)
 
 
