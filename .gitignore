@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Generated local databases and exports
+data/*.db
+data/*.db-shm
+data/*.db-wal
+exports/
+
+# Local/editor files
+.env
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

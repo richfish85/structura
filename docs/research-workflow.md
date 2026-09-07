@@ -1,0 +1,58 @@
+# Research Workflow
+
+## What
+
+Research moves through separate discovery, verification, normalization, audit, and human-review stages. No automated researcher owns a record end-to-end.
+
+## Why
+
+Separating stages reduces the chance that one mistaken assumption becomes a polished canonical record. The workflow also keeps omissions, conflicts, and uncertainty reviewable.
+
+## How
+
+```text
+Scout -> Verifier -> Normalizer -> Auditor -> Human review -> Canonical SQL
+```
+
+### Scout
+
+Find candidate products within a bounded year and category. Record raw manufacturer/product wording, model number, timing claims, sources, and notes. Do not infer missing dates or compatibility.
+
+### Verifier
+
+Check identity, manufacturer, release timing, and category independently. Add sources and flag conflicts. Do not expand the census or normalize away uncertainty.
+
+### Normalizer
+
+Map verified wording to approved entity types, predicates, category terms, and manufacturer identities. Do not invent vocabulary; flag unmapped terms.
+
+### Auditor
+
+Look for omissions, duplicate identities, inconsistent naming, category errors, suspicious dates, and weakly supported records. Report findings without changing the dataset.
+
+### Human review
+
+Resolve material ambiguity, approve ontology changes, and decide whether a record advances. The UI is part of review: browsing the records should reveal categories and relationships that do not feel structurally honest.
+
+## Source hierarchy
+
+| Tier | Typical sources | Use |
+|---|---|---|
+| 1 | Manufacturer documentation, manuals, datasheets, regulatory filings, standards bodies, archived manufacturer pages | Preferred factual evidence |
+| 2 | Contemporary technical publications, professional reviews, established hardware databases | Strong corroboration and market timing |
+| 3 | Teardowns, repair documentation, specialist archives, museum collections | Physical detail and archival support |
+| 4 | Forums, Reddit, personal sites, retail listings, general encyclopedias | Leads and context; rarely sufficient alone |
+
+Source tier is not a truth score. A primary source may omit an inconvenient fact; an expert archive may preserve information unavailable elsewhere. Contradictions remain visible.
+
+## Initial pilot
+
+Scope: products commercially present or credibly released in 1998 across CPU, GPU, and HDD categories.
+
+The three categories intentionally stress different modelling problems:
+
+- CPU: families, individual models, sockets, and dates
+- GPU: chips versus boards and multiple board manufacturers
+- HDD: capacities, interfaces, model families, and regional availability
+
+Compatibility, openness, repairability, scarcity, and market conclusions are outside this first batch.

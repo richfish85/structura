@@ -1,0 +1,16 @@
+[project]
+name = "structura-hardwaredb"
+version = "0.1.0"
+description = "A provenance-first, SQL-backed hardware knowledge base"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+structura = "structura.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["structura"]

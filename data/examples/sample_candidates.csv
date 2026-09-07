@@ -1,0 +1,3 @@
+batch_key,candidate_key,manufacturer_raw,product_name_raw,model_number_raw,product_type_raw,announced_date_raw,release_date_raw,market_scope_raw,source_1_url,source_2_url,notes
+example-only,example-cpu-001,Example Semiconductor,Example Processor 100,EX-100,CPU,,1998,Example market,https://example.invalid/source-one,,Fictional format demonstration only; never import as a factual hardware record
+example-only,example-gpu-001,Example Graphics,Example 3D Board,EG-3D,GPU,1998-02,,Example market,https://example.invalid/source-two,https://example.invalid/source-three,Fictional format demonstration only; conflicting date fields should remain unresolved

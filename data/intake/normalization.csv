@@ -1,0 +1,1 @@
+batch_key,candidate_key,entity_key,manufacturer_entity_key,normalized_product_name,normalized_model_number,entity_type_code,category_entity_key,announced_date,release_date,release_year,date_precision,normalization_status,unmapped_term,notes,normalizer
