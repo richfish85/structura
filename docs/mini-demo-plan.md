@@ -53,13 +53,14 @@ Multiple research agents should be able to work concurrently without writing to 
 ## Mini-demo acceptance checklist
 
 - [x] Initialize a fresh SQLite database from versioned migrations.
-- [x] Ingest the CPU scout/verification material into non-canonical candidate/staging records.
+- [x] Ingest the CPU scout, verification, normalization, and audit material into non-canonical candidate/staging records.
 - [x] Repeating the same import creates no duplicate records.
 - [x] A changed payload that collides with staged candidate identity is rejected for human resolution.
 - [x] Malformed input fails before any partial write.
 - [x] Generate static HTML from SQLite, not directly from CSV.
 - [x] The generated homepage links to the CPU batch, whose page links all imported candidate records.
 - [x] Every displayed factual claim shows its stage and source context.
+- [x] Display normalization proposals per candidate and audit/omission findings at batch and candidate level.
 - [x] Static output contains no JavaScript dependency and remains readable without styling.
 - [x] Automated tests cover ingestion, idempotency, rejection, rendering, and escaping.
 - [x] The full demo runs using Python's standard library and SQLite only.

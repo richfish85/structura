@@ -39,17 +39,19 @@ The generated database is `data/structura.db` and is ignored by Git. Schema and 
 
 ### Run the launch-cohort mini demo
 
-This builds a separate disposable review database, imports the scout and independent-verification artifacts without promoting them, and renders plain static HTML from SQL:
+This builds a separate disposable review database, imports the scout, independent-verification, normalization-proposal, and audit artifacts without promoting them, and renders plain static HTML from SQL:
 
 ```powershell
 python -m structura init --db data/mini-demo.db
 python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/01_scout_candidates.csv --sources research_batches/pilot-1998-cpu/01_sources.csv --stage scouting
 python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-cpu/02_verification.csv
+python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-cpu/03_normalization_proposal.csv
+python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-cpu/04_audit_findings.csv
 python -m structura render-review --db data/mini-demo.db --output exports/mini-demo
 python -m structura check --db data/mini-demo.db
 ```
 
-Open `exports/mini-demo/index.html`. Repeating either import is safe: the exact input digest is recognized and no duplicate run or assertion rows are added.
+Open `exports/mini-demo/index.html`. Repeating any import is safe: the exact input digest is recognized and no duplicate run, proposal, assertion, or finding rows are added.
 
 ## Implementation
 
@@ -72,7 +74,7 @@ agent files -> validate/hash -> non-canonical SQL review staging
 
 - `schema/001_initial.sql` defines entities, product details, relationships, sources, and evidence links.
 - `schema/002_seed_ontology.sql` supplies a proposed, revisable relationship vocabulary.
-- `schema/003_research_intake.sql` through `005_verification_report_intake.sql` preserve immutable import runs, raw candidate rows, and verification evidence separately from canonical promotion.
+- `schema/003_research_intake.sql` through `007_audit_findings.sql` preserve immutable import runs, raw candidate rows, verification evidence, normalization proposals, and audit leads separately from canonical promotion.
 - `data/intake/` contains blank handoff templates for research stages.
 - `structura/` contains database setup, validation, and the local HTML explorer.
 - `docs/` records product boundaries, architecture, research workflow, ontology, and risks.
@@ -118,7 +120,8 @@ Checklist:
 - [ ] Agree what counts as a product versus a family, chip, or board
 - [x] Scout the first bounded 1998 CPU candidate batch
 - [x] Independently verify the CPU candidates
-- [ ] Audit the CPU candidates
+- [x] Propose normalization for the CPU candidates
+- [x] Audit the CPU candidates for duplicates and omissions
 - [x] Demonstrate idempotent SQL intake and plain static HTML generation
 - [ ] Expand the pilot to GPU and HDD candidates after the CPU criteria review
 - [ ] Define the human promotion gate from verified to canonical
@@ -127,4 +130,4 @@ Checklist:
 
 ## Current decisions and open questions
 
-See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [draft research criteria](docs/research-criteria-v0.1.md), [CPU scout batch](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).
+See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [research criteria v0.2](docs/research-criteria-v0.2.md), [CPU pilot status](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).

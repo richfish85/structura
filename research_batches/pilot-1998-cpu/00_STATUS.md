@@ -2,7 +2,7 @@
 
 - Batch key: `pilot-1998-cpu-gpu-hdd`
 - Subset: CPU scout pass 01
-- Status: **independent verification complete; awaiting normalization, audit, and human review**
+- Status: **verification, normalization proposal, and audit complete; awaiting human boundary review**
 - Access date: 2026-09-08
 
 ## What
@@ -20,6 +20,8 @@ The pass tests whether the current intake format preserves product identity, fam
 - Raw manufacturer wording is preserved.
 - A separate agent independently verified the bounded ten-candidate set. All ten remain candidates for human review; none has been normalized or promoted to canonical status.
 - The scout and verification artifacts can now be imported into a disposable SQL review database and rendered as plain static HTML.
+- A separate normalizer proposed labels, family/variant structure, qualifying events, and supported date precision for all ten records.
+- An independent audit confirmed no duplicate identities but found nine omission-lead findings representing twelve proposed product keys. These leads remain outside the cohort.
 
 ## Stage gates
 
@@ -28,11 +30,11 @@ The pass tests whether the current intake format preserves product identity, fam
 - [x] Scout observations recorded
 - [x] Draft research criteria produced
 - [x] Independent verification
-- [ ] Normalization against approved terminology
-- [ ] Omission and duplicate audit
+- [x] Normalization proposal against candidate terminology
+- [x] Omission and duplicate audit
 - [ ] Human review
 - [ ] Canonical import
 
 ## Current boundary
 
-This sample is a **1998 launch cohort**, not a census of every CPU commercially present during 1998. The remaining boundary question is which evidence event qualifies a candidate for inclusion when announcement, introduction, shipment, and channel availability occur at different times.
+This sample is a **1998 launch cohort**, not a census of every CPU commercially present during 1998. The audit shows that the ten-row sample is not yet a complete Intel/AMD launch cohort. Human review must decide whether mobile and upgrade processors are in scope before the twelve omission-lead keys can be dispatched as new scout work.

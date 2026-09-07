@@ -31,8 +31,10 @@ class ResearchBatchTests(unittest.TestCase):
 
     def test_batch_remains_before_canonical_gate(self):
         status = (BATCH / "00_STATUS.md").read_text(encoding="utf-8")
-        self.assertIn("independent verification complete", status)
+        self.assertIn("verification, normalization proposal, and audit complete", status)
         self.assertIn("[x] Independent verification", status)
+        self.assertIn("[x] Normalization proposal", status)
+        self.assertIn("[x] Omission and duplicate audit", status)
         self.assertIn("[ ] Human review", status)
         self.assertIn("[ ] Canonical import", status)
 

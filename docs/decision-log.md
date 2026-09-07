@@ -85,3 +85,28 @@ No scout candidate was verified, normalized, imported, or promoted.
 - Wire job/result manifest identity directly into the SQL import ledger.
 - Define the normalization proposal format and independent omission/duplicate audit.
 - Define and test the recorded human canonical-promotion transaction.
+
+## 2026-09-08 — CPU normalization and omission audit
+
+### Observed
+
+- No two existing records are confirmed duplicates.
+- The AMD-K6-2 family and its 350/400 MHz records are deliberately different granularities and must not be counted as three equivalent products.
+- Pentium II Xeon 400 still hides unresolved 512 KB and 1 MB cache configurations.
+- Two AMD variant dates remain quarter-precision only.
+- Nine omission findings expose twelve proposed keys across additional desktop, mobile, server/workstation, and upgrade processors.
+- The original ten-row sample is therefore a pipeline pilot, not a complete Intel/AMD launch cohort.
+
+### Candidate rules for human review
+
+- Store family and variant records separately, with an explicit parent link, but publish counts by declared granularity.
+- Keep qualifying event type beside every date and forbid family-to-variant date inheritance.
+- Permit explicit quarter precision in the proposal/event layer.
+- Treat audit leads as a new scout queue, never as implicit cohort additions.
+- Require every batch to state whether mobile, upgrade, embedded, OEM-only, and region-specific products are included.
+
+### Decision required before expansion
+
+- Whether the CPU launch cohort includes mobile processors.
+- Whether it includes upgrade processors such as Pentium II OverDrive.
+- Whether one unresolved cache configuration is one candidate, multiple variants, or a family placeholder.

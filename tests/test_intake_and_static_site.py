@@ -6,7 +6,13 @@ import unittest
 from pathlib import Path
 
 from structura.db import connect, initialize, validate
-from structura.intake import IntakeError, import_batch, import_verification
+from structura.intake import (
+    IntakeError,
+    import_audit,
+    import_batch,
+    import_normalization,
+    import_verification,
+)
 from structura.static_site import MARKER, render_static_site
 
 
@@ -106,6 +112,42 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM entities WHERE record_status='canonical'").fetchone()[0], 0)
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM relationships").fetchone()[0], 0)
             self.assertEqual(validate(connection), [])
+
+    def test_current_normalization_and_audit_import_without_promotion(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        import_verification(self.db_path, BATCH / "02_verification.csv")
+        normalization = BATCH / "03_normalization_proposal.csv"
+        audit = BATCH / "04_audit_findings.csv"
+        first_normalization = import_normalization(self.db_path, normalization)
+        second_normalization = import_normalization(self.db_path, normalization)
+        first_audit = import_audit(self.db_path, audit)
+        second_audit = import_audit(self.db_path, audit)
+        self.assertEqual(first_normalization.candidate_count, 10)
+        self.assertFalse(first_normalization.already_imported)
+        self.assertTrue(second_normalization.already_imported)
+        self.assertEqual(first_audit.candidate_count, 15)
+        self.assertFalse(first_audit.already_imported)
+        self.assertTrue(second_audit.already_imported)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM research_import_runs").fetchone()[0], 4)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM normalization_proposals").fetchone()[0], 10)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM normalization_proposals WHERE date_precision='quarter'").fetchone()[0], 2)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM audit_findings").fetchone()[0], 15)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM audit_finding_candidate_refs").fetchone()[0], 11)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM audit_finding_proposed_keys").fetchone()[0], 12)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM entities WHERE record_status='canonical'").fetchone()[0], 0)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM relationships").fetchone()[0], 0)
+            self.assertEqual(connection.execute("SELECT workflow_status FROM research_batches WHERE batch_key='pilot-1998-cpu-gpu-hdd'").fetchone()[0], "audit")
+            self.assertEqual(validate(connection), [])
+        output = self.temp_root / "full-review-site"
+        render_static_site(self.db_path, output)
+        batch_page = (output / "batches" / "pilot-1998-cpu-gpu-hdd.html").read_text(encoding="utf-8")
+        amd_page = (output / "candidates" / "amd-k6-2-350.html").read_text(encoding="utf-8")
+        self.assertIn("Audit findings and omission leads", batch_page)
+        self.assertIn("intel-pentium-ii-333", batch_page)
+        self.assertIn("Normalization proposal", amd_page)
+        self.assertIn("amd-k6-2-family", amd_page)
+        self.assertIn("Audit findings", amd_page)
 
     def test_static_site_is_plain_deterministic_and_keeps_provenance(self):
         result = import_batch(self.db_path, self.candidates, self.sources)

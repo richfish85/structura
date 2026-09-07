@@ -74,14 +74,55 @@ VERIFICATION_REPORT_COLUMNS = (
     "unresolved_questions",
     "verifier_notes",
 )
+NORMALIZATION_COLUMNS = (
+    "batch_key",
+    "candidate_key",
+    "normalized_manufacturer",
+    "normalized_display_name",
+    "entity_granularity",
+    "parent_candidate_key",
+    "normalized_category",
+    "qualifying_event_type",
+    "normalized_launch_date",
+    "date_precision",
+    "market_channel_notes",
+    "decision_status",
+    "rationale",
+    "open_questions",
+    "normalizer",
+)
+AUDIT_COLUMNS = (
+    "batch_key",
+    "finding_id",
+    "finding_type",
+    "severity",
+    "affected_candidate_key",
+    "proposed_candidate_key",
+    "finding",
+    "source_url",
+    "source_locator",
+    "source_evidence",
+    "recommended_next_action",
+    "disposition",
+    "auditor",
+)
 NON_CANONICAL_STAGES = frozenset(
     {"planned", "scouting", "verification", "normalization", "audit", "human_review", "paused"}
 )
 KEY_PATTERN = re.compile(r"^[a-z0-9][a-z0-9-]{0,119}$")
+FINDING_KEY_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9-]{0,119}$")
 MAX_FIELD_LENGTH = 10_000
 VERIFICATION_STATUSES = frozenset({"verified", "unsupported", "uncertain", "conflict", "not_assessed"})
 CONFIDENCES = frozenset({"unknown", "low", "medium", "high"})
 EVIDENCE_ROLES = frozenset({"supports", "contradicts", "context", "lead_only"})
+ENTITY_GRANULARITIES = frozenset({"family", "model_variant", "sku_unresolved"})
+DATE_PRECISIONS = frozenset({"exact", "month", "quarter", "year", "range", "unknown"})
+NORMALIZATION_DECISIONS = frozenset({"proposed", "review_required", "blocked"})
+AUDIT_FINDING_TYPES = frozenset(
+    {"duplicate", "family_variant_overlap", "date_inheritance", "scope_error", "category_error", "omission_lead", "evidence_gap"}
+)
+AUDIT_SEVERITIES = frozenset({"info", "low", "medium", "high"})
+AUDIT_DISPOSITIONS = frozenset({"open", "resolved_no_change", "follow_up"})
 
 
 class IntakeError(ValueError):
@@ -131,6 +172,11 @@ def _is_http_url(value: str) -> bool:
 def _require_key(value: str, label: str, row_number: str) -> None:
     if not KEY_PATTERN.fullmatch(value):
         raise IntakeError(f"{label} row {row_number} has an invalid key: {value!r}")
+
+
+def _require_finding_key(value: str, row_number: str) -> None:
+    if not FINDING_KEY_PATTERN.fullmatch(value):
+        raise IntakeError(f"audit row {row_number} has an invalid finding_id: {value!r}")
 
 
 def _validate_candidates(rows: list[dict[str, str]]) -> str:
@@ -490,3 +536,222 @@ def import_verification(db_path: Path | str, verification_path: Path | str) -> I
     raise IntakeError(
         "verification columns must exactly match the assertion template or the verification report template"
     )
+
+
+def _validate_normalization(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        raise IntakeError("normalization file has no records")
+    batch_keys = {row["batch_key"] for row in rows}
+    if len(batch_keys) != 1:
+        raise IntakeError("normalization file must contain exactly one batch_key")
+    batch_key = next(iter(batch_keys))
+    _require_key(batch_key, "normalization", rows[0]["_row_number"])
+    seen: set[str] = set()
+    for row in rows:
+        row_number = row["_row_number"]
+        _require_key(row["candidate_key"], "normalization", row_number)
+        if row["candidate_key"] in seen:
+            raise IntakeError(f"duplicate candidate_key in normalization input: {row['candidate_key']}")
+        seen.add(row["candidate_key"])
+        if row["parent_candidate_key"]:
+            _require_key(row["parent_candidate_key"], "normalization parent", row_number)
+            if row["parent_candidate_key"] == row["candidate_key"]:
+                raise IntakeError(f"normalization row {row_number} cannot be its own parent")
+        for required in (
+            "normalized_manufacturer",
+            "normalized_display_name",
+            "normalized_category",
+            "qualifying_event_type",
+            "rationale",
+            "normalizer",
+        ):
+            if not row[required]:
+                raise IntakeError(f"normalization row {row_number} requires {required}")
+        if row["entity_granularity"] not in ENTITY_GRANULARITIES:
+            raise IntakeError(f"normalization row {row_number} has invalid entity_granularity")
+        if row["date_precision"] not in DATE_PRECISIONS:
+            raise IntakeError(f"normalization row {row_number} has invalid date_precision")
+        if row["decision_status"] not in NORMALIZATION_DECISIONS:
+            raise IntakeError(f"normalization row {row_number} has invalid decision_status")
+        if row["date_precision"] == "unknown" and row["normalized_launch_date"]:
+            raise IntakeError(f"normalization row {row_number} cannot supply a date with unknown precision")
+        if row["date_precision"] != "unknown" and not row["normalized_launch_date"]:
+            raise IntakeError(f"normalization row {row_number} requires normalized_launch_date")
+    return batch_key
+
+
+def import_normalization(db_path: Path | str, normalization_path: Path | str) -> ImportResult:
+    """Import normalization proposals while leaving entity fields unchanged."""
+    normalization_file = Path(normalization_path).resolve()
+    rows = _read_csv(normalization_file, NORMALIZATION_COLUMNS, "normalization")
+    batch_key = _validate_normalization(rows)
+    digest = _digest((normalization_file,), "normalization")
+    run_key = f"{batch_key}-{digest[:12]}"
+    with connect(db_path) as connection:
+        batch_id, candidates, previous_run_key = _verification_context(connection, batch_key, rows, digest)
+        if previous_run_key is not None:
+            return ImportResult(previous_run_key, True, len(rows), 0)
+        parent_keys = {row["parent_candidate_key"] for row in rows if row["parent_candidate_key"]}
+        unknown_parents = sorted(parent_keys - set(candidates))
+        if unknown_parents:
+            raise IntakeError("normalization references parent candidate keys not staged for this batch: " + ", ".join(unknown_parents))
+        existing = connection.execute(
+            "SELECT c.candidate_key FROM normalization_proposals n JOIN intake_candidate_records c ON c.id=n.intake_candidate_record_id JOIN research_import_runs r ON r.id=n.import_run_id WHERE r.research_batch_id=? AND c.candidate_key IN ({})".format(
+                ",".join("?" for _ in rows)
+            ),
+            [batch_id, *[row["candidate_key"] for row in rows]],
+        ).fetchall()
+        if existing:
+            raise IntakeError(
+                "normalization proposals already exist and require a human merge decision: "
+                + ", ".join(sorted(row["candidate_key"] for row in existing))
+            )
+        connection.execute(
+            "INSERT INTO research_import_runs(run_key, research_batch_id, pipeline_stage, input_digest, candidate_path, source_path, candidate_count, source_count, importer) VALUES (?, ?, 'normalization', ?, ?, NULL, ?, 0, ?)",
+            (run_key, batch_id, digest, str(normalization_file), len(rows), "structura-normalization-v1"),
+        )
+        run_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+        for row in rows:
+            connection.execute(
+                "INSERT INTO normalization_proposals(import_run_id, intake_candidate_record_id, normalized_manufacturer, normalized_display_name, entity_granularity, parent_intake_candidate_record_id, normalized_category, qualifying_event_type, normalized_launch_date, date_precision, market_channel_notes, decision_status, rationale, open_questions, normalizer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    candidates[row["candidate_key"]],
+                    row["normalized_manufacturer"],
+                    row["normalized_display_name"],
+                    row["entity_granularity"],
+                    candidates.get(row["parent_candidate_key"]),
+                    row["normalized_category"],
+                    row["qualifying_event_type"],
+                    row["normalized_launch_date"] or None,
+                    row["date_precision"],
+                    row["market_channel_notes"] or None,
+                    row["decision_status"],
+                    row["rationale"],
+                    row["open_questions"] or None,
+                    row["normalizer"],
+                ),
+            )
+        connection.execute("UPDATE research_batches SET workflow_status='normalization', updated_at=CURRENT_TIMESTAMP WHERE id=?", (batch_id,))
+    return ImportResult(run_key, False, len(rows), 0)
+
+
+def _validate_audit(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        raise IntakeError("audit file has no findings")
+    batch_keys = {row["batch_key"] for row in rows}
+    if len(batch_keys) != 1:
+        raise IntakeError("audit file must contain exactly one batch_key")
+    batch_key = next(iter(batch_keys))
+    _require_key(batch_key, "audit", rows[0]["_row_number"])
+    seen: set[str] = set()
+    for row in rows:
+        row_number = row["_row_number"]
+        _require_finding_key(row["finding_id"], row_number)
+        if row["finding_id"] in seen:
+            raise IntakeError(f"duplicate finding_id in audit input: {row['finding_id']}")
+        seen.add(row["finding_id"])
+        for candidate_key in _split_key_list(row["affected_candidate_key"]):
+            _require_key(candidate_key, "audit affected candidate", row_number)
+        for proposed_key in _split_key_list(row["proposed_candidate_key"]):
+            _require_key(proposed_key, "audit proposed candidate", row_number)
+        if row["finding_type"] not in AUDIT_FINDING_TYPES:
+            raise IntakeError(f"audit row {row_number} has invalid finding_type")
+        if row["severity"] not in AUDIT_SEVERITIES:
+            raise IntakeError(f"audit row {row_number} has invalid severity")
+        if row["disposition"] not in AUDIT_DISPOSITIONS:
+            raise IntakeError(f"audit row {row_number} has invalid disposition")
+        for required in ("finding", "recommended_next_action", "auditor"):
+            if not row[required]:
+                raise IntakeError(f"audit row {row_number} requires {required}")
+        if row["source_url"] and not _is_http_url(row["source_url"]):
+            raise IntakeError(f"audit row {row_number} has a non-http source URL")
+        if row["source_evidence"] and not row["source_url"]:
+            raise IntakeError(f"audit row {row_number} cannot supply source evidence without a source URL")
+    return batch_key
+
+
+def _split_key_list(value: str) -> list[str]:
+    return [item.strip() for item in value.split(";") if item.strip()]
+
+
+def import_audit(db_path: Path | str, audit_path: Path | str) -> ImportResult:
+    """Import immutable audit findings and omission leads without adding entities."""
+    audit_file = Path(audit_path).resolve()
+    rows = _read_csv(audit_file, AUDIT_COLUMNS, "audit")
+    batch_key = _validate_audit(rows)
+    digest = _digest((audit_file,), "audit")
+    run_key = f"{batch_key}-{digest[:12]}"
+    with connect(db_path) as connection:
+        batch = connection.execute("SELECT id FROM research_batches WHERE batch_key=?", (batch_key,)).fetchone()
+        if batch is None:
+            raise IntakeError(f"audit batch is not staged: {batch_key}")
+        batch_id = int(batch["id"])
+        previous = connection.execute(
+            "SELECT run_key FROM research_import_runs WHERE research_batch_id=? AND input_digest=?",
+            (batch_id, digest),
+        ).fetchone()
+        if previous is not None:
+            return ImportResult(previous["run_key"], True, len(rows), len({row["source_url"] for row in rows if row["source_url"]}))
+        candidates = {
+            row["candidate_key"]: int(row["id"])
+            for row in connection.execute(
+                "SELECT c.id, c.candidate_key FROM intake_candidate_records c JOIN research_import_runs r ON r.id=c.import_run_id WHERE r.research_batch_id=?",
+                (batch_id,),
+            ).fetchall()
+        }
+        affected_keys = {
+            candidate_key
+            for row in rows
+            for candidate_key in _split_key_list(row["affected_candidate_key"])
+        }
+        unknown = sorted(affected_keys - set(candidates))
+        if unknown:
+            raise IntakeError("audit references candidate keys not staged for this batch: " + ", ".join(unknown))
+        existing_ids = connection.execute(
+            "SELECT a.finding_key FROM audit_findings a JOIN research_import_runs r ON r.id=a.import_run_id WHERE r.research_batch_id=? AND a.finding_key IN ({})".format(
+                ",".join("?" for _ in rows)
+            ),
+            [batch_id, *[row["finding_id"] for row in rows]],
+        ).fetchall()
+        if existing_ids:
+            raise IntakeError(
+                "audit finding IDs already exist and require a human merge decision: "
+                + ", ".join(sorted(row["finding_key"] for row in existing_ids))
+            )
+        source_count = len({row["source_url"] for row in rows if row["source_url"]})
+        connection.execute(
+            "INSERT INTO research_import_runs(run_key, research_batch_id, pipeline_stage, input_digest, candidate_path, source_path, candidate_count, source_count, importer) VALUES (?, ?, 'audit', ?, ?, NULL, ?, ?, ?)",
+            (run_key, batch_id, digest, str(audit_file), len(rows), source_count, "structura-audit-v1"),
+        )
+        run_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+        for row in rows:
+            connection.execute(
+                "INSERT INTO audit_findings(import_run_id, finding_key, finding_type, severity, finding, source_url, source_locator, source_evidence, recommended_next_action, disposition, auditor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    row["finding_id"],
+                    row["finding_type"],
+                    row["severity"],
+                    row["finding"],
+                    row["source_url"] or None,
+                    row["source_locator"] or None,
+                    row["source_evidence"] or None,
+                    row["recommended_next_action"],
+                    row["disposition"],
+                    row["auditor"],
+                ),
+            )
+            finding_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+            for candidate_key in _split_key_list(row["affected_candidate_key"]):
+                connection.execute(
+                    "INSERT INTO audit_finding_candidate_refs(audit_finding_id, intake_candidate_record_id) VALUES (?, ?)",
+                    (finding_id, candidates[candidate_key]),
+                )
+            for proposed_key in _split_key_list(row["proposed_candidate_key"]):
+                connection.execute(
+                    "INSERT INTO audit_finding_proposed_keys(audit_finding_id, proposed_candidate_key) VALUES (?, ?)",
+                    (finding_id, proposed_key),
+                )
+        connection.execute("UPDATE research_batches SET workflow_status='audit', updated_at=CURRENT_TIMESTAMP WHERE id=?", (batch_id,))
+    return ImportResult(run_key, False, len(rows), source_count)
