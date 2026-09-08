@@ -1,7 +1,7 @@
 # 1998 HDD Pilot — Status
 
 - Batch key: `pilot-1998-hdd`
-- Status: **four bounded candidates completed scout, independent verification, normalization proposal, context research, and audit; human review required**
+- Status: **four bounded candidates completed research; Fireball EL retained with a reviewed release discrepancy**
 - Access date: 2026-09-08
 
 ## What
@@ -23,6 +23,6 @@ This slice tests family-versus-model boundaries, capacity variants, production-v
 
 ## Human review
 
-- Decide whether Fireball EL mass production without first-shipment evidence qualifies for the cohort.
+- Fireball EL is retained as a valid candidate at `L2`. May 1998 mass production and commercial existence are supported; exact first commercial release or shipment remains an explicitly unknown discrepancy.
 - Preserve the IBM limited-1998-OEM versus Q1-1999 reseller distinction.
-- Decide whether to authorize a separate expansion pass for Maxtor, Seagate, Western Digital, IBM Microdrive, mobile, and enterprise/SCSI leads.
+- Maxtor, Seagate, Western Digital, IBM Microdrive, mobile, and enterprise/SCSI omission leads remain deferred as `OL` items until a deliberate granular expansion.

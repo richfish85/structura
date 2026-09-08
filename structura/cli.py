@@ -10,6 +10,7 @@ from .intake import (
     import_batch,
     import_context,
     import_normalization,
+    import_review_decisions,
     import_verification,
 )
 from .static_site import render_static_site
@@ -54,6 +55,13 @@ def build_parser() -> argparse.ArgumentParser:
     audit_parser = subparsers.add_parser("import-audit", help="Load non-canonical audit findings and omission leads.")
     audit_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     audit_parser.add_argument("--audit", type=Path, required=True)
+
+    review_parser = subparsers.add_parser(
+        "import-review-decisions",
+        help="Load append-only non-canonical candidate discrepancy review decisions.",
+    )
+    review_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
+    review_parser.add_argument("--decisions", type=Path, required=True)
 
     context_parser = subparsers.add_parser(
         "import-context",
@@ -172,6 +180,18 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Audit already imported without duplication: {result.run_key}")
         else:
             print(f"Imported non-canonical audit run: {result.run_key} ({result.candidate_count} findings, {result.source_count} source URLs)")
+        return 0
+
+    if args.command == "import-review-decisions":
+        try:
+            result = import_review_decisions(args.db, args.decisions)
+        except IntakeError as error:
+            print(f"Review decisions rejected: {error}")
+            return 1
+        if result.already_imported:
+            print(f"Review decisions already imported without duplication: {result.run_key}")
+        else:
+            print(f"Imported non-canonical review decision run: {result.run_key} ({result.candidate_count} decisions)")
         return 0
 
     if args.command == "import-context":

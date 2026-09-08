@@ -1,0 +1,2 @@
+batch_key,candidate_key,discrepancy_level,discrepancy_types,disposition,decision_rationale,resolving_evidence,reviewer
+pilot-1998-hdd,quantum-fireball-el,L2,"date_precision,shipment_status,channel_availability",retain_for_review,"Keep the Fireball EL as a valid record; commercial existence and May 1998 mass production are supported, while exact commercial release remains unknown.","Dated Quantum, OEM, distributor, reseller, or contemporary publication evidence establishing first commercial shipment or availability and its market scope.",project-owner-review-2026-09-08

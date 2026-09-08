@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
 BATCH = ROOT / "research_batches" / "pilot-1998-cpu"
+PILOT = ROOT / "research_batches" / "pilot-1998"
 
 
 class ResearchBatchTests(unittest.TestCase):
@@ -38,8 +39,36 @@ class ResearchBatchTests(unittest.TestCase):
         self.assertIn("[x] Mobile and upgrade segment boundary decision", status)
         self.assertIn("[x] Purpose and benchmark context", status)
         self.assertIn("[x] Post-expansion audit", status)
-        self.assertIn("[ ] Human review", status)
+        self.assertIn("[x] Initial human review and discrepancy disposition", status)
         self.assertIn("[ ] Canonical import", status)
+
+    def test_owner_review_decisions_retain_named_discrepancies(self):
+        rows = []
+        for name in (
+            "02_REVIEW_DECISIONS_CPU.csv",
+            "03_REVIEW_DECISIONS_GPU.csv",
+            "04_REVIEW_DECISIONS_HDD.csv",
+        ):
+            with (PILOT / name).open(encoding="utf-8", newline="") as handle:
+                rows.extend(csv.DictReader(handle))
+
+        levels = {row["candidate_key"]: row["discrepancy_level"] for row in rows}
+        self.assertEqual(
+            levels,
+            {
+                "intel-pentium-ii-overdrive-300": "L3",
+                "intel-pentium-ii-overdrive-333": "L3",
+                "intel-pentium-ii-xeon-450": "L3",
+                "intel-i740": "L2",
+                "matrox-mga-g200": "L3",
+                "ati-rage-128-gl": "L4",
+                "ati-rage-128-vr": "L4",
+                "3dfx-voodoo-banshee": "L2",
+                "quantum-fireball-el": "L2",
+            },
+        )
+        self.assertTrue(all(row["disposition"] == "retain_for_review" for row in rows))
+        self.assertTrue(all(row["resolving_evidence"] for row in rows))
 
 
 if __name__ == "__main__":

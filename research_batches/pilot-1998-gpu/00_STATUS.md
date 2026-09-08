@@ -1,7 +1,7 @@
 # 1998 GPU Pilot — Status
 
 - Batch key: `pilot-1998-gpu`
-- Status: **eight bounded candidates completed scout, independent verification, normalization proposal, context research, and audit; human review required**
+- Status: **eight bounded candidates completed research; forecast and conflict cases retained with reviewed discrepancy levels**
 - Access date: 2026-09-08
 
 ## What
@@ -23,7 +23,10 @@ This slice tests chip-versus-board identity, variant boundaries, announcement/sa
 
 ## Human review
 
-- Decide whether announcement-only or sampling evidence is sufficient for MGA-G200 and RAGE 128 variants.
-- Preserve the conflicting September/October planned RAGE 128 production evidence.
-- Do not treat forecast Banshee-board availability as a completed shipment.
-- Decide whether to authorize a separate expansion pass for the audit's board, mobile, professional, Voodoo2, and Savage3D leads.
+- All eight candidate records remain valid database contributions.
+- `intel-i740` is `L2`: February production is stated, but exact commercial shipment remains unconfirmed.
+- `matrox-mga-g200` is `L3`: the chip announcement is supported, while concrete product and release evidence is absent.
+- `ati-rage-128-gl` and `ati-rage-128-vr` are `L4`: September and October production forecasts conflict and neither establishes actual shipment.
+- `3dfx-voodoo-banshee` is `L2`: card availability is forecast rather than confirmed.
+- Chip and board identities remain separate; no chip date is inherited onto a later board.
+- Omission leads are retained as deferred `OL` items for later granular expansion.

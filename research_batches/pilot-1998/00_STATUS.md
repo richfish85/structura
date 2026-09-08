@@ -1,6 +1,6 @@
 # 1998 Launch-Cohort Pilot — Status
 
-Status: **research workflow complete; human review required; no canonical records**  
+Status: **research workflow complete; initial discrepancy decisions recorded; no canonical records**
 Access/reconciliation date: 2026-09-08
 
 ## What
@@ -15,6 +15,8 @@ The bounded 1998 pilot now covers three review slices:
 | **Total** | **34** | **34** | **34** | **34** | **6** | **56** |
 
 All 34 records remain candidates. “Complete” means the declared pilot workflow has been completed for the bounded candidate set; it does **not** mean every CPU, GPU, or HDD sold or launched worldwide in 1998 has been enumerated.
+
+Nine named candidates now have append-only discrepancy decisions: three CPU, five GPU, and one HDD. The remaining candidates are unchanged rather than automatically assigned `L0`.
 
 ## Why
 
@@ -32,11 +34,13 @@ The pilot tests whether Structura can preserve identity, timing, category bounda
 
 ## Human-review decisions
 
-1. **Pentium II OverDrive identity:** the two frozen 300/333 output keys appear to describe one physical upgrade product with two input/output mappings.
-2. **Pentium II Xeon 450 event:** evidence establishes an announcement and planned October system shipment, not an unambiguous completed introduction/shipment event.
-3. **Quantum Fireball EL event:** May mass production is supported, but first commercial shipment is not established.
-4. **GPU timing:** MGA-G200 is announcement-only; RAGE 128 production timing is conflicting/forecast; Banshee card availability is forecast rather than confirmed.
-5. **Expansion boundary:** GPU and HDD audits retain proposed-only omission leads. They require fresh scouting and verification if the pilot is expanded toward a census.
+The project owner retained every disputed record and approved the reusable `L0`-`L4` discrepancy legend. Detailed decisions and future evidence thresholds are recorded in `01_REVIEW_DECISIONS.md`; the stable legend is documented in `docs/discrepancy-legend-v0.1.md`.
+
+1. **Pentium II OverDrive identity - retain at `L3`:** keep both frozen keys and the unresolved one-product/two-output question. Change the interpretation only if attributable involved-party evidence or written production/release evidence resolves it.
+2. **Pentium II Xeon 450 event - retain at `L3`:** keep the record for its documented specifications and design while the qualifying-event boundary remains open.
+3. **Quantum Fireball EL event - retain at `L2`:** treat the record as valid and display the unknown exact commercial-release timing as a discrepancy, not a disqualifier.
+4. **GPU timing - retain with `L2` through `L4`:** display forecast, availability, identity-boundary, and conflicting-source states explicitly.
+5. **Expansion boundary - defer omission leads as `OL`:** the current set is representative enough to test scaling. Granular lead expansion can resume later through fresh scouting and verification.
 
 ## Integrity corrections caught during intake
 

@@ -58,3 +58,5 @@ The 1998 pilot remains a launch cohort across CPU, GPU, and HDD. A qualifying re
 ### Human review
 
 These new sections do not promote a candidate. Human review must still resolve identity, event timing, family-versus-variant boundaries, contradictions, and whether the evidence is strong enough for canonical use.
+
+When an unknown remains useful rather than disqualifying, record an append-only `L0`-`L4` discrepancy decision instead of deleting or silently rewriting the candidate. `OL` marks a deferred omission lead and is not a candidate discrepancy level. See `discrepancy-legend-v0.1.md`.

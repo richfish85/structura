@@ -12,6 +12,7 @@ from structura.intake import (
     import_batch,
     import_context,
     import_normalization,
+    import_review_decisions,
     import_verification,
 )
 from structura.static_site import MARKER, render_static_site
@@ -64,6 +65,13 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
             encoding="utf-8",
         )
         return intent, benchmarks, sources
+
+    def write_review_decisions(self, path: Path, candidate_key: str = "intel-pentium-ii-350") -> None:
+        path.write_text(
+            "batch_key,candidate_key,discrepancy_level,discrepancy_types,disposition,decision_rationale,resolving_evidence,reviewer\n"
+            f"pilot-1998-cpu-gpu-hdd,{candidate_key},L3,\"identity,granularity\",restructure_required,The current evidence leaves product granularity open,Part-number evidence or a manufacturer configuration table,coordinator-review-a\n",
+            encoding="utf-8",
+        )
 
     def test_import_is_noncanonical_and_idempotent(self):
         first = import_batch(self.db_path, self.candidates, self.sources, stage="scouting")
@@ -260,6 +268,60 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
             import_context(self.db_path, intent, benchmarks, sources)
         with connect(self.db_path, read_only=True) as connection:
             self.assertEqual(connection.execute("SELECT COUNT(*) FROM context_import_runs").fetchone()[0], 0)
+
+    def test_review_decisions_are_append_only_idempotent_and_rendered(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        decisions = self.temp_root / "review-decisions.csv"
+        self.write_review_decisions(decisions)
+        first = import_review_decisions(self.db_path, decisions)
+        second = import_review_decisions(self.db_path, decisions)
+        self.assertFalse(first.already_imported)
+        self.assertTrue(second.already_imported)
+        changed = self.temp_root / "review-decisions-follow-up.csv"
+        self.write_review_decisions(changed)
+        changed.write_text(
+            changed.read_text(encoding="utf-8").replace("Part-number evidence or a manufacturer configuration table", "A dated orderable-parts table"),
+            encoding="utf-8",
+        )
+        follow_up = import_review_decisions(self.db_path, changed)
+        self.assertFalse(follow_up.already_imported)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM discrepancy_review_runs").fetchone()[0], 2)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM candidate_discrepancy_reviews").fetchone()[0], 2)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM candidate_discrepancy_review_types").fetchone()[0], 4)
+            self.assertEqual(connection.execute("SELECT record_status FROM entities WHERE entity_key='intel-pentium-ii-350'").fetchone()[0], "candidate")
+            self.assertEqual(connection.execute("SELECT workflow_status FROM research_batches WHERE batch_key='pilot-1998-cpu-gpu-hdd'").fetchone()[0], "human_review")
+            self.assertEqual(validate(connection), [])
+        output = self.temp_root / "review-decision-site"
+        render_static_site(self.db_path, output)
+        index = (output / "index.html").read_text(encoding="utf-8")
+        batch = (output / "batches" / "pilot-1998-cpu-gpu-hdd.html").read_text(encoding="utf-8")
+        candidate = (output / "candidates" / "intel-pentium-ii-350.html").read_text(encoding="utf-8")
+        for page in (index, batch, candidate):
+            self.assertIn("Discrepancy review legend", page)
+            self.assertIn("Deferred omission lead", page)
+        self.assertIn("Latest review", batch)
+        self.assertIn("Discrepancy review decisions", candidate)
+        self.assertIn("L3", candidate)
+        self.assertIn("A dated orderable-parts table", candidate)
+        self.assertNotIn("<script", candidate.lower())
+
+    def test_review_decisions_reject_unknown_or_extra_columns_without_writing(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        unknown = self.temp_root / "unknown-review.csv"
+        self.write_review_decisions(unknown, "unknown-product")
+        with self.assertRaisesRegex(IntakeError, "not staged"):
+            import_review_decisions(self.db_path, unknown)
+        extra = self.temp_root / "extra-review.csv"
+        extra.write_text(
+            "batch_key,candidate_key,discrepancy_level,discrepancy_types,disposition,decision_rationale,resolving_evidence,reviewer,extra\n"
+            "pilot-1998-cpu-gpu-hdd,intel-pentium-ii-350,L0,none,no_action,No material discrepancy,No further evidence required,coordinator,unexpected\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(IntakeError, "columns must be exactly"):
+            import_review_decisions(self.db_path, extra)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM discrepancy_review_runs").fetchone()[0], 0)
 
     def test_context_import_rejects_mixed_comparison_group(self):
         import_batch(self.db_path, self.candidates, self.sources)

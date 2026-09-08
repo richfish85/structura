@@ -107,6 +107,16 @@ AUDIT_COLUMNS = (
     "disposition",
     "auditor",
 )
+REVIEW_DECISION_COLUMNS = (
+    "batch_key",
+    "candidate_key",
+    "discrepancy_level",
+    "discrepancy_types",
+    "disposition",
+    "decision_rationale",
+    "resolving_evidence",
+    "reviewer",
+)
 INTENT_COLUMNS = (
     "batch_key",
     "candidate_key",
@@ -156,6 +166,24 @@ AUDIT_FINDING_TYPES = frozenset(
 )
 AUDIT_SEVERITIES = frozenset({"info", "low", "medium", "high"})
 AUDIT_DISPOSITIONS = frozenset({"open", "resolved_no_change", "follow_up"})
+DISCREPANCY_LEVELS = frozenset({"L0", "L1", "L2", "L3", "L4"})
+DISCREPANCY_TYPES = frozenset(
+    {
+        "none",
+        "identity",
+        "granularity",
+        "date_precision",
+        "channel_availability",
+        "shipment_status",
+        "cohort_boundary",
+        "source_conflict",
+        "category",
+        "scope",
+    }
+)
+REVIEW_DISPOSITIONS = frozenset(
+    {"no_action", "retain_for_review", "needs_evidence", "restructure_required", "excluded_from_cohort"}
+)
 INTENT_CLAIM_SCOPES = frozenset(
     {"manufacturer_stated", "independently_interpreted", "inferred"}
 )
@@ -1142,3 +1170,98 @@ def import_audit(db_path: Path | str, audit_path: Path | str) -> ImportResult:
                 )
         connection.execute("UPDATE research_batches SET workflow_status='audit', updated_at=CURRENT_TIMESTAMP WHERE id=?", (batch_id,))
     return ImportResult(run_key, False, len(rows), source_count)
+
+
+def _split_discrepancy_types(value: str, row_number: str) -> list[str]:
+    types = [item.strip() for item in value.split(",")]
+    if not types or any(not item for item in types):
+        raise IntakeError(f"review decision row {row_number} requires comma-separated discrepancy_types")
+    if len(types) != len(set(types)):
+        raise IntakeError(f"review decision row {row_number} repeats a discrepancy_type")
+    unknown = sorted(set(types) - DISCREPANCY_TYPES)
+    if unknown:
+        raise IntakeError(
+            f"review decision row {row_number} has invalid discrepancy_types: " + ", ".join(unknown)
+        )
+    return types
+
+
+def _validate_review_decisions(rows: list[dict[str, str]]) -> str:
+    if not rows:
+        raise IntakeError("review decision file has no records")
+    batch_keys = {row["batch_key"] for row in rows}
+    if len(batch_keys) != 1:
+        raise IntakeError("review decision file must contain exactly one batch_key")
+    batch_key = next(iter(batch_keys))
+    _require_key(batch_key, "review decision", rows[0]["_row_number"])
+    seen: set[str] = set()
+    for row in rows:
+        row_number = row["_row_number"]
+        _require_key(row["candidate_key"], "review decision", row_number)
+        if row["candidate_key"] in seen:
+            raise IntakeError(f"duplicate candidate_key in review decision input: {row['candidate_key']}")
+        seen.add(row["candidate_key"])
+        if row["discrepancy_level"] not in DISCREPANCY_LEVELS:
+            raise IntakeError(f"review decision row {row_number} has invalid discrepancy_level")
+        types = _split_discrepancy_types(row["discrepancy_types"], row_number)
+        if row["discrepancy_level"] == "L0" and types != ["none"]:
+            raise IntakeError(f"review decision row {row_number} requires discrepancy_types none for L0")
+        if row["discrepancy_level"] != "L0" and "none" in types:
+            raise IntakeError(f"review decision row {row_number} cannot use discrepancy_type none above L0")
+        if row["disposition"] not in REVIEW_DISPOSITIONS:
+            raise IntakeError(f"review decision row {row_number} has invalid disposition")
+        for required in ("decision_rationale", "resolving_evidence", "reviewer"):
+            if not row[required]:
+                raise IntakeError(f"review decision row {row_number} requires {required}")
+    return batch_key
+
+
+def import_review_decisions(db_path: Path | str, decision_path: Path | str) -> ImportResult:
+    """Import append-only discrepancy reviews without changing canonical status."""
+    decision_file = Path(decision_path).resolve()
+    rows = _read_csv(decision_file, REVIEW_DECISION_COLUMNS, "review decision")
+    batch_key = _validate_review_decisions(rows)
+    digest = _digest((decision_file,), "discrepancy_review")
+    run_key = f"{batch_key}-{digest[:12]}"
+    with connect(db_path) as connection:
+        batch = connection.execute("SELECT id FROM research_batches WHERE batch_key=?", (batch_key,)).fetchone()
+        if batch is None:
+            raise IntakeError(f"review decision batch is not staged: {batch_key}")
+        batch_id = int(batch["id"])
+        previous = connection.execute(
+            "SELECT run_key, decision_count FROM discrepancy_review_runs WHERE research_batch_id=? AND input_digest=?",
+            (batch_id, digest),
+        ).fetchone()
+        if previous is not None:
+            return ImportResult(previous["run_key"], True, previous["decision_count"], 0)
+        candidates = {
+            row["candidate_key"]: int(row["id"])
+            for row in connection.execute(
+                "SELECT c.id, c.candidate_key FROM intake_candidate_records c JOIN research_import_runs r ON r.id=c.import_run_id WHERE r.research_batch_id=?",
+                (batch_id,),
+            ).fetchall()
+        }
+        unknown = sorted({row["candidate_key"] for row in rows} - set(candidates))
+        if unknown:
+            raise IntakeError("review decisions reference candidate keys not staged for this batch: " + ", ".join(unknown))
+        connection.execute(
+            "INSERT INTO discrepancy_review_runs(run_key, research_batch_id, input_digest, decision_path, decision_count, importer) VALUES (?, ?, ?, ?, ?, ?)",
+            (run_key, batch_id, digest, str(decision_file), len(rows), "structura-discrepancy-review-v1"),
+        )
+        review_run_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+        for row in rows:
+            connection.execute(
+                "INSERT INTO candidate_discrepancy_reviews(discrepancy_review_run_id, intake_candidate_record_id, discrepancy_level, disposition, decision_rationale, resolving_evidence, reviewer) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (review_run_id, candidates[row["candidate_key"]], row["discrepancy_level"], row["disposition"], row["decision_rationale"], row["resolving_evidence"], row["reviewer"]),
+            )
+            decision_id = int(connection.execute("SELECT last_insert_rowid()").fetchone()[0])
+            for discrepancy_type in _split_discrepancy_types(row["discrepancy_types"], row["_row_number"]):
+                connection.execute(
+                    "INSERT INTO candidate_discrepancy_review_types(candidate_discrepancy_review_id, discrepancy_type) VALUES (?, ?)",
+                    (decision_id, discrepancy_type),
+                )
+        connection.execute(
+            "UPDATE research_batches SET workflow_status='human_review', updated_at=CURRENT_TIMESTAMP WHERE id=?",
+            (batch_id,),
+        )
+    return ImportResult(run_key, False, len(rows), 0)

@@ -2,7 +2,7 @@
 
 - Batch key: `pilot-1998-cpu-gpu-hdd`
 - Subset: CPU scout pass 01
-- Status: **22 candidates scouted, independently verified, normalized, context-researched, and post-expansion audited; identity/event flags await human review**
+- Status: **22 candidates scouted, independently verified, normalized, context-researched, and post-expansion audited; flagged records retained with reviewed discrepancy levels**
 - Access date: 2026-09-08
 
 ## What
@@ -42,9 +42,9 @@ The pass tests whether the current intake format preserves product identity, fam
 - [x] Normalization proposals for omission-derived candidates
 - [x] Purpose and benchmark context research
 - [x] Post-expansion audit across all 22 CPU candidates
-- [ ] Human review
+- [x] Initial human review and discrepancy disposition
 - [ ] Canonical import
 
 ## Current boundary
 
-This sample is a **1998 launch cohort**, not a census of every CPU commercially present during 1998. Mobile and upgrade processors are explicitly in scope, with separate segment labels and counts. The expanded review database now contains 22 non-canonical candidate rows. OverDrive 300/333 remain two frozen scout keys pending a likely one-product restructure; Xeon 450 remains review-required because its current evidence states announcement and planned shipment rather than an unambiguous qualifying introduction or completed shipment.
+This sample is a **1998 launch cohort**, not a census of every CPU commercially present during 1998. Mobile and upgrade processors are explicitly in scope, with separate segment labels and counts. The expanded review database contains 22 non-canonical candidate rows. OverDrive 300/333 remain two frozen keys at `L3`; no merge or reinterpretation occurs without verified documentary or attributable involved-party evidence. Xeon 450 remains at `L3`: its specifications and design are useful, while announcement versus completed shipment remains an open cohort-boundary question.

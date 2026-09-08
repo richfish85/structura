@@ -42,7 +42,9 @@ Record what problem a source says the product addressed, who it targeted, the en
 
 ### Human review
 
-Resolve material ambiguity, approve ontology changes, and decide whether a record advances. The UI is part of review: browsing the records should reveal categories and relationships that do not feel structurally honest.
+Resolve material ambiguity, approve ontology changes, and decide whether a record advances. Human decisions are append-only: they add a discrepancy level, disposition, rationale, and the evidence that could resolve the question without rewriting the underlying agent artifacts. The UI is part of review: browsing the records should reveal categories and relationships that do not feel structurally honest.
+
+The pilot uses the stable `L0`-`L4` discrepancy legend in `docs/discrepancy-legend-v0.1.md`. Levels describe evidence uncertainty, not product quality or database eligibility. `OL` is a separate deferred omission-lead marker, not a candidate level.
 
 ## Source hierarchy
 
@@ -67,4 +69,6 @@ The three categories intentionally stress different modelling problems:
 
 Compatibility, openness, repairability, scarcity, and market conclusions are outside this first batch.
 
-Announcement-only records remain candidates until verification establishes whether a qualifying introduction or commercial shipment occurred in 1998. Channel-specific availability should be preserved rather than collapsed into one date.
+Announcement-only records and records with unresolved shipment timing remain useful candidates. Their discrepancy level must preserve whether the evidence supports existence, announcement, production, forecast availability, or completed shipment; no later event should be inferred. Channel-specific availability should be preserved rather than collapsed into one date.
+
+The 1998 omission leads are retained as deferred `OL` items. They are not discarded, but granular expansion toward a census is postponed while the representative pilot is reused across other years and categories.

@@ -39,7 +39,7 @@ The generated database is `data/structura.db` and is ignored by Git. Schema and 
 
 ### Run the launch-cohort mini demo
 
-This builds a separate disposable review database, imports the scout, independent-verification, normalization-proposal, and audit artifacts without promoting them, and renders plain static HTML from SQL:
+This builds a separate disposable review database, imports scout, independent-verification, normalization-proposal, audit, context, and append-only human-review artifacts without promoting them, and renders plain static HTML from SQL:
 
 ```powershell
 python -m structura init --db data/mini-demo.db
@@ -63,11 +63,14 @@ python -m structura import-verification --db data/mini-demo.db --verification re
 python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-hdd/jobs/job-1998-hdd-normalize-003/runs/run-20260908T020000Z-terra-hdd-normalizer-003/normalization.csv
 python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-hdd/jobs/job-1998-hdd-audit-004/runs/run-20260908T011000Z-terra-hdd-audit-004/audit.csv
 python -m structura import-context --db data/mini-demo.db --intent research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/intent.csv --benchmarks research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/benchmarks.csv --sources research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/sources.csv
+python -m structura import-review-decisions --db data/mini-demo.db --decisions research_batches/pilot-1998/02_REVIEW_DECISIONS_CPU.csv
+python -m structura import-review-decisions --db data/mini-demo.db --decisions research_batches/pilot-1998/03_REVIEW_DECISIONS_GPU.csv
+python -m structura import-review-decisions --db data/mini-demo.db --decisions research_batches/pilot-1998/04_REVIEW_DECISIONS_HDD.csv
 python -m structura render-review --db data/mini-demo.db --output exports/mini-demo
 python -m structura check --db data/mini-demo.db
 ```
 
-Open `exports/mini-demo/index.html`. Repeating any import is safe: the exact input digest is recognized and no duplicate run, proposal, assertion, or finding rows are added.
+Open `exports/mini-demo/index.html`. Repeating any import is safe: the exact input digest is recognized and no duplicate run, proposal, assertion, finding, or review-decision rows are added.
 
 ## Implementation
 
@@ -90,7 +93,7 @@ agent files -> validate/hash -> non-canonical SQL review staging
 
 - `schema/001_initial.sql` defines entities, product details, relationships, sources, and evidence links.
 - `schema/002_seed_ontology.sql` supplies a proposed, revisable relationship vocabulary.
-- `schema/003_research_intake.sql` through `009_product_context.sql` preserve immutable import runs, raw candidate rows, verification evidence, normalization proposals, audit leads, stated-purpose claims, and comparable benchmark observations separately from canonical promotion.
+- `schema/003_research_intake.sql` through `010_discrepancy_review.sql` preserve immutable import runs, raw candidate rows, verification evidence, normalization proposals, audit leads, stated-purpose claims, comparable benchmark observations, and append-only discrepancy decisions separately from canonical promotion.
 - `data/intake/` contains blank handoff templates for research stages.
 - `structura/` contains database setup, validation, and the local HTML explorer.
 - `docs/` records product boundaries, architecture, research workflow, ontology, and risks.
