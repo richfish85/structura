@@ -1,0 +1,14 @@
+{
+  "manifest_version": "0.1", "manifest_type": "job", "batch_id": "pilot-1997-hdd", "job_id": "job-1997-hdd-normalize-003", "stage": "normalization", "status": "accepted", "created_at_utc": "2026-09-08T02:00:00Z", "coordinator": "structura-root-coordinator",
+  "owner": {"agent_id": "terra-1997-hdd-normalizer-003", "model": "gpt-5.6-terra", "capability_route": "terra", "independence_group": "1997-hdd-normalization-003"},
+  "scope": {"record_keys": ["quantum-fireball-se", "ibm-deskstar-8", "maxtor-diamondmax-1750", "quantum-bigfoot-tx", "ibm-deskstar-18gp"], "category": "HDD", "time_boundary": "calendar year 1997 launch cohort", "exclusions": ["new candidates", "verification changes", "audit", "canonical promotion"]},
+  "inputs": [
+    {"artifact_id": "hdd-scout-candidates", "path": "../job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/candidates.csv", "sha256": "f39d95979acbf3b74dbec3075ed79f3c06abd20b8b54d019d700f3fa58daeff6"},
+    {"artifact_id": "hdd-scout-sources", "path": "../job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/sources.csv", "sha256": "ddc224442316bfa8aa1ff2ca1b46cdfa092622adacdebb6efb4f5a290e866622"},
+    {"artifact_id": "hdd-verification", "path": "../job-1997-hdd-verify-002/runs/run-20260908T014000Z-terra-1997-hdd-verify-002/verification.csv", "sha256": "c0d523d7bb36e6c9ed59f431f77fa7d860c9f73133467c20841e0881d6aa21a2"},
+    {"artifact_id": "hdd-verifier-notes", "path": "../job-1997-hdd-verify-002/runs/run-20260908T014000Z-terra-1997-hdd-verify-002/notes.md", "sha256": "00d4f3ada7452d787e46bdb0b6f8367e296067ea40e81adca892815832b4df41"}
+  ],
+  "output_contract": {"path": "runs/run-20260908T020000Z-terra-1997-hdd-normalizer-003/normalization.csv", "schema": "structura-normalization-v1", "columns": ["batch_key", "candidate_key", "normalized_manufacturer", "normalized_display_name", "entity_granularity", "parent_candidate_key", "normalized_category", "qualifying_event_type", "normalized_launch_date", "date_precision", "market_channel_notes", "decision_status", "rationale", "open_questions", "normalizer"]},
+  "handoff": {"destination_stage": "human_review", "required_human_approval": true, "canonical_promotion_allowed": false},
+  "accepted_result": {"run_id": "run-20260908T020000Z-terra-1997-hdd-normalizer-003", "artifact_id": "artifact-job-1997-hdd-normalize-003-run-20260908T020000Z-terra-1997-hdd-normalizer-003", "result_manifest_sha256": "f873e70f0385ee6e07502584942c99e97345823a988df4230338ccc8b26e89b4"}
+}

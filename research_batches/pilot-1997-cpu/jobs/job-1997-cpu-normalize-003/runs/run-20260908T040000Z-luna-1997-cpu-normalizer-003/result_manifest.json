@@ -1,0 +1,29 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-cpu",
+  "job_id": "job-1997-cpu-normalize-003",
+  "run_id": "run-20260908T040000Z-luna-1997-cpu-normalizer-003",
+  "artifact_id": "artifact-job-1997-cpu-normalize-003-run-20260908T040000Z-luna-1997-cpu-normalizer-003",
+  "stage": "normalizer",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T04:00:00Z",
+  "completed_at_utc": "2026-09-08T04:20:00Z",
+  "worker": {"agent_id": "luna-1997-cpu-normalizer-003", "model": "gpt-5.6-luna", "capability_route": "luna", "tool_versions": ["apply_patch", "exec_command"], "independence_group": "1997-cpu-normalization-003"},
+  "inputs": [
+    {"artifact_id": "1997-cpu-scout-candidates", "sha256": "22a0db91c72887dbbfba7718cdfc4dfabcc11d3a5670ee00f01538d5d0cd21b1"},
+    {"artifact_id": "1997-cpu-scout-sources", "sha256": "6c9ecd748e75e226bfdbfbcb0e55a9a101009165ec2e61da0d24d0305470dc9f"},
+    {"artifact_id": "1997-cpu-scout-notes", "sha256": "9a9ab9235cd62b97c90a2896428c911b54c5326921e86a460564e6e91991c8dd"},
+    {"artifact_id": "1997-cpu-verification-report", "sha256": "AFB84BEE94AF083FACB8D845C497F845D2808E74BB11EC2EE631338F180F843D"},
+    {"artifact_id": "1997-cpu-verification-result", "sha256": "145ED6D949D5408159942FC2AF28D84EAC52C302146C6B5240CE5698C8ED79DF"}
+  ],
+  "outputs": [
+    {"path": "normalization.csv", "sha256": "3DBE46B413481DA6618F153839E157E66A5C2EC175CDE7A245F953E246C27A28", "row_count": 9, "schema": "structura-normalization-v1"},
+    {"path": "notes.md", "sha256": "1DE517E1FEA1A2E055FE861551DF06518EB41F20B0AC7CE92B8DBE81F468CC42", "row_count": null, "schema": "normalization-notes-markdown-v1"}
+  ],
+  "coverage": {"record_keys_attempted": ["intel-pentium-ii-233", "intel-pentium-ii-266", "intel-pentium-ii-300", "intel-pentium-mmx-233", "intel-mobile-pentium-mmx-200", "intel-mobile-pentium-mmx-233", "intel-mobile-pentium-mmx-120", "intel-embedded-pentium-mmx-200", "amd-k6-family"], "record_keys_completed": ["intel-pentium-ii-233", "intel-pentium-ii-266", "intel-pentium-ii-300", "intel-pentium-mmx-233", "intel-mobile-pentium-mmx-200", "intel-mobile-pentium-mmx-233", "intel-mobile-pentium-mmx-120", "intel-embedded-pentium-mmx-200", "amd-k6-family"], "record_keys_blocked": [], "unknowns": ["boxed/component and regional scope", "first workstation shipment", "mobile package SKU and OEM geography", "embedded module identity", "AMD K6 exact date and speed-grade composition"], "conflicts": []},
+  "source_policy_used": {"access_date_utc": "2026-09-08", "upstream_artifacts_read_only": true, "canonical_sql_written": false},
+  "quality": {"self_approval_violation": false, "candidate_count": 9, "duplicate_candidate_keys": false, "mobile_embedded_workstation_boundaries_preserved": true, "notes": "Normalization proposals map only the verified nine candidates. Family/model/SKU granularity, typed event wording, date precision, channel limits, and unknowns are preserved."},
+  "handoff": {"ready_for_stage": "auditor", "required_follow_up": ["Audit granularity and date inheritance", "Human review before canonical promotion"], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

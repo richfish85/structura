@@ -1,0 +1,21 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1997-gpu",
+  "job_id": "job-1997-gpu-verify-002",
+  "stage": "verifier",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T01:40:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {"agent_id": "terra-1997-gpu-verifier-002", "model": "gpt-5.6-terra", "capability_route": "terra", "independence_group": "1997-gpu-verification-002"},
+  "scope": {"record_keys": ["nvidia-riva-128", "s3-virge-mx", "3dlabs-permedia-2", "canopus-powerwindow-pwr128p", "melco-whp-ps-series", "ati-xpert"], "time_boundary": "calendar year 1997 GPU launch cohort", "inclusion_event": "new product introduction or first commercial shipment during 1997", "exclusions": ["candidate discovery", "normalization", "audit", "canonical promotion", "unregistered source URLs"]},
+  "inputs": [
+    {"artifact_id": "gpu-scout-candidates", "path": "../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/candidates.csv", "sha256": "270d53c2a19560b39cc1fc47425e4ff7ed0625f7b0c60fcc832285fd5b7234fd"},
+    {"artifact_id": "gpu-scout-sources", "path": "../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/sources.csv", "sha256": "6d349ebf75eb382638955d05fe592298782e000c8d104538290d3e68a42d9334"},
+    {"artifact_id": "gpu-scout-notes", "path": "../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/notes.md", "sha256": "bcc0d6c3b171074bee04b3e1953a597be3dd15c24b260252e65da676cb8ca22b"}
+  ],
+  "source_policy": {"allowed_tiers": [1, 2, 3], "primary_source_preferred": true, "retrospective_sources_allowed": true, "independent_confirmation_required": false, "access_date_utc": "2026-09-08"},
+  "output_contract": {"run_directory": "runs/run-20260908T014000Z-terra-1997-gpu-verify-002", "schema": "structura-verification-report-v1", "required_columns": ["batch_key", "candidate_key", "identity_status", "manufacturer_status", "category_status", "timing_status", "inclusion_recommendation", "verified_event_type", "verified_timing_raw", "date_precision", "source_1_url", "source_1_locator", "source_1_evidence", "source_2_url", "source_2_locator", "source_2_evidence", "contradictions_or_limits", "unresolved_questions", "verifier_notes"]},
+  "handoff": {"destination_stage": "normalizer", "canonical_promotion_allowed": false},
+  "accepted_result": {"run_id": "run-20260908T014000Z-terra-1997-gpu-verify-002", "artifact_id": "artifact-job-1997-gpu-verify-002-run-20260908T014000Z-terra-1997-gpu-verify-002", "result_manifest_sha256": "ad22029fb37f7829abdb0bb3a007a7271f0cc3689f4657fd27401a7b1025069f"}
+}

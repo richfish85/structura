@@ -1,0 +1,125 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-gpu",
+  "job_id": "job-1997-gpu-verify-002",
+  "run_id": "run-20260908T014000Z-terra-1997-gpu-verify-002",
+  "artifact_id": "artifact-job-1997-gpu-verify-002-run-20260908T014000Z-terra-1997-gpu-verify-002",
+  "stage": "verifier",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:40:00Z",
+  "completed_at_utc": "2026-09-08T01:55:00Z",
+  "worker": {
+    "agent_id": "terra-1997-gpu-verifier-002",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "tool_versions": [
+      "web__run",
+      "apply_patch",
+      "exec_command"
+    ],
+    "independence_group": "1997-gpu-verification-002"
+  },
+  "inputs": [
+    {
+      "artifact_id": "gpu-scout-candidates",
+      "path": "../../../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/candidates.csv",
+      "sha256": "270d53c2a19560b39cc1fc47425e4ff7ed0625f7b0c60fcc832285fd5b7234fd",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "gpu-scout-sources",
+      "path": "../../../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/sources.csv",
+      "sha256": "6d349ebf75eb382638955d05fe592298782e000c8d104538290d3e68a42d9334",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "gpu-scout-notes",
+      "path": "../../../job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/notes.md",
+      "sha256": "bcc0d6c3b171074bee04b3e1953a597be3dd15c24b260252e65da676cb8ca22b",
+      "row_count": null
+    }
+  ],
+  "outputs": [
+    {
+      "path": "verification.csv",
+      "sha256": "36b5f6f1af50ebeb13ebaecd505a7fbe688ca3ed89b51209c8f2d438631adcaf",
+      "row_count": 6,
+      "schema": "structura-verification-report-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "f6e58eeabec6ce5f3aaeede4aaf014291ce419f4d72b6144b893620d74bc15b9",
+      "row_count": null,
+      "schema": "verification-notes-markdown-v1"
+    }
+  ],
+  "coverage": {
+    "record_keys_attempted": [
+      "nvidia-riva-128",
+      "s3-virge-mx",
+      "3dlabs-permedia-2",
+      "canopus-powerwindow-pwr128p",
+      "melco-whp-ps-series",
+      "ati-xpert"
+    ],
+    "record_keys_completed": [
+      "nvidia-riva-128",
+      "s3-virge-mx",
+      "3dlabs-permedia-2",
+      "canopus-powerwindow-pwr128p",
+      "melco-whp-ps-series",
+      "ati-xpert"
+    ],
+    "record_keys_blocked": [],
+    "unknowns": [
+      "RIVA 128 first shipment",
+      "ViRGE/MX completed volume production",
+      "PERMEDIA 2 first shipment",
+      "PWR128P exact sale date",
+      "WHP-PS variant shipment dates",
+      "Xpert actual August availability"
+    ],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [
+      1,
+      2,
+      3
+    ],
+    "primary_sources_used": [
+      "nvidia-1997-timeline",
+      "elsa-permedia-2-1997"
+    ],
+    "contemporary_sources_used": [
+      "s3-virge-mx-1997-pcwatch",
+      "canopus-riva-128-1997-pcwatch",
+      "melco-permedia-2-1997-pcwatch",
+      "ati-xpert-1997-computerwoche"
+    ],
+    "independence_limitations": [
+      "Each frozen candidate has one registered source; no source URL outside the scout register was used."
+    ]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Independent verification only. No scout artifacts, shared batch files, database data, normalizations, audit decisions, or canonical statuses were changed."
+  },
+  "handoff": {
+    "ready_for_stage": "normalizer",
+    "required_follow_up": [
+      "Obtain shipment or availability evidence for forecast-led records",
+      "Keep chip and board identities separate",
+      "Do not manufacture exact dates from month windows"
+    ],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1997-cpu",
+  "job_id": "job-1997-cpu-normalize-003",
+  "stage": "normalizer",
+  "status": "submitted",
+  "created_at_utc": "2026-09-08T04:00:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {"agent_id": "luna-1997-cpu-normalizer-003", "model": "gpt-5.6-luna", "capability_route": "luna", "independence_group": "1997-cpu-normalization-003"},
+  "scope": {"record_keys": ["intel-pentium-ii-233", "intel-pentium-ii-266", "intel-pentium-ii-300", "intel-pentium-mmx-233", "intel-mobile-pentium-mmx-200", "intel-mobile-pentium-mmx-233", "intel-mobile-pentium-mmx-120", "intel-embedded-pentium-mmx-200", "amd-k6-family"], "category": "CPU", "time_boundary": "calendar year 1997 launch cohort", "exclusions": ["new candidates", "scouting", "verification", "audit", "context research", "canonical promotion"]},
+  "inputs": [
+    {"artifact_id": "1997-cpu-scout-candidates", "path": "../../job-1997-cpu-scout-001/runs/run-20260908T030000Z-luna-1997-cpu-scout-001/candidates.csv", "sha256": "22a0db91c72887dbbfba7718cdfc4dfabcc11d3a5670ee00f01538d5d0cd21b1"},
+    {"artifact_id": "1997-cpu-scout-sources", "path": "../../job-1997-cpu-scout-001/runs/run-20260908T030000Z-luna-1997-cpu-scout-001/sources.csv", "sha256": "6c9ecd748e75e226bfdbfbcb0e55a9a101009165ec2e61da0d24d0305470dc9f"},
+    {"artifact_id": "1997-cpu-scout-notes", "path": "../../job-1997-cpu-scout-001/runs/run-20260908T030000Z-luna-1997-cpu-scout-001/notes.md", "sha256": "9a9ab9235cd62b97c90a2896428c911b54c5326921e86a460564e6e91991c8dd"},
+    {"artifact_id": "1997-cpu-verification-report", "path": "../../job-1997-cpu-verify-002/runs/run-20260908T032000Z-terra-1997-cpu-verifier-002/verification.csv", "sha256": "AFB84BEE94AF083FACB8D845C497F845D2808E74BB11EC2EE631338F180F843D"},
+    {"artifact_id": "1997-cpu-verification-result", "path": "../../job-1997-cpu-verify-002/runs/run-20260908T032000Z-terra-1997-cpu-verifier-002/result_manifest.json", "sha256": "145ED6D949D5408159942FC2AF28D84EAC52C302146C6B5240CE5698C8ED79DF"}
+  ],
+  "output_contract": {"path": "runs/run-20260908T040000Z-luna-1997-cpu-normalizer-003/normalization.csv", "schema": "structura-normalization-v1", "columns": ["batch_key", "candidate_key", "normalized_manufacturer", "normalized_display_name", "entity_granularity", "parent_candidate_key", "normalized_category", "qualifying_event_type", "normalized_launch_date", "date_precision", "market_channel_notes", "decision_status", "rationale", "open_questions", "normalizer"]},
+  "handoff": {"destination_stage": "auditor", "required_human_approval": true, "canonical_promotion_allowed": false}
+}

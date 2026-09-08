@@ -1,0 +1,114 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-cpu",
+  "job_id": "job-1997-cpu-scout-001",
+  "run_id": "run-20260908T030000Z-luna-1997-cpu-scout-001",
+  "artifact_id": "artifact-job-1997-cpu-scout-001-run-20260908T030000Z-luna-1997-cpu-scout-001",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T03:00:00Z",
+  "completed_at_utc": "2026-09-08T03:15:00Z",
+  "worker": {
+    "agent_id": "luna-1997-cpu-scout-001",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": [
+      "web__run",
+      "apply_patch",
+      "exec_command"
+    ],
+    "independence_group": "1997-cpu-scout-001"
+  },
+  "outputs": [
+    {
+      "path": "candidates.csv",
+      "sha256": "22a0db91c72887dbbfba7718cdfc4dfabcc11d3a5670ee00f01538d5d0cd21b1",
+      "row_count": 9,
+      "schema": "structura-scout-candidates-v1"
+    },
+    {
+      "path": "sources.csv",
+      "sha256": "6c9ecd748e75e226bfdbfbcb0e55a9a101009165ec2e61da0d24d0305470dc9f",
+      "row_count": 8,
+      "schema": "structura-source-register-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "9a9ab9235cd62b97c90a2896428c911b54c5326921e86a460564e6e91991c8dd",
+      "row_count": null,
+      "schema": "scout-notes-markdown-v1"
+    }
+  ],
+  "coverage": {
+    "record_keys_attempted": [
+      "intel-pentium-ii-233",
+      "intel-pentium-ii-266",
+      "intel-pentium-ii-300",
+      "intel-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-200",
+      "intel-mobile-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-120",
+      "intel-embedded-pentium-mmx-200",
+      "amd-k6-family"
+    ],
+    "record_keys_completed": [
+      "intel-pentium-ii-233",
+      "intel-pentium-ii-266",
+      "intel-pentium-ii-300",
+      "intel-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-200",
+      "intel-mobile-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-120",
+      "intel-embedded-pentium-mmx-200",
+      "amd-k6-family"
+    ],
+    "record_keys_blocked": [],
+    "unknowns": [
+      "exact shipments, part numbers, geography, full speed-grade coverage"
+    ],
+    "conflicts": [],
+    "omissions_or_leads": [
+      "Cyrix 6x86MX",
+      "IDT WinChip",
+      "additional AMD-K6 speed grades",
+      "Intel server/workstation and OverDrive variants"
+    ]
+  },
+  "source_policy_used": {
+    "tiers_consulted": [
+      1,
+      2
+    ],
+    "primary_sources_used": [
+      "intel-1997-dp050797",
+      "intel-1997-dp060297",
+      "intel-1997-mp090897",
+      "intel-1997-mp102097",
+      "intel-1997-em092997",
+      "intel-quickref-year",
+      "amd-1997-10k405",
+      "amd-1996-10k"
+    ],
+    "independence_limitations": [
+      "Most evidence is manufacturer-controlled; AMD 1997 timing is retrospective in the 1998 filing."
+    ]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Scout-only representative cohort; no normalization or verification conclusion."
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": [
+      "Independently verify candidate identity and qualifying 1997 event, especially AMD family granularity and Pentium II 300 workstation timing."
+    ],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-gpu",
+  "job_id": "job-1997-gpu-scout-001",
+  "run_id": "run-20260908T013000Z-terra-1997-gpu-scout-001",
+  "artifact_id": "artifact-job-1997-gpu-scout-001-run-20260908T013000Z-terra-1997-gpu-scout-001",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:30:00Z",
+  "completed_at_utc": "2026-09-08T01:42:00Z",
+  "worker": {"agent_id": "terra-1997-gpu-scout-001", "model": "gpt-5.6-terra", "capability_route": "terra", "tool_versions": ["web__run", "apply_patch", "exec_command"], "independence_group": "1997-gpu-scout-001"},
+  "inputs": [{"artifact_id": "job-manifest", "path": "../../job_manifest.json", "sha256": "7fe8fe122f94db8610593ceb6e20bee9f9ddc38fe84da192504447871750dd2c", "identity": "job-1997-gpu-scout-001 scope and source policy"}],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "270d53c2a19560b39cc1fc47425e4ff7ed0625f7b0c60fcc832285fd5b7234fd", "row_count": 6, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "6d349ebf75eb382638955d05fe592298782e000c8d104538290d3e68a42d9334", "row_count": 6, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "bcc0d6c3b171074bee04b3e1953a597be3dd15c24b260252e65da676cb8ca22b", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["nvidia-riva-128", "s3-virge-mx", "3dlabs-permedia-2", "canopus-powerwindow-pwr128p", "melco-whp-ps-series", "ati-xpert"],
+    "record_keys_completed": ["nvidia-riva-128", "s3-virge-mx", "3dlabs-permedia-2", "canopus-powerwindow-pwr128p", "melco-whp-ps-series", "ati-xpert"],
+    "record_keys_blocked": [],
+    "unknowns": ["NVIDIA exact first shipment and channel", "S3 ViRGE/MX actual production or sale date", "PERMEDIA 2 first chip shipment", "exact late-October board sale dates", "ATI Xpert exact August sale date"],
+    "conflicts": [],
+    "omissions_or_leads": ["3Dfx Voodoo Rush", "ATI 3D Rage Pro chip", "Matrox Millennium II or Mystique 220", "Rendition Verite V2200", "PowerVR PCX2", "Number Nine workstation boards", "other mobile products"]
+  },
+  "source_policy_used": {"tiers_consulted": [1, 2], "primary_sources_used": ["nvidia-1997-timeline", "elsa-permedia-2-1997"], "contemporary_technical_sources_used": ["s3-virge-mx-1997-pcwatch", "canopus-riva-128-1997-pcwatch", "melco-permedia-2-1997-pcwatch", "ati-xpert-1997-computerwoche"], "independence_limitations": ["NVIDIA chronology is retrospective and no source set establishes all chip first-shipment dates."]},
+  "quality": {"self_approval_violation": false, "canonical_sql_written": false, "notes": "Scout-only result. No verification, normalization, audit, context research, database import, or canonical decision occurred."},
+  "handoff": {"ready_for_stage": "verifier", "required_follow_up": ["Verify chip-versus-board identities", "Resolve planned production versus actual shipment", "Check omission leads only in new scoped scout jobs"], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

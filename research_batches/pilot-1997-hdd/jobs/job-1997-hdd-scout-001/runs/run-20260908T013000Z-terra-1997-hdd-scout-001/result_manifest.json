@@ -1,0 +1,31 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-hdd",
+  "job_id": "job-1997-hdd-scout-001",
+  "run_id": "run-20260908T013000Z-terra-1997-hdd-scout-001",
+  "artifact_id": "artifact-job-1997-hdd-scout-001-run-20260908T013000Z-terra-1997-hdd-scout-001",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:30:00Z",
+  "completed_at_utc": "2026-09-08T01:42:00Z",
+  "worker": {"agent_id": "terra-1997-hdd-scout-001", "model": "gpt-5.6-terra", "capability_route": "terra", "tool_versions": ["web__run", "apply_patch", "exec_command"], "independence_group": "1997-hdd-scout-001"},
+  "inputs": [{"artifact_id": "job-manifest", "path": "../../job_manifest.json", "sha256": "c53857b23e0753e75f6f4d533e81ff7dba5a4b34f00cd80824cf5c264d4c2854", "identity": "job-1997-hdd-scout-001 scope and source policy"}],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "f39d95979acbf3b74dbec3075ed79f3c06abd20b8b54d019d700f3fa58daeff6", "row_count": 5, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "ddc224442316bfa8aa1ff2ca1b46cdfa092622adacdebb6efb4f5a290e866622", "row_count": 4, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "2083ca3e9f0d0e105cfcd9d3a3307a29b5dfafde20f83ba83ae3f31299675eeb", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["quantum-fireball-se", "ibm-deskstar-8", "maxtor-diamondmax-1750", "quantum-bigfoot-tx", "ibm-deskstar-18gp"],
+    "record_keys_completed": ["quantum-fireball-se", "ibm-deskstar-8", "maxtor-diamondmax-1750", "quantum-bigfoot-tx", "ibm-deskstar-18gp"],
+    "record_keys_blocked": [],
+    "unknowns": ["Fireball SE first commercial shipment", "Deskstar 8 precise OEM production/shipment event", "DiamondMax 1750 actual production and retail availability", "Bigfoot TX contemporaneous commercial channel", "Deskstar 18GP first OEM shipment"],
+    "conflicts": [],
+    "omissions_or_leads": ["Quantum Atlas III", "Quantum Viking II", "Seagate Medalist/Barracuda", "Fujitsu desktop and mobile", "Western Digital Caviar", "IBM Travelstar", "removable HDD products"]
+  },
+  "source_policy_used": {"tiers_consulted": [2, 3], "primary_sources_used": [], "contemporary_technical_sources_used": ["quantum-hdd-1997-pcwatch", "ibm-maxtor-hdd-1997-pcwatch", "ibm-deskstar-18gp-comdex-1997"], "independence_limitations": ["Bigfoot TX timing is retrospective; all sources are initial scout evidence and require independent verification."]},
+  "quality": {"self_approval_violation": false, "canonical_sql_written": false, "notes": "Scout-only result. No verification, normalization, audit, context research, database import, or canonical decision occurred."},
+  "handoff": {"ready_for_stage": "verifier", "required_follow_up": ["Verify planned production versus actual shipment", "Preserve OEM-only and retail boundaries", "Confirm Deskstar 18GP qualifying event"], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

@@ -1,0 +1,117 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-hdd",
+  "job_id": "job-1997-hdd-verify-002",
+  "run_id": "run-20260908T014000Z-terra-1997-hdd-verify-002",
+  "artifact_id": "artifact-job-1997-hdd-verify-002-run-20260908T014000Z-terra-1997-hdd-verify-002",
+  "stage": "verifier",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:40:00Z",
+  "completed_at_utc": "2026-09-08T01:55:00Z",
+  "worker": {
+    "agent_id": "terra-1997-hdd-verifier-002",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "tool_versions": [
+      "web__run",
+      "apply_patch",
+      "exec_command"
+    ],
+    "independence_group": "1997-hdd-verification-002"
+  },
+  "inputs": [
+    {
+      "artifact_id": "hdd-scout-candidates",
+      "path": "../../../job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/candidates.csv",
+      "sha256": "f39d95979acbf3b74dbec3075ed79f3c06abd20b8b54d019d700f3fa58daeff6",
+      "row_count": 5
+    },
+    {
+      "artifact_id": "hdd-scout-sources",
+      "path": "../../../job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/sources.csv",
+      "sha256": "ddc224442316bfa8aa1ff2ca1b46cdfa092622adacdebb6efb4f5a290e866622",
+      "row_count": 4
+    },
+    {
+      "artifact_id": "hdd-scout-notes",
+      "path": "../../../job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/notes.md",
+      "sha256": "2083ca3e9f0d0e105cfcd9d3a3307a29b5dfafde20f83ba83ae3f31299675eeb",
+      "row_count": null
+    }
+  ],
+  "outputs": [
+    {
+      "path": "verification.csv",
+      "sha256": "e8729d1a82bc8361622eab34234c646285aba3ba559cccb3d2bebe5022b77d41",
+      "row_count": 5,
+      "schema": "structura-verification-report-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "00d4f3ada7452d787e46bdb0b6f8367e296067ea40e81adca892815832b4df41",
+      "row_count": null,
+      "schema": "verification-notes-markdown-v1"
+    }
+  ],
+  "coverage": {
+    "record_keys_attempted": [
+      "quantum-fireball-se",
+      "ibm-deskstar-8",
+      "maxtor-diamondmax-1750",
+      "quantum-bigfoot-tx",
+      "ibm-deskstar-18gp"
+    ],
+    "record_keys_completed": [
+      "quantum-fireball-se",
+      "ibm-deskstar-8",
+      "maxtor-diamondmax-1750",
+      "quantum-bigfoot-tx",
+      "ibm-deskstar-18gp"
+    ],
+    "record_keys_blocked": [],
+    "unknowns": [
+      "Fireball SE first commercial shipment",
+      "Deskstar 8 actual July production",
+      "DiamondMax 1750 retail availability",
+      "Bigfoot TX contemporary shipment corroboration",
+      "Deskstar 18GP OEM shipment date"
+    ],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [
+      2,
+      3
+    ],
+    "primary_sources_used": [],
+    "contemporary_sources_used": [
+      "quantum-hdd-1997-pcwatch",
+      "ibm-maxtor-hdd-1997-pcwatch",
+      "ibm-deskstar-18gp-comdex-1997"
+    ],
+    "independence_limitations": [
+      "The Bigfoot TX evidence is retrospective; each frozen candidate has one registered source and no outside URL was used."
+    ]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Independent verification only. No scout artifacts, shared batch files, database data, normalizations, audit decisions, or canonical statuses were changed."
+  },
+  "handoff": {
+    "ready_for_stage": "normalizer",
+    "required_follow_up": [
+      "Keep forecast, production, shipment, and retail events separate",
+      "Preserve IBM OEM-only boundaries",
+      "Obtain contemporary Bigfoot TX evidence before treating its source as strong commercial-launch proof"
+    ],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}

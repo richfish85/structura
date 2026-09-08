@@ -1,0 +1,15 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1997-hdd",
+  "job_id": "job-1997-hdd-scout-001",
+  "stage": "scout",
+  "status": "submitted",
+  "created_at_utc": "2026-09-08T01:30:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {"agent_id": "terra-1997-hdd-scout-001", "model": "gpt-5.6-terra", "capability_route": "terra", "independence_group": "1997-hdd-scout-001"},
+  "scope": {"category": "HDD", "time_boundary": "calendar year 1997 launch cohort", "inclusion_event": "new product introduction or first commercial shipment during 1997", "segments": ["desktop", "enterprise SCSI", "OEM"], "stopping_rule": "five representative families/models with source-backed 1997 event evidence", "exclusions": ["census claims", "verification", "normalization", "audit", "canonical promotion"]},
+  "source_policy": {"allowed_tiers": [1, 2, 3], "primary_source_preferred": true, "contemporary_technical_publications_allowed": true, "access_date_utc": "2026-09-08"},
+  "output_contract": {"run_directory": "runs/run-20260908T013000Z-terra-1997-hdd-scout-001", "artifacts": ["candidates.csv", "sources.csv", "notes.md", "result_manifest.json"], "candidate_schema": "structura-scout-candidates-v1", "source_schema": "structura-source-register-v1"},
+  "handoff": {"destination_stage": "verifier", "canonical_promotion_allowed": false}
+}

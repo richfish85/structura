@@ -1,0 +1,97 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1997-cpu",
+  "job_id": "job-1997-cpu-verify-002",
+  "run_id": "run-20260908T032000Z-terra-1997-cpu-verifier-002",
+  "artifact_id": "artifact-job-1997-cpu-verify-002-run-20260908T032000Z-terra-1997-cpu-verifier-002",
+  "stage": "verification",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T03:20:00Z",
+  "completed_at_utc": "2026-09-08T03:35:00Z",
+  "worker": {
+    "agent_id": "terra-1997-cpu-verifier-002",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "tool_versions": [
+      "apply_patch",
+      "exec_command"
+    ],
+    "independence_group": "1997-cpu-verification-002"
+  },
+  "inputs": [
+    {
+      "artifact_id": "1997-cpu-scout-candidates",
+      "sha256": "22a0db91c72887dbbfba7718cdfc4dfabcc11d3a5670ee00f01538d5d0cd21b1"
+    },
+    {
+      "artifact_id": "1997-cpu-scout-sources",
+      "sha256": "6c9ecd748e75e226bfdbfbcb0e55a9a101009165ec2e61da0d24d0305470dc9f"
+    },
+    {
+      "artifact_id": "1997-cpu-scout-notes",
+      "sha256": "9a9ab9235cd62b97c90a2896428c911b54c5326921e86a460564e6e91991c8dd"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "verification.csv",
+      "sha256": "afb84bee94af083facb8d845c497f845d2808e74bb11ec2ee631338f180f843d",
+      "row_count": 9,
+      "schema": "structura-verification-report-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "8c5cbe90ad438f01a8341a9aaf126268aa7a04d6664064aa91fac905ce9f53f8",
+      "row_count": null,
+      "schema": "verifier-notes-markdown-v1"
+    }
+  ],
+  "coverage": {
+    "record_keys_attempted": [
+      "intel-pentium-ii-233",
+      "intel-pentium-ii-266",
+      "intel-pentium-ii-300",
+      "intel-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-200",
+      "intel-mobile-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-120",
+      "intel-embedded-pentium-mmx-200",
+      "amd-k6-family"
+    ],
+    "record_keys_completed": [
+      "intel-pentium-ii-233",
+      "intel-pentium-ii-266",
+      "intel-pentium-ii-300",
+      "intel-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-200",
+      "intel-mobile-pentium-mmx-233",
+      "intel-mobile-pentium-mmx-120",
+      "intel-embedded-pentium-mmx-200",
+      "amd-k6-family"
+    ],
+    "record_keys_blocked": [],
+    "unknowns": [
+      "exact shipment days, ordering part numbers, geography, AMD speed-grade composition"
+    ],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Independent verification only; no scout edits, normalization, audit, context research, or promotion."
+  },
+  "handoff": {
+    "ready_for_stage": "normalizer",
+    "required_follow_up": [
+      "Preserve Pentium II 300 workstation timing gap and AMD family-level quarter precision."
+    ],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}
