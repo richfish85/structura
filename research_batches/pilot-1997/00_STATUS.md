@@ -1,6 +1,6 @@
 # 1997 Launch-Cohort Pilot — Status
 
-Status: **scouting complete; independent verification in progress; no canonical records**
+Status: **research handoffs complete; audit import requires repair; no canonical records**
 Access/reconciliation date: 2026-09-08
 
 ## What
@@ -26,11 +26,11 @@ The qualifying event is a new product introduction or first commercial shipment 
 
 | Slice | Scouted | Independently verified | Normalized | Context researched | Audited |
 |---|---:|---:|---:|---:|---:|
-| CPU | 9 | 0 | 0 | 0 | 0 |
-| GPU | 6 | 0 | 0 | 0 | 0 |
-| HDD | 5 | 0 | 0 | 0 | 0 |
-| **Total** | **20** | **0** | **0** | **0** | **0** |
+| CPU | 9 | 9 | 9 | 9 | 0 |
+| GPU | 6 | 6 | 6 | 6 | 0 |
+| HDD | 5 | 5 | 5 | 5 | 0 |
+| **Total** | **20** | **20** | **20** | **20** | **0** |
 
 ## Deferred
 
-Visual presentation, benchmark bars, and granular census expansion remain deferred. Omission leads are preserved as research pointers rather than silently added to the candidate set.
+Visual presentation, benchmark bars, and granular census expansion remain deferred. The three audit packets need CSV repair before their findings can be imported; omission leads remain preserved as research pointers rather than silently added to the candidate set.
