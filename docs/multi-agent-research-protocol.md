@@ -116,6 +116,8 @@ Manifests record source-policy metadata: allowed source tiers, required primary-
 
 Agents must preserve `unknown`, `not found`, `conflict`, and `not applicable` distinctly. Never convert a missing date into an exact date; never turn a company repeat into independent corroboration; never copy a family event onto a speed grade without evidence. A blocked or incomplete job is a valid result.
 
+When two runs describe the same source differently, the coordinator resolves identity by stable source key or exact URL and preserves each worker's raw title, type, dates, and scope note as a run-level source observation. A reused key pointing to a different URL, or a conflicting tier for the same resolved source, is rejected for human resolution rather than silently merged.
+
 ### 8. Idempotence, retry, and recovery
 
 Retries create a new `run_id` but retain the same `job_id` and input snapshot hash. A retry must state the reason (`timeout`, `tool_failure`, `source_unavailable`, `quality_gate`, or `coordinator_request`) and what changed. The coordinator deduplicates by `(job_id, input_snapshot_sha256, attempt_number)` and never merges two attempts automatically.

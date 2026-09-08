@@ -1,0 +1,93 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-verify-omissions-004",
+  "stage": "verifier",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T00:15:33Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-verifier-omissions-04",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "cpu-omission-verification-04"
+  },
+  "scope": {
+    "record_keys": [
+      "amd-k6-2-366",
+      "amd-k6-2-380",
+      "amd-k6-300-mobile",
+      "intel-celeron-300",
+      "intel-mobile-pentium-ii-233",
+      "intel-mobile-pentium-ii-266",
+      "intel-mobile-pentium-ii-300",
+      "intel-pentium-266",
+      "intel-pentium-ii-333",
+      "intel-pentium-ii-overdrive-300",
+      "intel-pentium-ii-overdrive-333",
+      "intel-pentium-ii-xeon-450"
+    ],
+    "category": "CPU",
+    "manufacturer": "Intel and AMD",
+    "geography": null,
+    "time_boundary": "calendar year 1998 launch cohort",
+    "inclusion_event": "new product introduction or first commercial shipment during 1998",
+    "stopping_rule": "stop after all twelve frozen scout keys have an independent field-level assessment, evidence locator, inclusion recommendation, and explicit identity/timing limitations",
+    "exclusions": ["candidate discovery", "normalization", "canonical promotion", "unregistered source URLs"]
+  },
+  "inputs": [
+    {
+      "artifact_id": "desktop-server-candidates",
+      "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv",
+      "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961"
+    },
+    {
+      "artifact_id": "desktop-server-sources",
+      "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv",
+      "sha256": "4d206fbe499e4df1fc38502c7fb71f32685e586f6bab58ca9dccbabda73fb859"
+    },
+    {
+      "artifact_id": "mobile-upgrade-candidates",
+      "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv",
+      "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9"
+    },
+    {
+      "artifact_id": "mobile-upgrade-sources",
+      "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv",
+      "sha256": "56be5725291bc7863c137cc6d1c0a2c0916070b8d781aa2c3a0500c1e7a3f8ab"
+    }
+  ],
+  "source_policy": {
+    "allowed_tiers": [1, 2, 3],
+    "primary_source_preferred": true,
+    "retrospective_sources_allowed": true,
+    "independent_confirmation_required": false,
+    "web_or_archive_tools_allowed": true,
+    "access_date_utc": "2026-09-08"
+  },
+  "tools_allowed": ["web search", "manufacturer archives", "SEC filings"],
+  "output_contract": {
+    "path": "runs/run-20260908T001533Z-terra-verifier-04/verification.csv",
+    "schema": "structura-verification-report-v1",
+    "required_columns": ["batch_key", "candidate_key", "identity_status", "manufacturer_status", "category_status", "timing_status", "inclusion_recommendation", "verified_event_type", "verified_timing_raw", "date_precision", "source_1_url", "source_1_evidence", "verifier_notes"],
+    "unknown_tokens": ["unknown", "not_found", "conflict", "not_applicable"]
+  },
+  "handoff": {
+    "destination_stage": "normalizer",
+    "required_human_approval": false,
+    "canonical_promotion_allowed": false
+  },
+  "retry_policy": {
+    "attempt_number": 1,
+    "prior_run_id": null,
+    "retry_reason": null,
+    "input_snapshot_sha256": "d34b193ffd60388cb8c7a7d906e694ef534c051d8b0b531217b56a1bfaa686b1"
+  },
+  "notes": "Use a different agent identity from both scouts. Treat the two OverDrive output-speed keys as an explicit identity/granularity test; do not assume they are distinct physical products. Use only source URLs present in the frozen scout source registers so the coordinator can import without inventing source identity.",
+  "accepted_result": {
+    "run_id": "run-20260908T001533Z-terra-verifier-04",
+    "artifact_id": "artifact-job-1998-cpu-verify-omissions-004-run-20260908T001533Z-terra-verifier-04",
+    "decision": "structural acceptance for human review; no normalization, merge, or canonical approval"
+  }
+}

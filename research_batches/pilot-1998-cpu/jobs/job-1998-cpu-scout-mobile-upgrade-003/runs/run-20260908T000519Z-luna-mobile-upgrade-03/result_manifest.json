@@ -1,0 +1,53 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-scout-mobile-upgrade-003",
+  "run_id": "run-20260908T000519Z-luna-mobile-upgrade-03",
+  "artifact_id": "artifact-job-1998-cpu-scout-mobile-upgrade-003-run-20260908T000519Z-luna-mobile-upgrade-03",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:05:19Z",
+  "completed_at_utc": "2026-09-08T00:22:00Z",
+  "worker": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "cpu-omission-scout-03"
+  },
+  "inputs": [
+    {"artifact_id": "artifact-cpu-audit-04", "sha256": "ff58c2f03213ddaa557ba05a4e33eb23b2d1bf6d3d2c7d743259b7053b7daf84"},
+    {"artifact_id": "artifact-research-criteria-v02", "sha256": "5ded5e2b47227f6f439990d0de395bbf4f8b298bcd3e75ea9fd0fdcbc56d3966"}
+  ],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9", "row_count": 6, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "56be5725291bc7863c137cc6d1c0a2c0916070b8d781aa2c3a0500c1e7a3f8ab", "row_count": 6, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "6cf4bca72e8b16fa58c39d8e406ffcca5da9dd6eeb906cc24b808a32e06e11b9", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "amd-k6-300-mobile"],
+    "record_keys_completed": ["intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "amd-k6-300-mobile"],
+    "record_keys_blocked": [],
+    "unknowns": ["intel-mobile-pentium-ii-300 exact commercial availability and channel", "intel-pentium-ii-overdrive-300/333 exact availability day and ordering identity", "amd-k6-300-mobile first shipment and commercial channel", "all six exact part numbers and geographic sell-through"],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1],
+    "primary_sources_used": ["intel-1998-mp040298", "intel-quickref-year", "intel-quickref-family", "intel-1998-mp091698", "intel-1998-dp081098", "amd-1998-q3-results"],
+    "retrospective_sources_used": ["intel-quickref-year", "intel-quickref-family", "amd-1998-q3-results"],
+    "independence_limitations": ["All sources are manufacturer-controlled primary evidence; chronology pages are historical reference material and AMD evidence is a regulatory filing reproducing a contemporary release."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Scout-only output. Mobile and upgrade segments remain explicitly labeled. Raw manufacturer wording, typed event distinctions, date precision, channel scope, unknowns, and shared OverDrive identity uncertainty are preserved. No normalization or verification conclusion was made."
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": ["Independently verify all six leads; resolve mobile/upgrade identity granularity and typed commercial events before normalization."],
+    "coordinator_decision": "pending"
+  },
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

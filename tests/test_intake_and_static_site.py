@@ -18,6 +18,9 @@ from structura.static_site import MARKER, render_static_site
 
 ROOT = Path(__file__).resolve().parents[1]
 BATCH = ROOT / "research_batches" / "pilot-1998-cpu"
+DESKTOP_SCOUT = BATCH / "jobs" / "job-1998-cpu-scout-desktop-server-002" / "runs" / "run-20260908T000519Z-luna-desktop-server-02"
+MOBILE_SCOUT = BATCH / "jobs" / "job-1998-cpu-scout-mobile-upgrade-003" / "runs" / "run-20260908T000519Z-luna-mobile-upgrade-03"
+OMISSION_VERIFICATION = BATCH / "jobs" / "job-1998-cpu-verify-omissions-004" / "runs" / "run-20260908T001533Z-terra-verifier-04"
 
 
 class IntakeAndStaticSiteTests(unittest.TestCase):
@@ -73,6 +76,30 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
         candidate_copy.write_text(source_text.replace("Manufacturer wording identifies", "Different raw observation identifies", 1), encoding="utf-8")
         with self.assertRaisesRegex(IntakeError, "require a human merge decision"):
             import_batch(self.db_path, candidate_copy, self.sources)
+
+    def test_disjoint_scout_runs_reuse_sources_and_preserve_raw_source_wording(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        first = import_batch(self.db_path, DESKTOP_SCOUT / "candidates.csv", DESKTOP_SCOUT / "sources.csv")
+        second = import_batch(self.db_path, MOBILE_SCOUT / "candidates.csv", MOBILE_SCOUT / "sources.csv")
+        verification = import_verification(self.db_path, OMISSION_VERIFICATION / "verification.csv")
+        self.assertEqual(first.candidate_count, 6)
+        self.assertEqual(second.candidate_count, 6)
+        self.assertEqual(verification.candidate_count, 12)
+        self.assertTrue(import_batch(self.db_path, DESKTOP_SCOUT / "candidates.csv", DESKTOP_SCOUT / "sources.csv").already_imported)
+        self.assertTrue(import_batch(self.db_path, MOBILE_SCOUT / "candidates.csv", MOBILE_SCOUT / "sources.csv").already_imported)
+        self.assertTrue(import_verification(self.db_path, OMISSION_VERIFICATION / "verification.csv").already_imported)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM research_import_runs").fetchone()[0], 4)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM entities").fetchone()[0], 22)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM sources").fetchone()[0], 15)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM intake_source_records").fetchone()[0], 19)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM verification_records").fetchone()[0], 12)
+            raw_quickref_notes = connection.execute("SELECT COUNT(DISTINCT scope_note_raw) FROM intake_source_records WHERE source_key_raw='intel-quickref-year'").fetchone()[0]
+            resolved_quickref = connection.execute("SELECT COUNT(*) FROM sources WHERE source_key='intel-quickref-year'").fetchone()[0]
+            self.assertGreaterEqual(raw_quickref_notes, 2)
+            self.assertEqual(resolved_quickref, 1)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM entities WHERE record_status='canonical'").fetchone()[0], 0)
+            self.assertEqual(validate(connection), [])
 
     def test_verification_is_idempotent_and_does_not_promote_candidate(self):
         import_batch(self.db_path, self.candidates, self.sources)

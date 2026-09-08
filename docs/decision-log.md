@@ -105,8 +105,44 @@ No scout candidate was verified, normalized, imported, or promoted.
 - Treat audit leads as a new scout queue, never as implicit cohort additions.
 - Require every batch to state whether mobile, upgrade, embedded, OEM-only, and region-specific products are included.
 
-### Decision required before expansion
+### Decisions identified before expansion
 
 - Whether the CPU launch cohort includes mobile processors.
 - Whether it includes upgrade processors such as Pentium II OverDrive.
 - Whether one unresolved cache configuration is one candidate, multiple variants, or a family placeholder.
+
+## 2026-09-08 — CPU segment boundary locked
+
+### Adopted
+
+- Mobile processors are included in the 1998 CPU launch cohort.
+- Upgrade processors are included in the cohort.
+- Desktop, mobile, server/workstation, and upgrade products must retain explicit segment labels and separate counts.
+- The twelve omission-lead keys may proceed through fresh scout and independent-verification jobs.
+- Omission leads still do not become canonical records merely because their segment is now in scope.
+
+### Still open
+
+- Embedded and OEM-only processor inclusion
+- Xeon cache configuration granularity
+- Family-versus-variant public counting rules
+
+## 2026-09-08 — Twelve omission leads researched
+
+### Observed
+
+- Two disjoint scout jobs completed all twelve approved-scope keys and a separate verifier completed all twelve checks.
+- The two OverDrive output-speed keys appear to describe one physical upgrade processor with two compatibility-dependent outputs.
+- Xeon 450 evidence currently establishes an exact announcement and planned October 1998 system shipments, not an unambiguous completed qualifying event.
+- Source-register descriptions vary between workers even when the underlying URL is identical.
+
+### Adopted for intake
+
+- Resolve existing source identity by stable key or exact URL.
+- Preserve each worker's exact source-register wording as a run-level observation.
+- Reject reused keys pointing to different URLs and conflicting tiers rather than silently merging them.
+
+### Human review required
+
+- Restructure the two OverDrive scout keys into one product plus output/compatibility assertions, or supply evidence that they were separately orderable products.
+- Decide whether Xeon 450 remains outside the cohort pending actual shipment/introduction evidence.

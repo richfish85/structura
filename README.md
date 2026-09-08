@@ -47,6 +47,9 @@ python -m structura import-batch --db data/mini-demo.db --candidates research_ba
 python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-cpu/02_verification.csv
 python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-cpu/03_normalization_proposal.csv
 python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-cpu/04_audit_findings.csv
+python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv --sources research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv --stage scouting
+python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv --sources research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv --stage scouting
+python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-cpu/jobs/job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/verification.csv
 python -m structura render-review --db data/mini-demo.db --output exports/mini-demo
 python -m structura check --db data/mini-demo.db
 ```
@@ -123,6 +126,8 @@ Checklist:
 - [x] Propose normalization for the CPU candidates
 - [x] Audit the CPU candidates for duplicates and omissions
 - [x] Demonstrate idempotent SQL intake and plain static HTML generation
+- [x] Expand and independently verify the twelve CPU omission leads
+- [ ] Resolve the OverDrive identity and Xeon 450 event flags
 - [ ] Expand the pilot to GPU and HDD candidates after the CPU criteria review
 - [ ] Define the human promotion gate from verified to canonical
 - [ ] Test the ontology on one deeply modelled object
@@ -130,4 +135,4 @@ Checklist:
 
 ## Current decisions and open questions
 
-See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [research criteria v0.2](docs/research-criteria-v0.2.md), [CPU pilot status](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).
+See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [research criteria v0.3](docs/research-criteria-v0.3.md), [CPU pilot status](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).

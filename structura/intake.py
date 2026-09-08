@@ -238,19 +238,6 @@ def _digest(files: Iterable[Path], stage: str) -> str:
     return hasher.hexdigest()
 
 
-def _source_values_match(existing: sqlite3.Row, proposed: dict[str, str]) -> bool:
-    return (
-        existing["title"] == proposed["title"]
-        and (existing["publisher"] or "") == proposed["publisher"]
-        and existing["source_type"] == proposed["source_type"]
-        and existing["source_tier"] == int(proposed["source_tier"])
-        and (existing["url"] or "") == proposed["url"]
-        and (existing["publication_date"] or "") == proposed["publication_date"]
-        and existing["accessed_date"] == proposed["accessed_date"]
-        and (existing["notes"] or "") == proposed["scope_note"]
-    )
-
-
 def import_batch(
     db_path: Path | str,
     candidate_path: Path | str,
@@ -318,10 +305,18 @@ def import_batch(
         source_ids: dict[str, int] = {}
         for source in sources:
             existing = connection.execute("SELECT * FROM sources WHERE source_key=?", (source["source_key"],)).fetchone()
+            existing_by_url = connection.execute("SELECT * FROM sources WHERE url=? ORDER BY id LIMIT 1", (source["url"],)).fetchone()
             if existing is not None:
-                if not _source_values_match(existing, source):
-                    raise IntakeError(f"source_key conflicts with existing source: {source['source_key']}")
+                if (existing["url"] or "") != source["url"]:
+                    raise IntakeError(f"source_key points to a different URL than the existing source: {source['source_key']}")
+                if int(existing["source_tier"]) != int(source["source_tier"]):
+                    raise IntakeError(f"source_tier disagrees with existing source: {source['source_key']}")
                 source_ids[source["url"]] = int(existing["id"])
+                continue
+            if existing_by_url is not None:
+                if int(existing_by_url["source_tier"]) != int(source["source_tier"]):
+                    raise IntakeError(f"source_tier disagrees with source already registered at URL: {source['url']}")
+                source_ids[source["url"]] = int(existing_by_url["id"])
                 continue
             connection.execute(
                 "INSERT INTO sources(source_key, title, publisher, source_type, source_tier, url, publication_date, accessed_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -338,6 +333,24 @@ def import_batch(
             connection.execute(
                 "INSERT INTO research_import_run_sources(import_run_id, source_id) VALUES (?, ?)",
                 (run_id, source_id),
+            )
+        for source in sources:
+            connection.execute(
+                "INSERT INTO intake_source_records(import_run_id, source_id, source_row_number, source_key_raw, title_raw, publisher_raw, source_type_raw, source_tier_raw, url_raw, publication_date_raw, accessed_date_raw, scope_note_raw) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    run_id,
+                    source_ids[source["url"]],
+                    int(source["_row_number"]),
+                    source["source_key"],
+                    source["title"],
+                    source["publisher"] or None,
+                    source["source_type"],
+                    int(source["source_tier"]),
+                    source["url"],
+                    source["publication_date"] or None,
+                    source["accessed_date"],
+                    source["scope_note"],
+                ),
             )
         for row in candidates:
             connection.execute(

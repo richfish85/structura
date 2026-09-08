@@ -1,0 +1,53 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-scout-desktop-server-002",
+  "run_id": "run-20260908T000519Z-luna-desktop-server-02",
+  "artifact_id": "artifact-job-1998-cpu-scout-desktop-server-002-run-20260908T000519Z-luna-desktop-server-02",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:05:19Z",
+  "completed_at_utc": "2026-09-08T00:14:00Z",
+  "worker": {
+    "agent_id": "luna-scout-desktop-server-02",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "cpu-omission-scout-02"
+  },
+  "inputs": [
+    {"artifact_id": "artifact-cpu-audit-04", "sha256": "ff58c2f03213ddaa557ba05a4e33eb23b2d1bf6d3d2c7d743259b7053b7daf84"},
+    {"artifact_id": "artifact-research-criteria-v02", "sha256": "5ded5e2b47227f6f439990d0de395bbf4f8b298bcd3e75ea9fd0fdcbc56d3966"}
+  ],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961", "row_count": 6, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "4d206fbe499e4df1fc38502c7fb71f32685e586f6bab58ca9dccbabda73fb859", "row_count": 5, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "710f277f4a7d35d78de41ed0584f48204d95dd626c137a534c47bfd3e34ed929", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-pentium-ii-333", "intel-pentium-266", "intel-celeron-300", "intel-pentium-ii-xeon-450", "amd-k6-2-366", "amd-k6-2-380"],
+    "record_keys_completed": ["intel-pentium-ii-333", "intel-pentium-266", "intel-celeron-300", "intel-pentium-ii-xeon-450", "amd-k6-2-366", "amd-k6-2-380"],
+    "record_keys_blocked": [],
+    "unknowns": ["intel-pentium-266 commercial availability and channel", "intel-celeron-300 exact component/boxed availability", "intel-pentium-ii-xeon-450 exact four-way 1998 availability", "amd-k6-2-366 exact day/month and first shipment", "amd-k6-2-380 exact day/month and first shipment"],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1],
+    "primary_sources_used": ["intel-1998-dp012698", "intel-quickref-year", "intel-1998-dp060898", "intel-1998-wp100698", "amd-1998-q4-results"],
+    "retrospective_sources_used": ["amd-1998-q4-results"],
+    "independence_limitations": ["All sources are manufacturer-controlled; AMD Q4 evidence was filed in January 1999 and is retrospective."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Scout-only output. Raw manufacturer wording, typed event distinctions, date precision, channel scope, and unresolved gaps are preserved. No normalization or verification conclusion was made."
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": ["Independently verify all six leads; resolve availability/channel timing and SKU/cache granularity before normalization."],
+    "coordinator_decision": "pending"
+  },
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}
