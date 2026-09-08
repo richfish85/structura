@@ -34,7 +34,12 @@
     "time_boundary": "calendar year 1998 launch cohort",
     "inclusion_event": "new product introduction or first commercial shipment during 1998",
     "stopping_rule": "stop after all twelve frozen scout keys have an independent field-level assessment, evidence locator, inclusion recommendation, and explicit identity/timing limitations",
-    "exclusions": ["candidate discovery", "normalization", "canonical promotion", "unregistered source URLs"]
+    "exclusions": [
+      "candidate discovery",
+      "normalization",
+      "canonical promotion",
+      "unregistered source URLs"
+    ]
   },
   "inputs": [
     {
@@ -59,19 +64,46 @@
     }
   ],
   "source_policy": {
-    "allowed_tiers": [1, 2, 3],
+    "allowed_tiers": [
+      1,
+      2,
+      3
+    ],
     "primary_source_preferred": true,
     "retrospective_sources_allowed": true,
     "independent_confirmation_required": false,
     "web_or_archive_tools_allowed": true,
     "access_date_utc": "2026-09-08"
   },
-  "tools_allowed": ["web search", "manufacturer archives", "SEC filings"],
+  "tools_allowed": [
+    "web search",
+    "manufacturer archives",
+    "SEC filings"
+  ],
   "output_contract": {
     "path": "runs/run-20260908T001533Z-terra-verifier-04/verification.csv",
     "schema": "structura-verification-report-v1",
-    "required_columns": ["batch_key", "candidate_key", "identity_status", "manufacturer_status", "category_status", "timing_status", "inclusion_recommendation", "verified_event_type", "verified_timing_raw", "date_precision", "source_1_url", "source_1_evidence", "verifier_notes"],
-    "unknown_tokens": ["unknown", "not_found", "conflict", "not_applicable"]
+    "required_columns": [
+      "batch_key",
+      "candidate_key",
+      "identity_status",
+      "manufacturer_status",
+      "category_status",
+      "timing_status",
+      "inclusion_recommendation",
+      "verified_event_type",
+      "verified_timing_raw",
+      "date_precision",
+      "source_1_url",
+      "source_1_evidence",
+      "verifier_notes"
+    ],
+    "unknown_tokens": [
+      "unknown",
+      "not_found",
+      "conflict",
+      "not_applicable"
+    ]
   },
   "handoff": {
     "destination_stage": "normalizer",
@@ -88,6 +120,7 @@
   "accepted_result": {
     "run_id": "run-20260908T001533Z-terra-verifier-04",
     "artifact_id": "artifact-job-1998-cpu-verify-omissions-004-run-20260908T001533Z-terra-verifier-04",
-    "decision": "structural acceptance for human review; no normalization, merge, or canonical approval"
+    "decision": "structural acceptance for human review; no normalization, merge, or canonical approval",
+    "result_manifest_sha256": "5ca75193e3648598a500132d53ec9cb3700a15253549832682774748bd8cda08"
   }
 }

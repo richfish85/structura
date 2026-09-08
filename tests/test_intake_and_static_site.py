@@ -10,6 +10,7 @@ from structura.intake import (
     IntakeError,
     import_audit,
     import_batch,
+    import_context,
     import_normalization,
     import_verification,
 )
@@ -41,6 +42,28 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
             f"pilot-1998-cpu-gpu-hdd,{candidate_key},verified,verified,uncertain,verified,medium,intel-1998-dp041598,1,supports,release paragraph,Independent check notes the named processor variant,,terra-verifier-a\n",
             encoding="utf-8",
         )
+
+    def write_context(self) -> tuple[Path, Path, Path]:
+        intent = self.temp_root / "intent.csv"
+        benchmarks = self.temp_root / "benchmarks.csv"
+        sources = self.temp_root / "context-sources.csv"
+        intent.write_text(
+            "batch_key,candidate_key,claim_scope,problem_addressed,target_user,engineering_response,confidence,source_key,source_locator,evidence_note,limitations,researcher\n"
+            "pilot-1998-cpu-gpu-hdd,intel-celeron-300a,manufacturer_stated,Improve affordable Basic PC performance,New and value-PC buyers,Add 128 KB integrated L2 cache,high,intel-celeron-cache-launch,launch section,Intel presents the cached part as a value-PC performance improvement,Manufacturer positioning is not an independent market finding,luna-context-a\n",
+            encoding="utf-8",
+        )
+        benchmarks.write_text(
+            "batch_key,candidate_key,comparison_group_key,benchmark_name,metric_name,result_value,result_unit,higher_is_better,system_configuration,test_date,result_provenance,confidence,source_key,source_locator,limitations,researcher\n"
+            "pilot-1998-cpu-gpu-hdd,intel-celeron-300a,spec95-mu440ex-aug98,SPEC CPU95,SPECint95,11.3,ratio,true,Intel MU440EX; 64 MB SDRAM; UnixWare 2.0,1998-08,standards_body_vendor_submitted,high,spec-celeron-300a,result summary,Submitted by Intel and compiler-optimized,luna-context-a\n",
+            encoding="utf-8",
+        )
+        sources.write_text(
+            "source_key,title,publisher,source_type,source_tier,url,publication_date,accessed_date,scope_note\n"
+            "intel-celeron-cache-launch,Intel Introduces Celeron 333 and 300A,Intel,press_release,1,https://www.intel.com/pressroom/archive/releases/1998/dp082498.htm,1998-08-24,2026-09-08,Manufacturer positioning and cache details\n"
+            "spec-celeron-300a,SPECint95 Intel MU440EX 300A,SPEC,benchmark_disclosure,1,https://www.spec.org/example-celeron-300a.html,1998-09-15,2026-09-08,Fully disclosed benchmark result\n",
+            encoding="utf-8",
+        )
+        return intent, benchmarks, sources
 
     def test_import_is_noncanonical_and_idempotent(self):
         first = import_batch(self.db_path, self.candidates, self.sources, stage="scouting")
@@ -199,6 +222,57 @@ class IntakeAndStaticSiteTests(unittest.TestCase):
         self.assertIn("lead_only", candidate_page)
         self.assertIn("Verification assertions", candidate_page)
         self.assertIn(verification_result.run_key, candidate_page)
+
+    def test_context_import_is_idempotent_noncanonical_and_rendered(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        intent, benchmarks, sources = self.write_context()
+        first = import_context(self.db_path, intent, benchmarks, sources)
+        second = import_context(self.db_path, intent, benchmarks, sources)
+        self.assertFalse(first.already_imported)
+        self.assertTrue(second.already_imported)
+        self.assertEqual(first.run_key, second.run_key)
+        self.assertEqual(first.intent_count, 1)
+        self.assertEqual(first.benchmark_count, 1)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM product_intent_claims").fetchone()[0], 1)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM benchmark_observations").fetchone()[0], 1)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM context_source_records").fetchone()[0], 2)
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM entities WHERE record_status='canonical'").fetchone()[0], 0)
+            self.assertEqual(validate(connection), [])
+        output = self.temp_root / "context-review-site"
+        render_static_site(self.db_path, output)
+        candidate_page = (output / "candidates" / "intel-celeron-300a.html").read_text(encoding="utf-8")
+        self.assertIn("Why it existed", candidate_page)
+        self.assertIn("Improve affordable Basic PC performance", candidate_page)
+        self.assertIn("What difference it made", candidate_page)
+        self.assertIn("SPECint95", candidate_page)
+        self.assertNotIn("<script", candidate_page.lower())
+
+    def test_context_import_rejects_unquoted_extra_columns(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        intent, benchmarks, sources = self.write_context()
+        intent.write_text(
+            "batch_key,candidate_key,claim_scope,problem_addressed,target_user,engineering_response,confidence,source_key,source_locator,evidence_note,limitations,researcher\n"
+            "pilot-1998-cpu-gpu-hdd,intel-celeron-300a,manufacturer_stated,Affordable computing,dealers,integrators,Integrated cache,high,intel-celeron-cache-launch,launch,Positioning evidence,Comma is deliberately unquoted,tester\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(IntakeError, "does not have exactly 12 columns"):
+            import_context(self.db_path, intent, benchmarks, sources)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM context_import_runs").fetchone()[0], 0)
+
+    def test_context_import_rejects_mixed_comparison_group(self):
+        import_batch(self.db_path, self.candidates, self.sources)
+        intent, benchmarks, sources = self.write_context()
+        benchmarks.write_text(
+            benchmarks.read_text(encoding="utf-8")
+            + "pilot-1998-cpu-gpu-hdd,intel-celeron-333,spec95-mu440ex-aug98,SPEC CPU95,SPECfp95,9.5,ratio,true,Different system,1998-08,standards_body_vendor_submitted,high,spec-celeron-300a,result summary,Mixed configuration is deliberate,luna-context-a\n",
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(IntakeError, "changes the metric or configuration"):
+            import_context(self.db_path, intent, benchmarks, sources)
+        with connect(self.db_path, read_only=True) as connection:
+            self.assertEqual(connection.execute("SELECT COUNT(*) FROM context_import_runs").fetchone()[0], 0)
 
     def test_static_site_refuses_nonempty_foreign_directory(self):
         output = self.temp_root / "not-owned"

@@ -1,0 +1,82 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-audit-004",
+  "run_id": "run-20260908T011000Z-terra-hdd-audit-004",
+  "artifact_id": "artifact-job-1998-hdd-audit-004-run-20260908T011000Z-terra-hdd-audit-004",
+  "stage": "audit",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:10:00Z",
+  "completed_at_utc": "2026-09-08T01:18:00Z",
+  "worker": {
+    "agent_id": "terra-verifier-omissions-04",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "hdd-audit-004"
+  },
+  "inputs": [
+    {
+      "artifact_id": "hdd-scout-candidates",
+      "path": "../../../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv",
+      "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742",
+      "row_count": 4
+    },
+    {
+      "artifact_id": "hdd-scout-sources",
+      "path": "../../../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv",
+      "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984",
+      "row_count": 5
+    },
+    {
+      "artifact_id": "hdd-verification",
+      "path": "../../../job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/verification.csv",
+      "sha256": "f969788ff67a37ff1875c0b821f8c51e8bbd8633ef7b644019f6521a19cc16a3",
+      "row_count": 4
+    }
+  ],
+  "outputs": [
+    {
+      "path": "audit.csv",
+      "sha256": "444c6295f5e245a4f3ffd2c3b8a25081945860387b620ff7b6fa55333617c236",
+      "row_count": 11,
+      "schema": "structura-audit-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "aa47281a375947c369eb2583468ebd90a648890194db02db91b99a8d4babdddd",
+      "row_count": null,
+      "schema": "audit-notes-markdown-v1"
+    }
+  ],
+  "coverage": {
+    "frozen_record_keys_checked": ["quantum-fireball-el", "quantum-fireball-ex", "ibm-deskstar-25gp", "ibm-deskstar-22gxp"],
+    "finding_count": 11,
+    "unique_finding_id_count": 11,
+    "source_url_count": 8,
+    "proposed_candidate_keys": ["maxtor-diamondmax-2880", "seagate-barracuda-18lp-family", "seagate-cheetah-18lp-family", "western-digital-wd-expert", "ibm-microdrive"],
+    "candidate_entities_created": 0
+  },
+  "quality": {
+    "audit_schema_validated": true,
+    "affected_keys_are_frozen_subset": true,
+    "proposed_keys_are_leads_only": true,
+    "canonical_sql_written": false,
+    "database_written": false,
+    "approval_or_promotion_made": false
+  },
+  "handoff": {
+    "ready_for_stage": "human_review",
+    "required_follow_up": [
+      "Decide whether Quantum mass production meets the cohort event rule.",
+      "Preserve IBM's limited 1998 OEM shipment separately from Q1 1999 broad channel availability.",
+      "If expanding the cohort, dispatch new scoped scout runs for each proposed lead before verification."
+    ],
+    "coordinator_decision": "pending"
+  },
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
+}

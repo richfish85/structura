@@ -1,0 +1,105 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-audit-expanded-007",
+  "stage": "audit",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T01:20:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-verifier-omissions-04",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "cpu-audit-expanded-007"
+  },
+  "scope": {
+    "record_count": 22,
+    "category": "CPU",
+    "time_boundary": "calendar year 1998 launch cohort",
+    "audit_checks": [
+      "cross-run duplicates",
+      "family and variant boundaries",
+      "date inheritance",
+      "event and segment scope",
+      "OverDrive identity",
+      "Xeon 450 boundary",
+      "AMD precision",
+      "remaining omission risk"
+    ],
+    "prohibited_actions": [
+      "candidate creation",
+      "normalization",
+      "approval",
+      "canonical promotion",
+      "database writes",
+      "prior artifact edits"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "cpu-original-candidates",
+      "path": "../../01_scout_candidates.csv",
+      "sha256": "e3e7322be27583e905bea796cdd17015d1f35b6d6ff9fdaf7f8a3586f297435d",
+      "row_count": 10
+    },
+    {
+      "artifact_id": "cpu-original-verification",
+      "path": "../../02_verification.csv",
+      "sha256": "6a2a7dc198af0574c761568ca03359f016e17180a5919f0bfe8db5451a1db0b8",
+      "row_count": 10
+    },
+    {
+      "artifact_id": "cpu-expanded-desktop-server-candidates",
+      "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv",
+      "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "cpu-expanded-mobile-upgrade-candidates",
+      "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv",
+      "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "cpu-expanded-verification",
+      "path": "../job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/verification.csv",
+      "sha256": "2178754ecaabac228d44f893b06d23437813fb91032cd8c87eeb2cdf389680e4",
+      "row_count": 12
+    }
+  ],
+  "source_policy": {
+    "allowed_sources": "frozen CPU source registers and verification URLs only",
+    "primary_source_preferred": true,
+    "commercial_event_caution": "Announcements, planned shipments, and component, system, and boxed-channel availability remain distinct claims.",
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T012000Z-terra-cpu-audit-expanded-007",
+    "schema": "structura-audit-v1",
+    "required_columns": [
+      "batch_key",
+      "finding_id",
+      "finding_type",
+      "severity",
+      "affected_candidate_key",
+      "proposed_candidate_key",
+      "finding",
+      "source_url",
+      "source_locator",
+      "source_evidence",
+      "recommended_next_action",
+      "disposition",
+      "auditor"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T012000Z-terra-cpu-audit-expanded-007",
+    "artifact_id": "artifact-job-1998-cpu-audit-expanded-007-run-20260908T012000Z-terra-cpu-audit-expanded-007",
+    "result_manifest_sha256": "9c08da3cc13f9647a3a5fce4526e36c98b25f426ec04af6a7d7a019a3bebadca"
+  }
+}

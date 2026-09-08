@@ -1,0 +1,65 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-scout-001",
+  "stage": "scout",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T00:21:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-gpu-scout-001",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "gpu-scout-001"
+  },
+  "scope": {
+    "category": "GPU",
+    "record_keys": [],
+    "geography": null,
+    "time_boundary": "calendar year 1998 launch cohort",
+    "inclusion_event": "new product introduction or first commercial shipment during 1998",
+    "segments": [
+      "desktop",
+      "workstation/professional",
+      "mobile only where evidenced"
+    ],
+    "exclusions": [
+      "products merely on sale from earlier years",
+      "verification",
+      "normalization",
+      "canonical promotion"
+    ]
+  },
+  "source_policy": {
+    "allowed_tiers": [
+      1,
+      2,
+      3
+    ],
+    "primary_source_preferred": true,
+    "retrospective_sources_allowed": true,
+    "contemporary_technical_publications_allowed": true,
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T002100Z-terra-gpu-scout-001",
+    "artifacts": [
+      "candidates.csv",
+      "sources.csv",
+      "notes.md",
+      "result_manifest.json"
+    ],
+    "candidate_schema": "structura-scout-candidates-v1",
+    "source_schema": "structura-source-register-v1"
+  },
+  "handoff": {
+    "destination_stage": "verifier",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T002100Z-terra-gpu-scout-001",
+    "artifact_id": "artifact-job-1998-gpu-scout-001-run-20260908T002100Z-terra-gpu-scout-001",
+    "result_manifest_sha256": "843ffe7d51d7c0dec51c6c1ce4b08adb38fdda65da390cd4449a453ae9ce69e0"
+  }
+}

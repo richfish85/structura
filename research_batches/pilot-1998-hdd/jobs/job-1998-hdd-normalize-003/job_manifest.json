@@ -1,0 +1,75 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-normalize-003",
+  "stage": "normalization",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T02:00:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-hdd-normalizer-003",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "hdd-normalization-003"
+  },
+  "scope": {
+    "record_keys": [
+      "quantum-fireball-el",
+      "quantum-fireball-ex",
+      "ibm-deskstar-25gp",
+      "ibm-deskstar-22gxp"
+    ],
+    "category": "HDD",
+    "time_boundary": "calendar year 1998 launch cohort",
+    "exclusions": [
+      "new candidates",
+      "verification changes",
+      "audit",
+      "canonical promotion"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "hdd-verification",
+      "path": "../../job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/verification.csv",
+      "sha256": "f969788ff67a37ff1875c0b821f8c51e8bbd8633ef7b644019f6521a19cc16a3"
+    },
+    {
+      "artifact_id": "hdd-verifier-notes",
+      "path": "../../job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/notes.md",
+      "sha256": "df0e97b8fb0a549ed1e2b1d6e78b2174efe5bc0785c64bb60b81d649b77ab26c"
+    }
+  ],
+  "output_contract": {
+    "path": "runs/run-20260908T020000Z-terra-hdd-normalizer-003/normalization.csv",
+    "schema": "structura-normalization-v1",
+    "columns": [
+      "batch_key",
+      "candidate_key",
+      "normalized_manufacturer",
+      "normalized_display_name",
+      "entity_granularity",
+      "parent_candidate_key",
+      "normalized_category",
+      "qualifying_event_type",
+      "normalized_launch_date",
+      "date_precision",
+      "market_channel_notes",
+      "decision_status",
+      "rationale",
+      "open_questions",
+      "normalizer"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "required_human_approval": true,
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T020000Z-terra-hdd-normalizer-003",
+    "artifact_id": "artifact-job-1998-hdd-normalize-003-run-20260908T020000Z-terra-hdd-normalizer-003",
+    "result_manifest_sha256": "3a0322f8777f6a461129148cd6458be1c3e70cbb3b50c4069301a3b8df35eaa9"
+  }
+}

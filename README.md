@@ -50,6 +50,19 @@ python -m structura import-audit --db data/mini-demo.db --audit research_batches
 python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv --sources research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv --stage scouting
 python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv --sources research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv --stage scouting
 python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-cpu/jobs/job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/verification.csv
+python -m structura import-context --db data/mini-demo.db --intent research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/intent.csv --benchmarks research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/benchmarks.csv --sources research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/sources.csv
+python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-cpu/jobs/job-1998-cpu-normalize-omissions-006/runs/run-20260908T024000Z-terra-cpu-normalizer-omissions-006/normalization.csv
+python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-cpu/jobs/job-1998-cpu-audit-expanded-007/runs/run-20260908T012000Z-terra-cpu-audit-expanded-007/audit.csv
+python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-gpu/jobs/job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/candidates.csv --sources research_batches/pilot-1998-gpu/jobs/job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/sources.csv --stage scouting
+python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-gpu/jobs/job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/verification.csv
+python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-gpu/jobs/job-1998-gpu-normalize-003/runs/run-20260908T020000Z-terra-gpu-normalizer-003/normalization.csv
+python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-gpu/jobs/job-1998-gpu-audit-004/runs/run-20260908T011500Z-luna-gpu-audit-004/audit.csv
+python -m structura import-context --db data/mini-demo.db --intent research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/intent.csv --benchmarks research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/benchmarks.csv --sources research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/sources.csv
+python -m structura import-batch --db data/mini-demo.db --candidates research_batches/pilot-1998-hdd/jobs/job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv --sources research_batches/pilot-1998-hdd/jobs/job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv --stage scouting
+python -m structura import-verification --db data/mini-demo.db --verification research_batches/pilot-1998-hdd/jobs/job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/verification.csv
+python -m structura import-normalization --db data/mini-demo.db --normalization research_batches/pilot-1998-hdd/jobs/job-1998-hdd-normalize-003/runs/run-20260908T020000Z-terra-hdd-normalizer-003/normalization.csv
+python -m structura import-audit --db data/mini-demo.db --audit research_batches/pilot-1998-hdd/jobs/job-1998-hdd-audit-004/runs/run-20260908T011000Z-terra-hdd-audit-004/audit.csv
+python -m structura import-context --db data/mini-demo.db --intent research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/intent.csv --benchmarks research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/benchmarks.csv --sources research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/sources.csv
 python -m structura render-review --db data/mini-demo.db --output exports/mini-demo
 python -m structura check --db data/mini-demo.db
 ```
@@ -77,7 +90,7 @@ agent files -> validate/hash -> non-canonical SQL review staging
 
 - `schema/001_initial.sql` defines entities, product details, relationships, sources, and evidence links.
 - `schema/002_seed_ontology.sql` supplies a proposed, revisable relationship vocabulary.
-- `schema/003_research_intake.sql` through `007_audit_findings.sql` preserve immutable import runs, raw candidate rows, verification evidence, normalization proposals, and audit leads separately from canonical promotion.
+- `schema/003_research_intake.sql` through `009_product_context.sql` preserve immutable import runs, raw candidate rows, verification evidence, normalization proposals, audit leads, stated-purpose claims, and comparable benchmark observations separately from canonical promotion.
 - `data/intake/` contains blank handoff templates for research stages.
 - `structura/` contains database setup, validation, and the local HTML explorer.
 - `docs/` records product boundaries, architecture, research workflow, ontology, and risks.
@@ -127,12 +140,14 @@ Checklist:
 - [x] Audit the CPU candidates for duplicates and omissions
 - [x] Demonstrate idempotent SQL intake and plain static HTML generation
 - [x] Expand and independently verify the twelve CPU omission leads
+- [x] Add SQL-backed "Why it existed" and "What difference it made" review sections
+- [x] Complete bounded scout, verification, normalization, context, and audit coverage across the CPU, GPU, and HDD pilot slices
 - [ ] Resolve the OverDrive identity and Xeon 450 event flags
-- [ ] Expand the pilot to GPU and HDD candidates after the CPU criteria review
+- [ ] Decide whether to expand the GPU and HDD audit leads toward a wider census
 - [ ] Define the human promotion gate from verified to canonical
 - [ ] Test the ontology on one deeply modelled object
 - [ ] Select a licence before publishing or accepting contributions
 
 ## Current decisions and open questions
 
-See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [research criteria v0.3](docs/research-criteria-v0.3.md), [CPU pilot status](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).
+See [Product brief](docs/product-brief.md), [Architecture](docs/architecture.md), [Ontology v0.1](docs/ontology-v0.1.md), [Research workflow](docs/research-workflow.md), [CPU boundary criteria v0.3](docs/research-criteria-v0.3.md), [purpose and benchmark criteria v0.4](docs/research-criteria-v0.4.md), [CPU pilot status](research_batches/pilot-1998-cpu/00_STATUS.md), and [Decision log](docs/decision-log.md).

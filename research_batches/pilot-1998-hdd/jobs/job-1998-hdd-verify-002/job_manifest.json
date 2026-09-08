@@ -1,0 +1,94 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-verify-002",
+  "stage": "verifier",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T01:00:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-hdd-verifier-002",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "hdd-verification-002"
+  },
+  "scope": {
+    "record_keys": [
+      "quantum-fireball-el",
+      "quantum-fireball-ex",
+      "ibm-deskstar-25gp",
+      "ibm-deskstar-22gxp"
+    ],
+    "time_boundary": "calendar year 1998 launch cohort",
+    "inclusion_event": "new product introduction or first commercial shipment during 1998",
+    "exclusions": [
+      "candidate discovery",
+      "normalization",
+      "audit",
+      "canonical promotion",
+      "unregistered source URLs"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "hdd-scout-candidates",
+      "path": "../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv",
+      "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742"
+    },
+    {
+      "artifact_id": "hdd-scout-sources",
+      "path": "../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv",
+      "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984"
+    },
+    {
+      "artifact_id": "hdd-scout-notes",
+      "path": "../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/notes.md",
+      "sha256": "2fcbfb7e046090605d8f8f3f530b483b4e3feeeed38b67c70c5da560df53e169"
+    }
+  ],
+  "source_policy": {
+    "allowed_tiers": [
+      1,
+      2
+    ],
+    "primary_source_preferred": true,
+    "retrospective_sources_allowed": true,
+    "independent_confirmation_required": false,
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T010000Z-terra-hdd-verifier-002",
+    "schema": "structura-verification-report-v1",
+    "required_columns": [
+      "batch_key",
+      "candidate_key",
+      "identity_status",
+      "manufacturer_status",
+      "category_status",
+      "timing_status",
+      "inclusion_recommendation",
+      "verified_event_type",
+      "verified_timing_raw",
+      "date_precision",
+      "source_1_url",
+      "source_1_locator",
+      "source_1_evidence",
+      "source_2_url",
+      "source_2_locator",
+      "source_2_evidence",
+      "contradictions_or_limits",
+      "unresolved_questions",
+      "verifier_notes"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "normalizer",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T010000Z-terra-hdd-verifier-002",
+    "artifact_id": "artifact-job-1998-hdd-verify-002-run-20260908T010000Z-terra-hdd-verifier-002",
+    "result_manifest_sha256": "224340c56fc5998db309b45442a9232e59f70bb24f8c0987435da2c9fb76fc70"
+  }
+}

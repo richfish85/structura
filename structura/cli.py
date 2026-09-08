@@ -4,7 +4,14 @@ import argparse
 from pathlib import Path
 
 from .db import DEFAULT_DB, connect, counts, initialize, validate
-from .intake import IntakeError, import_audit, import_batch, import_normalization, import_verification
+from .intake import (
+    IntakeError,
+    import_audit,
+    import_batch,
+    import_context,
+    import_normalization,
+    import_verification,
+)
 from .static_site import render_static_site
 from .web import serve
 
@@ -47,6 +54,15 @@ def build_parser() -> argparse.ArgumentParser:
     audit_parser = subparsers.add_parser("import-audit", help="Load non-canonical audit findings and omission leads.")
     audit_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     audit_parser.add_argument("--audit", type=Path, required=True)
+
+    context_parser = subparsers.add_parser(
+        "import-context",
+        help="Load non-canonical product-purpose and benchmark evidence.",
+    )
+    context_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
+    context_parser.add_argument("--intent", type=Path, required=True)
+    context_parser.add_argument("--benchmarks", type=Path, required=True)
+    context_parser.add_argument("--sources", type=Path, required=True)
 
     render_parser = subparsers.add_parser("render-review", help="Render a static HTML review site from SQLite.")
     render_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -156,6 +172,23 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Audit already imported without duplication: {result.run_key}")
         else:
             print(f"Imported non-canonical audit run: {result.run_key} ({result.candidate_count} findings, {result.source_count} source URLs)")
+        return 0
+
+    if args.command == "import-context":
+        try:
+            result = import_context(args.db, args.intent, args.benchmarks, args.sources)
+        except IntakeError as error:
+            print(f"Context import rejected: {error}")
+            return 1
+        if result.already_imported:
+            print(f"Context already imported without duplication: {result.run_key}")
+        else:
+            print(
+                "Imported non-canonical context run: "
+                f"{result.run_key} ({result.intent_count} intent claims, "
+                f"{result.benchmark_count} benchmark observations, "
+                f"{result.source_count} sources)"
+            )
         return 0
 
     return 2

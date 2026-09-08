@@ -1,0 +1,51 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-scout-001",
+  "run_id": "run-20260908T003300Z-luna-hdd-01",
+  "artifact_id": "artifact-job-1998-hdd-scout-001-run-20260908T003300Z-luna-hdd-01",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:33:00Z",
+  "completed_at_utc": "2026-09-08T00:40:00Z",
+  "worker": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "hdd-scout-01"
+  },
+  "inputs": [],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742", "row_count": 4, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984", "row_count": 5, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "2fcbfb7e046090605d8f8f3f530b483b4e3feeeed38b67c70c5da560df53e169", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["quantum-fireball-el", "quantum-fireball-ex", "ibm-deskstar-25gp", "ibm-deskstar-22gxp"],
+    "record_keys_completed": ["quantum-fireball-el", "quantum-fireball-ex", "ibm-deskstar-25gp", "ibm-deskstar-22gxp"],
+    "record_keys_blocked": [],
+    "unknowns": ["quantum-fireball-el exact announcement and first-shipment date", "quantum-fireball-ex exact first-shipment day", "IBM ordering part numbers and regional timing", "broad non-OEM availability for both IBM models"],
+    "conflicts": [],
+    "omissions_or_leads": ["ibm-microdrive-170", "ibm-microdrive-340", "quantum-viking-ii", "quantum-atlas-iii", "quantum-bigfoot-tx", "seagate-1998-hdd-families", "western-digital-1998-hdd-families", "maxtor-1998-hdd-families", "fujitsu-1998-hdd-families", "hitachi-1998-hdd-families", "mobile-25-inch-hdd-families", "enterprise-scsi-hdd-families"]
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1, 2],
+    "primary_sources_used": ["quantum-1998-q2-10q"],
+    "retrospective_sources_used": [],
+    "independence_limitations": ["IBM launch timing is supported by an IBM News republication and contemporary Reuters reporting rather than a directly accessible IBM press-release URL; Quantum EL exact launch day is not established."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Scout-only output. Capacity, interface, form factor, market segment, and regional/channel uncertainty are preserved. Family/model boundaries remain explicit. Microdrive was excluded because available evidence points to 1999 shipment rather than a 1998 commercial launch."
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": ["Independently verify all four candidates and expand omission seeds if the cohort boundary is widened beyond the bounded Quantum/IBM desktop-workstation pilot."],
+    "coordinator_decision": "pending"
+  },
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}
+

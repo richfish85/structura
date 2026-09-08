@@ -1,0 +1,104 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-verify-002",
+  "stage": "verifier",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T00:50:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "gpu-verifier-002"
+  },
+  "scope": {
+    "record_keys": [
+      "intel-i740",
+      "intel-express-3d",
+      "nvidia-riva-128zx",
+      "nvidia-riva-tnt",
+      "matrox-mga-g200",
+      "ati-rage-128-gl",
+      "ati-rage-128-vr",
+      "3dfx-voodoo-banshee"
+    ],
+    "category": "GPU",
+    "time_boundary": "calendar year 1998 launch cohort",
+    "inclusion_event": "new product introduction or first commercial shipment during 1998",
+    "identity_checks": [
+      "chip versus board",
+      "manufacturer",
+      "GPU category"
+    ],
+    "exclusions": [
+      "new candidates",
+      "normalization",
+      "audit",
+      "canonical promotion"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "frozen-gpu-candidates",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/candidates.csv",
+      "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0"
+    },
+    {
+      "artifact_id": "frozen-gpu-sources",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/sources.csv",
+      "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1"
+    },
+    {
+      "artifact_id": "frozen-gpu-notes",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/notes.md",
+      "sha256": "5327be4b85ef87d41b09d862efd8144cf2bd538f3242f912647e495d61f38e67"
+    },
+    {
+      "artifact_id": "frozen-gpu-result-manifest",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/result_manifest.json",
+      "sha256": "843ffe7d51d7c0dec51c6c1ce4b08adb38fdda65da390cd4449a453ae9ce69e0"
+    }
+  ],
+  "source_policy": {
+    "allowed_source_urls": "Only URLs registered in frozen scout sources.csv",
+    "independent_confirmation_required": false,
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "path": "runs/run-20260908T005000Z-luna-gpu-verify-002/verification.csv",
+    "schema": "structura-verification-report-v1",
+    "columns": [
+      "batch_key",
+      "candidate_key",
+      "identity_status",
+      "manufacturer_status",
+      "category_status",
+      "timing_status",
+      "inclusion_recommendation",
+      "verified_event_type",
+      "verified_timing_raw",
+      "date_precision",
+      "source_1_url",
+      "source_1_locator",
+      "source_1_evidence",
+      "source_2_url",
+      "source_2_locator",
+      "source_2_evidence",
+      "contradictions_or_limits",
+      "unresolved_questions",
+      "verifier_notes"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "normalizer",
+    "required_human_approval": true,
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T005000Z-luna-gpu-verify-002",
+    "artifact_id": "artifact-job-1998-gpu-verify-002-run-20260908T005000Z-luna-gpu-verify-002",
+    "result_manifest_sha256": "ddc22d4975c9d23cba3db1dc8cb7af3158583e786e3f63c9cd91e9c713a96244"
+  }
+}

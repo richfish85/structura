@@ -1,0 +1,67 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-scout-001",
+  "stage": "scout",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T00:33:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "hdd-scout-01"
+  },
+  "scope": {
+    "record_keys": [
+      "quantum-fireball-el",
+      "quantum-fireball-ex",
+      "ibm-deskstar-25gp",
+      "ibm-deskstar-22gxp"
+    ],
+    "category": "HDD",
+    "manufacturers": [
+      "Quantum Corporation",
+      "International Business Machines Corporation"
+    ],
+    "time_boundary": "calendar year 1998 launch cohort",
+    "inclusion_event": "new product introduction or first commercial shipment during 1998",
+    "boundary": "bounded desktop/workstation fixed magnetic HDD pilot; mobile, removable, enterprise/SCSI, and other manufacturers are omission-search territory",
+    "stopping_rule": "stop after all bounded candidates have source-backed results and omission seeds are recorded"
+  },
+  "source_policy": {
+    "allowed_tiers": [
+      1,
+      2,
+      3
+    ],
+    "primary_source_preferred": true,
+    "retrospective_sources_allowed": true,
+    "independent_confirmation_required": false,
+    "web_or_archive_tools_allowed": true,
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "path": "runs/run-20260908T003300Z-luna-hdd-01/candidates.csv",
+    "schema": "structura-scout-candidates-v1 plus source register",
+    "required_columns": [
+      "batch_key",
+      "candidate_key",
+      "manufacturer_raw",
+      "product_name_raw",
+      "product_type_raw",
+      "source_1_url",
+      "notes"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "verifier",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T003300Z-luna-hdd-01",
+    "artifact_id": "artifact-job-1998-hdd-scout-001-run-20260908T003300Z-luna-hdd-01",
+    "result_manifest_sha256": "6f65c044950e11247402f4c764596b598de685b09d0f68f01b33167a8ed8b887"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-scout-001",
+  "run_id": "run-20260908T002100Z-terra-gpu-scout-001",
+  "artifact_id": "artifact-job-1998-gpu-scout-001-run-20260908T002100Z-terra-gpu-scout-001",
+  "stage": "scout",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:21:00Z",
+  "completed_at_utc": "2026-09-08T00:59:08Z",
+  "worker": {
+    "agent_id": "terra-gpu-scout-001",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "gpu-scout-001"
+  },
+  "inputs": [
+    {"artifact_id": "job-manifest", "path": "../../job_manifest.json", "sha256": "69ed5a8865fb8496ca7e9d6f00901a11beaf87ccadc29b1b28ab06973260f125", "identity": "job-1998-gpu-scout-001 scope and source policy"}
+  ],
+  "outputs": [
+    {"path": "candidates.csv", "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0", "row_count": 8, "schema": "structura-scout-candidates-v1"},
+    {"path": "sources.csv", "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1", "row_count": 7, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "5327be4b85ef87d41b09d862efd8144cf2bd538f3242f912647e495d61f38e67", "row_count": null, "schema": "scout-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_completed": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_blocked": [],
+    "unknowns": ["NVIDIA exact launch/first-shipment dates and channels", "Matrox MGA-G200 board availability", "ATI RAGE 128 actual volume-shipment month and board/chip boundaries", "3Dfx Banshee actual card shipment date", "mobile GPU product coverage"],
+    "conflicts": ["ATI contemporary reports differ on expected volume-production month: September versus October; neither proves actual shipment."],
+    "omissions_or_leads": ["3Dfx Voodoo2", "S3 Savage3D", "Number Nine Revolution 3D", "Rendition V2200", "3DLabs Permedia 3", "evidenced 1998 mobile GPU products"]
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1, 2],
+    "primary_sources_used": ["intel-1998-cs021298", "intel-1998-cn041598", "nvidia-1998-timeline"],
+    "contemporary_technical_sources_used": ["matrox-g200-1998-pcwatch", "ati-rage-128-1998-pcwatch", "ati-rage-128-1998-mpr", "3dfx-voodoo-banshee-1998-pcwatch"],
+    "independence_limitations": ["NVIDIA timeline is retrospective; Matrox, ATI, and 3Dfx original manufacturer pages were not directly available in this source set and contemporary technical reporting is retained as attributed scout evidence."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Scout-only result. No verification, normalization, database import, source-register mutation outside this run, or canonical decision occurred."
+  },
+  "handoff": {
+    "ready_for_stage": "verifier",
+    "required_follow_up": ["Independently verify all eight candidates", "Resolve ATI production-month conflict without treating plans as shipments", "Audit omission seed list as separate bounded jobs", "Confirm chip-versus-board identity before normalization"],
+    "coordinator_decision": "pending"
+  },
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

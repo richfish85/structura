@@ -13,32 +13,119 @@
     "agent_id": "terra-verifier-omissions-04",
     "model": "gpt-5.6-terra",
     "capability_route": "terra",
-    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "tool_versions": [
+      "web__run",
+      "apply_patch",
+      "exec_command"
+    ],
     "independence_group": "cpu-omission-verification-04"
   },
   "inputs": [
-    {"artifact_id": "desktop-server-candidates", "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv", "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961", "row_count": 6},
-    {"artifact_id": "desktop-server-sources", "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv", "sha256": "4d206fbe499e4df1fc38502c7fb71f32685e586f6bab58ca9dccbabda73fb859", "row_count": 5},
-    {"artifact_id": "mobile-upgrade-candidates", "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv", "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9", "row_count": 6},
-    {"artifact_id": "mobile-upgrade-sources", "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv", "sha256": "56be5725291bc7863c137cc6d1c0a2c0916070b8d781aa2c3a0500c1e7a3f8ab", "row_count": 6}
+    {
+      "artifact_id": "desktop-server-candidates",
+      "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv",
+      "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "desktop-server-sources",
+      "path": "../job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv",
+      "sha256": "4d206fbe499e4df1fc38502c7fb71f32685e586f6bab58ca9dccbabda73fb859",
+      "row_count": 5
+    },
+    {
+      "artifact_id": "mobile-upgrade-candidates",
+      "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv",
+      "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9",
+      "row_count": 6
+    },
+    {
+      "artifact_id": "mobile-upgrade-sources",
+      "path": "../job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv",
+      "sha256": "56be5725291bc7863c137cc6d1c0a2c0916070b8d781aa2c3a0500c1e7a3f8ab",
+      "row_count": 6
+    }
   ],
   "outputs": [
-    {"path": "verification.csv", "sha256": "e08ef660a74124ff839d0f67ccd80c847119f7bd76cd04ba6e689612ef7432b1", "row_count": 12, "schema": "structura-verification-report-v1"},
-    {"path": "notes.md", "sha256": "066115741241d945db5b57e4c6966e7022d4d1ade861df5cf388592c3acf73a9", "row_count": null, "schema": "verification-notes-markdown-v1"}
+    {
+      "path": "verification.csv",
+      "sha256": "2178754ecaabac228d44f893b06d23437813fb91032cd8c87eeb2cdf389680e4",
+      "row_count": 12,
+      "schema": "structura-verification-report-v1"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "7e10c246a45728a3c9d2de327d237853400fc5fd38cf4282a69f8b45927a68d1",
+      "row_count": null,
+      "schema": "verification-notes-markdown-v1"
+    }
   ],
   "coverage": {
-    "record_keys_attempted": ["amd-k6-2-366", "amd-k6-2-380", "amd-k6-300-mobile", "intel-celeron-300", "intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-266", "intel-pentium-ii-333", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "intel-pentium-ii-xeon-450"],
-    "record_keys_completed": ["amd-k6-2-366", "amd-k6-2-380", "amd-k6-300-mobile", "intel-celeron-300", "intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-266", "intel-pentium-ii-333", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "intel-pentium-ii-xeon-450"],
+    "record_keys_attempted": [
+      "amd-k6-2-366",
+      "amd-k6-2-380",
+      "amd-k6-300-mobile",
+      "intel-celeron-300",
+      "intel-mobile-pentium-ii-233",
+      "intel-mobile-pentium-ii-266",
+      "intel-mobile-pentium-ii-300",
+      "intel-pentium-266",
+      "intel-pentium-ii-333",
+      "intel-pentium-ii-overdrive-300",
+      "intel-pentium-ii-overdrive-333",
+      "intel-pentium-ii-xeon-450"
+    ],
+    "record_keys_completed": [
+      "amd-k6-2-366",
+      "amd-k6-2-380",
+      "amd-k6-300-mobile",
+      "intel-celeron-300",
+      "intel-mobile-pentium-ii-233",
+      "intel-mobile-pentium-ii-266",
+      "intel-mobile-pentium-ii-300",
+      "intel-pentium-266",
+      "intel-pentium-ii-333",
+      "intel-pentium-ii-overdrive-300",
+      "intel-pentium-ii-overdrive-333",
+      "intel-pentium-ii-xeon-450"
+    ],
     "record_keys_blocked": [],
-    "unknowns": ["AMD exact dates and SKU identities", "Pentium 266 commercial availability", "mobile Pentium II 300 channel availability", "Pentium II 333 boxed/component availability", "OverDrive physical-product/SKU identity", "Xeon 450 qualifying introduction versus announcement boundary"],
-    "conflicts": ["intel-pentium-ii-overdrive-300 and intel-pentium-ii-overdrive-333 are two frozen output-speed keys but Intel's source describes one singular processor with two mappings"],
+    "unknowns": [
+      "AMD exact dates and SKU identities",
+      "Pentium 266 commercial availability",
+      "mobile Pentium II 300 channel availability",
+      "Pentium II 333 boxed/component availability",
+      "OverDrive physical-product/SKU identity",
+      "Xeon 450 qualifying introduction versus announcement boundary"
+    ],
+    "conflicts": [
+      "intel-pentium-ii-overdrive-300 and intel-pentium-ii-overdrive-333 are two frozen output-speed keys but Intel's source describes one singular processor with two mappings"
+    ],
     "omissions_or_leads": []
   },
   "source_policy_used": {
-    "tiers_consulted": [1],
-    "primary_sources_used": ["intel-1998-dp012698", "intel-quickref-year", "intel-1998-dp060898", "intel-1998-wp100698", "amd-1998-q4-results", "intel-1998-mp040298", "intel-1998-mp091698", "intel-1998-dp081098", "amd-1998-q3-results"],
-    "retrospective_sources_used": ["intel-quickref-year", "amd-1998-q4-results", "amd-1998-q3-results"],
-    "independence_limitations": ["All consulted evidence is manufacturer-controlled; Intel chronology is retrospective and AMD filings contain company statements."]
+    "tiers_consulted": [
+      1
+    ],
+    "primary_sources_used": [
+      "intel-1998-dp012698",
+      "intel-quickref-year",
+      "intel-1998-dp060898",
+      "intel-1998-wp100698",
+      "amd-1998-q4-results",
+      "intel-1998-mp040298",
+      "intel-1998-mp091698",
+      "intel-1998-dp081098",
+      "amd-1998-q3-results"
+    ],
+    "retrospective_sources_used": [
+      "intel-quickref-year",
+      "amd-1998-q4-results",
+      "amd-1998-q3-results"
+    ],
+    "independence_limitations": [
+      "All consulted evidence is manufacturer-controlled; Intel chronology is retrospective and AMD filings contain company statements."
+    ]
   },
   "quality": {
     "self_approval_violation": false,
@@ -47,8 +134,16 @@
   },
   "handoff": {
     "ready_for_stage": "normalizer",
-    "required_follow_up": ["Human merge/restructure decision for the two OverDrive output-speed keys", "Human cohort-event decision for Xeon 450", "Do not convert quarter evidence into exact dates"],
+    "required_follow_up": [
+      "Human merge/restructure decision for the two OverDrive output-speed keys",
+      "Human cohort-event decision for Xeon 450",
+      "Do not convert quarter evidence into exact dates"
+    ],
     "coordinator_decision": "pending"
   },
-  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+  "retry": {
+    "attempt_number": 1,
+    "retry_reason": null,
+    "supersedes_run_id": null
+  }
 }

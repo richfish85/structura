@@ -23,7 +23,7 @@ class DatabaseTests(unittest.TestCase):
             type_count = connection.execute("SELECT COUNT(*) FROM entity_types").fetchone()[0]
             predicate_count = connection.execute("SELECT COUNT(*) FROM predicates").fetchone()[0]
             totals = counts(connection)
-        self.assertEqual(migration_count, 8)
+        self.assertEqual(migration_count, 9)
         self.assertGreaterEqual(type_count, 10)
         self.assertGreaterEqual(predicate_count, 15)
         self.assertEqual(totals["entities"], 0)

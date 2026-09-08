@@ -1,0 +1,38 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-audit-004",
+  "run_id": "run-20260908T011500Z-luna-gpu-audit-004",
+  "artifact_id": "artifact-job-1998-gpu-audit-004-run-20260908T011500Z-luna-gpu-audit-004",
+  "stage": "auditor",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:15:00Z",
+  "completed_at_utc": "2026-09-08T01:35:00Z",
+  "worker": {"agent_id": "luna-scout-mobile-upgrade-03", "model": "gpt-5.6-luna", "capability_route": "luna", "tool_versions": ["web__run", "apply_patch", "exec_command"], "independence_group": "gpu-audit-004"},
+  "inputs": [
+    {"artifact_id": "frozen-gpu-candidates", "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0"},
+    {"artifact_id": "frozen-gpu-sources", "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1"},
+    {"artifact_id": "frozen-gpu-notes", "sha256": "5327be4b85ef87d41b09d862efd8144cf2bd538f3242f912647e495d61f38e67"},
+    {"artifact_id": "frozen-gpu-scout-result", "sha256": "843ffe7d51d7c0dec51c6c1ce4b08adb38fdda65da390cd4449a453ae9ce69e0"},
+    {"artifact_id": "gpu-verification-report", "sha256": "606911a67234ee0e7cb962c180511e58ca93002cb7c50e8d5669de5d148d5942"},
+    {"artifact_id": "gpu-verification-notes", "sha256": "6b00b4d84c8c732eb096fa3e2e8d87154c0b1e224bfb86e7a9a4d51267184fa4"},
+    {"artifact_id": "gpu-verification-result", "sha256": "DDC22D4975C9D23CBA3DB1DC8CB7AF3158583E786E3F63C9CD91E9C713A96244"}
+  ],
+  "outputs": [
+    {"path": "audit.csv", "sha256": "85F0870633F93111DD556B6151B4CF2DDEC53032ADD234EF2E22DB7B7D8DE935", "row_count": 17, "schema": "structura-audit-report-v1"},
+    {"path": "notes.md", "sha256": "1FD6C2E5917855C066E020DB5DA59579024E62337F6439677705DACA9397FF9F", "row_count": null, "schema": "audit-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_completed": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_blocked": [],
+    "unknowns": ["exact first commercial shipment for several chips", "regional and channel boundaries", "ATI planned September versus October outcome", "Banshee board shipment", "professional lead product-level dates"],
+    "conflicts": ["ATI PC Watch planned September production versus Microprocessor Report planned October production", "forecasted Banshee card availability is not shipment evidence"],
+    "omissions_or_leads": ["s3-savage3d", "3dfx-voodoo2", "canopus-pure3d-ii", "stb-velocity-4400", "creative-graphics-blaster-riva-tnt", "matrox-mga-g200-board", "ati-rage-magnum", "ati-rage-fury", "ati-xpert-128", "ati-rage-mobility-m", "ati-rage-mobility-p", "number-nine-revolution-3d", "3dlabs-permedia-3", "rendition-v2200"]
+  },
+  "source_policy_used": {"access_date_utc": "2026-09-08", "source_tiers_consulted": [1, 2], "new_urls_used_for_omission_leads": true, "registered_frozen_source_set_edited": false},
+  "quality": {"self_approval_violation": false, "canonical_sql_written": false, "frozen_inputs_edited": false, "unique_finding_ids": true, "notes": "Audit findings preserve chip/board/family boundaries, timing inheritance limits, conflicts, evidence gaps, and omission leads as proposed keys only. Mobile and professional leads remain separately labeled. Enum correction applied and revalidated against the approved AUDIT_COLUMNS enum contract."},
+  "handoff": {"ready_for_stage": "coordinator", "required_follow_up": ["Human review of high-severity timing/scope findings", "Separate bounded scouting of omission leads before any candidate addition"], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

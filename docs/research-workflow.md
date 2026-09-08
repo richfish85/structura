@@ -14,6 +14,12 @@ Separating stages reduces the chance that one mistaken assumption becomes a poli
 Scout -> Verifier -> Normalizer -> Auditor -> Human review -> Canonical SQL
 ```
 
+Purpose and benchmark research is a parallel enrichment lane. It may begin once a candidate identity is staged, but it never bypasses the main gates:
+
+```text
+staged candidate -> purpose / benchmark evidence -> human review
+```
+
 ### Scout
 
 Find candidate products within a bounded year and category. Record raw manufacturer/product wording, model number, timing claims, sources, and notes. Do not infer missing dates or compatibility.
@@ -29,6 +35,10 @@ Map verified wording to approved entity types, predicates, category terms, and m
 ### Auditor
 
 Look for omissions, duplicate identities, inconsistent naming, category errors, suspicious dates, and weakly supported records. Report findings without changing the dataset.
+
+### Context researcher
+
+Record what problem a source says the product addressed, who it targeted, the engineering response, and any defensibly comparable benchmark observations. Distinguish manufacturer positioning from independent interpretation and inference. Never put unlike benchmark configurations in the same comparison group, and record a gap when no comparable result survives review.
 
 ### Human review
 

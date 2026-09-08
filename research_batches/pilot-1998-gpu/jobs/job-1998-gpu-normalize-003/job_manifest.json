@@ -1,0 +1,79 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-normalize-003",
+  "stage": "normalization",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T02:00:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-gpu-normalizer-003",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "gpu-normalization-003"
+  },
+  "scope": {
+    "record_keys": [
+      "intel-i740",
+      "intel-express-3d",
+      "nvidia-riva-128zx",
+      "nvidia-riva-tnt",
+      "matrox-mga-g200",
+      "ati-rage-128-gl",
+      "ati-rage-128-vr",
+      "3dfx-voodoo-banshee"
+    ],
+    "category": "GPU",
+    "time_boundary": "calendar year 1998 launch cohort",
+    "exclusions": [
+      "new candidates",
+      "verification changes",
+      "audit",
+      "canonical promotion"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "gpu-verification",
+      "path": "../../job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/verification.csv",
+      "sha256": "606911a67234ee0e7cb962c180511e58ca93002cb7c50e8d5669de5d148d5942"
+    },
+    {
+      "artifact_id": "gpu-verifier-notes",
+      "path": "../../job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/notes.md",
+      "sha256": "6b00b4d84c8c732eb096fa3e2e8d87154c0b1e224bfb86e7a9a4d51267184fa4"
+    }
+  ],
+  "output_contract": {
+    "path": "runs/run-20260908T020000Z-terra-gpu-normalizer-003/normalization.csv",
+    "schema": "structura-normalization-v1",
+    "columns": [
+      "batch_key",
+      "candidate_key",
+      "normalized_manufacturer",
+      "normalized_display_name",
+      "entity_granularity",
+      "parent_candidate_key",
+      "normalized_category",
+      "qualifying_event_type",
+      "normalized_launch_date",
+      "date_precision",
+      "market_channel_notes",
+      "decision_status",
+      "rationale",
+      "open_questions",
+      "normalizer"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "required_human_approval": true,
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T020000Z-terra-gpu-normalizer-003",
+    "artifact_id": "artifact-job-1998-gpu-normalize-003-run-20260908T020000Z-terra-gpu-normalizer-003",
+    "result_manifest_sha256": "ab9916a9c7da52fe57bb42f979be05a8668cfc60479f508fe2011df41812c24b"
+  }
+}

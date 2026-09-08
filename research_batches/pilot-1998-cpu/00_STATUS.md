@@ -2,7 +2,7 @@
 
 - Batch key: `pilot-1998-cpu-gpu-hdd`
 - Subset: CPU scout pass 01
-- Status: **twelve omission leads scouted and independently verified; two identity/event flags await human review**
+- Status: **22 candidates scouted, independently verified, normalized, context-researched, and post-expansion audited; identity/event flags await human review**
 - Access date: 2026-09-08
 
 ## What
@@ -23,7 +23,9 @@ The pass tests whether the current intake format preserves product identity, fam
 - A separate normalizer proposed labels, family/variant structure, qualifying events, and supported date precision for all ten records.
 - An independent audit confirmed no duplicate identities but found nine omission-lead findings representing twelve proposed product keys. These leads remain outside the cohort.
 - Two disjoint Luna scout jobs completed all twelve approved-scope omission keys, followed by one independent Terra verification job over the frozen outputs.
-- Nine new keys are retained for ordinary human review. The two OverDrive output-speed keys require merge/restructure review, and Xeon 450 separately requires a qualifying-event decision.
+- The twelve expanded keys now have normalization proposals, and a post-expansion audit covers all 22 CPU candidates.
+- All 22 candidates have a sourced “Why it existed” record or explicit gap. Six same-platform SPEC CPU95 observations cover the Celeron 300/300A/333 comparison; no weaker cross-configuration results were retained.
+- Nine expanded keys are retained for ordinary human review. The two OverDrive output-speed keys require merge/restructure review, and Xeon 450 separately requires a qualifying-event decision.
 
 ## Stage gates
 
@@ -37,6 +39,9 @@ The pass tests whether the current intake format preserves product identity, fam
 - [x] Mobile and upgrade segment boundary decision
 - [x] Omission-lead scout jobs
 - [x] Independent verification of omission leads
+- [x] Normalization proposals for omission-derived candidates
+- [x] Purpose and benchmark context research
+- [x] Post-expansion audit across all 22 CPU candidates
 - [ ] Human review
 - [ ] Canonical import
 

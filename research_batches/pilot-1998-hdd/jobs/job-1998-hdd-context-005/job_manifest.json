@@ -1,0 +1,48 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-context-005",
+  "stage": "context_research",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T02:20:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-hdd-context-005",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "hdd-context-005"
+  },
+  "scope": {
+    "record_keys": [
+      "quantum-fireball-el",
+      "quantum-fireball-ex",
+      "ibm-deskstar-25gp",
+      "ibm-deskstar-22gxp"
+    ],
+    "category": "HDD",
+    "exclusions": [
+      "new candidates",
+      "normalization",
+      "audit",
+      "canonical promotion"
+    ]
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T022000Z-luna-hdd-context-005",
+    "schemas": [
+      "cpu-context-intent-v1",
+      "cpu-context-benchmarks-v1",
+      "structura-source-register-v1"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T022000Z-luna-hdd-context-005",
+    "artifact_id": "artifact-job-1998-hdd-context-005-run-20260908T022000Z-luna-hdd-context-005",
+    "result_manifest_sha256": "e85eb162cd127de7d9713f36e159cfe6f2f6b01d6ea2c399cc35749bd96add9b"
+  }
+}

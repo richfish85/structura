@@ -1,0 +1,97 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-audit-004",
+  "stage": "audit",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T01:10:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "terra-verifier-omissions-04",
+    "model": "gpt-5.6-terra",
+    "capability_route": "terra",
+    "independence_group": "hdd-audit-004"
+  },
+  "scope": {
+    "record_keys": [
+      "quantum-fireball-el",
+      "quantum-fireball-ex",
+      "ibm-deskstar-25gp",
+      "ibm-deskstar-22gxp"
+    ],
+    "time_boundary": "calendar year 1998 launch cohort",
+    "audit_checks": [
+      "duplicates",
+      "family and variant boundaries",
+      "timing inheritance",
+      "scope and category errors",
+      "evidence gaps",
+      "omission leads"
+    ],
+    "prohibited_actions": [
+      "candidate creation",
+      "normalization",
+      "approval",
+      "canonical promotion",
+      "database writes"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "hdd-scout-candidates",
+      "path": "../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv",
+      "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742",
+      "row_count": 4
+    },
+    {
+      "artifact_id": "hdd-scout-sources",
+      "path": "../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv",
+      "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984",
+      "row_count": 5
+    },
+    {
+      "artifact_id": "hdd-verification",
+      "path": "../job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/verification.csv",
+      "sha256": "f969788ff67a37ff1875c0b821f8c51e8bbd8633ef7b644019f6521a19cc16a3",
+      "row_count": 4
+    }
+  ],
+  "source_policy": {
+    "preferred": [
+      "first-party",
+      "regulatory",
+      "contemporary reporting"
+    ],
+    "access_date_utc": "2026-09-08",
+    "commercial_shipment_caution": "An announced, forecast, or mass-production event is not silently treated as first commercial shipment."
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T011000Z-terra-hdd-audit-004",
+    "schema": "structura-audit-v1",
+    "required_columns": [
+      "batch_key",
+      "finding_id",
+      "finding_type",
+      "severity",
+      "affected_candidate_key",
+      "proposed_candidate_key",
+      "finding",
+      "source_url",
+      "source_locator",
+      "source_evidence",
+      "recommended_next_action",
+      "disposition",
+      "auditor"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T011000Z-terra-hdd-audit-004",
+    "artifact_id": "artifact-job-1998-hdd-audit-004-run-20260908T011000Z-terra-hdd-audit-004",
+    "result_manifest_sha256": "d34b333b2a75978785b4f1b042d607d900ad541ecd50aa4a9da592d61be311f0"
+  }
+}

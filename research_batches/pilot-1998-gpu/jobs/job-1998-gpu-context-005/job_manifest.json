@@ -1,0 +1,52 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-context-005",
+  "stage": "context_research",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T02:20:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-gpu-context-005",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "gpu-context-005"
+  },
+  "scope": {
+    "record_keys": [
+      "intel-i740",
+      "intel-express-3d",
+      "nvidia-riva-128zx",
+      "nvidia-riva-tnt",
+      "matrox-mga-g200",
+      "ati-rage-128-gl",
+      "ati-rage-128-vr",
+      "3dfx-voodoo-banshee"
+    ],
+    "category": "GPU",
+    "exclusions": [
+      "new candidates",
+      "normalization",
+      "audit",
+      "canonical promotion"
+    ]
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T022000Z-luna-gpu-context-005",
+    "schemas": [
+      "cpu-context-intent-v1",
+      "cpu-context-benchmarks-v1",
+      "structura-source-register-v1"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T022000Z-luna-gpu-context-005",
+    "artifact_id": "artifact-job-1998-gpu-context-005-run-20260908T022000Z-luna-gpu-context-005",
+    "result_manifest_sha256": "d97a1430b42754cf4bf5c095e31cf8f827c2364e5a691835c65a6ab3a8308288"
+  }
+}

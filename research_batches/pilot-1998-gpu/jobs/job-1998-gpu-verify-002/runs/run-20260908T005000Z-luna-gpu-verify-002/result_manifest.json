@@ -1,0 +1,54 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-verify-002",
+  "run_id": "run-20260908T005000Z-luna-gpu-verify-002",
+  "artifact_id": "artifact-job-1998-gpu-verify-002-run-20260908T005000Z-luna-gpu-verify-002",
+  "stage": "verifier",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:50:00Z",
+  "completed_at_utc": "2026-09-08T01:05:00Z",
+  "worker": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "gpu-verifier-002"
+  },
+  "inputs": [
+    {"artifact_id": "frozen-gpu-candidates", "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0"},
+    {"artifact_id": "frozen-gpu-sources", "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1"},
+    {"artifact_id": "frozen-gpu-notes", "sha256": "5327be4b85ef87d41b09d862efd8144cf2bd538f3242f912647e495d61f38e67"},
+    {"artifact_id": "frozen-gpu-result-manifest", "sha256": "843ffe7d51d7c0dec51c6c1ce4b08adb38fdda65da390cd4449a453ae9ce69e0"}
+  ],
+  "outputs": [
+    {"path": "verification.csv", "sha256": "606911a67234ee0e7cb962c180511e58ca93002cb7c50e8d5669de5d148d5942", "row_count": 8, "schema": "structura-verification-report-v1"},
+    {"path": "notes.md", "sha256": "6b00b4d84c8c732eb096fa3e2e8d87154c0b1e224bfb86e7a9a4d51267184fa4", "row_count": null, "schema": "verifier-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_completed": ["intel-i740", "intel-express-3d", "nvidia-riva-128zx", "nvidia-riva-tnt", "matrox-mga-g200", "ati-rage-128-gl", "ati-rage-128-vr", "3dfx-voodoo-banshee"],
+    "record_keys_blocked": [],
+    "unknowns": ["NVIDIA exact dates, shipments, and board partners", "Matrox first commercial availability and board identity", "ATI actual volume-shipment month and plan outcome", "Banshee actual chip and board shipment dates", "ordering part numbers and regional channels"],
+    "conflicts": ["ATI PC Watch planned September volume production versus Microprocessor Report planned October volume production; neither establishes actual shipment."],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "registered_source_urls_only": true,
+    "source_tiers_consulted": [1, 2],
+    "source_urls_used": ["https://www.intel.com/pressroom/archive/releases/1998/CS021298.HTM", "https://www.intel.com/pressroom/archive/releases/1998/CN041598.HTM", "https://www.nvidia.com/content/timeline/time_98.html", "https://pc.watch.impress.co.jp/docs/article/980506/mgag200.htm", "https://pc.watch.impress.co.jp/docs/article/980828/ati.htm", "https://www.ardent-tool.com/CPU/docs/MPR/19980914/121204.pdf", "https://pc.watch.impress.co.jp/docs/article/980624/banshee.htm"],
+    "independence_limitations": ["NVIDIA evidence is a retrospective first-party chronology; Matrox, ATI, and 3Dfx evidence is contemporary technical reporting already registered by the frozen scout. No new URLs were used."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Independent verifier output. Chip versus board identity, manufacturer, GPU category, event typing, date precision, contradictions, and unresolved questions are recorded. NVIDIA month precision, ATI planned-production conflict, and Banshee forecast-versus-shipment caveat are preserved. No scout files were edited."
+  },
+  "handoff": {
+    "ready_for_stage": "normalizer",
+    "required_follow_up": ["Human review of Matrox announcement-only and ATI/Banshee timing evidence before normalization; preserve chip/board separation."],
+    "coordinator_decision": "pending"
+  },
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

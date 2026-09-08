@@ -10,6 +10,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT / "research_batches" / "templates"
 PILOT_JOBS = ROOT / "research_batches" / "pilot-1998-cpu" / "jobs"
+NEW_PILOT_JOB_ROOTS = (
+    ROOT / "research_batches" / "pilot-1998-gpu" / "jobs",
+    ROOT / "research_batches" / "pilot-1998-hdd" / "jobs",
+)
+ADDITIONAL_CPU_JOBS = (
+    PILOT_JOBS / "job-1998-cpu-context-005" / "job_manifest.json",
+    PILOT_JOBS / "job-1998-cpu-normalize-omissions-006" / "job_manifest.json",
+    PILOT_JOBS / "job-1998-cpu-audit-expanded-007" / "job_manifest.json",
+)
 
 
 class ResearchManifestTests(unittest.TestCase):
@@ -94,6 +103,40 @@ class ResearchManifestTests(unittest.TestCase):
             rows = list(csv.DictReader(handle))
         self.assertEqual(len(rows), 12)
         self.assertEqual({row["candidate_key"] for row in rows}, set(job["scope"]["record_keys"]))
+
+    def test_new_pilot_job_outputs_are_accepted_and_hash_verified(self):
+        job_paths = [
+            path
+            for root in NEW_PILOT_JOB_ROOTS
+            for path in sorted(root.glob("*/job_manifest.json"))
+        ]
+        job_paths.extend(ADDITIONAL_CPU_JOBS)
+        self.assertEqual(len(job_paths), 13)
+        for job_path in job_paths:
+            job = json.loads(job_path.read_text(encoding="utf-8"))
+            self.assertEqual(job["status"], "accepted", job_path)
+            accepted = job["accepted_result"]
+            run_path = job_path.parent / "runs" / accepted["run_id"]
+            result_path = run_path / "result_manifest.json"
+            self.assertTrue(result_path.is_file(), result_path)
+            self.assertEqual(
+                hashlib.sha256(result_path.read_bytes()).hexdigest(),
+                accepted["result_manifest_sha256"].lower(),
+            )
+            result = json.loads(result_path.read_text(encoding="utf-8"))
+            self.assertEqual(result["status"], "submitted")
+            self.assertEqual(result["artifact_id"], accepted["artifact_id"])
+            self.assertFalse(result["quality"]["canonical_sql_written"])
+            for output in result["outputs"]:
+                output_path = run_path / output["path"]
+                self.assertEqual(
+                    hashlib.sha256(output_path.read_bytes()).hexdigest(),
+                    output["sha256"].lower(),
+                    output_path,
+                )
+                if output_path.suffix == ".csv" and output["row_count"] is not None:
+                    with output_path.open(encoding="utf-8", newline="") as handle:
+                        self.assertEqual(sum(1 for _ in csv.DictReader(handle)), output["row_count"])
 
 
 if __name__ == "__main__":

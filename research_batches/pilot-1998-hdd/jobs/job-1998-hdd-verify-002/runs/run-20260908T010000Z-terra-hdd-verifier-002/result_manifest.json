@@ -1,0 +1,39 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-hdd",
+  "job_id": "job-1998-hdd-verify-002",
+  "run_id": "run-20260908T010000Z-terra-hdd-verifier-002",
+  "artifact_id": "artifact-job-1998-hdd-verify-002-run-20260908T010000Z-terra-hdd-verifier-002",
+  "stage": "verifier",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T01:00:00Z",
+  "completed_at_utc": "2026-09-08T01:05:14Z",
+  "worker": {"agent_id": "terra-hdd-verifier-002", "model": "gpt-5.6-terra", "capability_route": "terra", "tool_versions": ["web__run", "apply_patch", "exec_command"], "independence_group": "hdd-verification-002"},
+  "inputs": [
+    {"artifact_id": "hdd-scout-candidates", "path": "../../../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv", "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742", "row_count": 4},
+    {"artifact_id": "hdd-scout-sources", "path": "../../../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv", "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984", "row_count": 5},
+    {"artifact_id": "hdd-scout-notes", "path": "../../../job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/notes.md", "sha256": "2fcbfb7e046090605d8f8f3f530b483b4e3feeeed38b67c70c5da560df53e169", "row_count": null}
+  ],
+  "outputs": [
+    {"path": "verification.csv", "sha256": "f969788ff67a37ff1875c0b821f8c51e8bbd8633ef7b644019f6521a19cc16a3", "row_count": 4, "schema": "structura-verification-report-v1"},
+    {"path": "notes.md", "sha256": "df0e97b8fb0a549ed1e2b1d6e78b2174efe5bc0785c64bb60b81d649b77ab26c", "row_count": null, "schema": "verification-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["quantum-fireball-el", "quantum-fireball-ex", "ibm-deskstar-25gp", "ibm-deskstar-22gxp"],
+    "record_keys_completed": ["quantum-fireball-el", "quantum-fireball-ex", "ibm-deskstar-25gp", "ibm-deskstar-22gxp"],
+    "record_keys_blocked": [],
+    "unknowns": ["Fireball EL first commercial shipment", "Fireball EX exact commercial shipment", "IBM exact OEM shipment day and geography", "IBM ordering part numbers", "IBM broad distributor/reseller availability before Q1 1999"],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1, 2],
+    "primary_sources_used": ["quantum-1998-q2-10q"],
+    "contemporary_sources_used": ["quantum-fireball-ex-pcwatch", "quantum-fireball-el-pcwatch", "ibm-news-deskstar", "ibm-deskstar-reuters"],
+    "independence_limitations": ["Quantum evidence is company-controlled; IBM commercial-timing distinction is from Reuters reporting, with IBM News republished for product context."]
+  },
+  "quality": {"self_approval_violation": false, "canonical_sql_written": false, "notes": "Independent verification only. No scout artifacts, shared batch files, database data, normalizations, audit decisions, or canonical statuses were changed."},
+  "handoff": {"ready_for_stage": "normalizer", "required_follow_up": ["Human cohort-event decision for Fireball EL mass production", "Preserve IBM limited 1998 OEM shipment separately from Q1 1999 broad availability", "Do not convert missing shipment days into exact dates"], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

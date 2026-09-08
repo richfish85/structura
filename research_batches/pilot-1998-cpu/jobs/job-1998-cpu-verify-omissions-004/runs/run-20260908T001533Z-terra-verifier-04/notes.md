@@ -22,3 +22,7 @@ All four frozen input artifacts matched the SHA-256 values declared in `job_mani
 ## Limits
 
 All cited evidence is first-party. No independent confirmation, part-number enumeration, regional sell-through evidence, or canonical decision is claimed.
+
+## Coordinator integrity correction
+
+During full-pilot validation, eleven rows were found to contain one surplus empty CSV field between the optional second-source fields and the limitations fields. The coordinator removed only that empty field and re-serialized the file so the existing limitations, unresolved questions, and verifier notes map to their declared columns. No substantive verification conclusion changed.

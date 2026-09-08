@@ -1,0 +1,44 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-context-005",
+  "stage": "context_research",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T00:20:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-context-005",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "cpu-context-research-005"
+  },
+  "scope": {
+    "category": "CPU",
+    "record_count": 22,
+    "evidence_families": ["product purpose", "benchmark observations"],
+    "stopping_rule": "Each frozen candidate has a sourced purpose statement or explicit gap; benchmark rows are retained only within defensible comparison groups.",
+    "exclusions": ["new candidates", "canonical promotion", "visual presentation"]
+  },
+  "source_policy": {
+    "primary_source_preferred": true,
+    "standards_body_results_allowed": true,
+    "manufacturer_positioning_must_be_labelled": true,
+    "access_date_utc": "2026-09-08"
+  },
+  "output_contract": {
+    "run_directory": "runs/run-20260908T002000Z-luna-context-005",
+    "artifacts": ["intent.csv", "benchmarks.csv", "sources.csv", "notes.md", "result_manifest.json"],
+    "intent_schema": "cpu-context-intent-v1",
+    "benchmark_schema": "cpu-context-benchmarks-v1"
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T002000Z-luna-context-005",
+    "artifact_id": "artifact-job-1998-cpu-context-005-run-20260908T002000Z-luna-context-005",
+    "result_manifest_sha256": "1b7a1298133c31f95166a8842c8fcfa9a7a0d2ed748d978382f9ee0c3e614e21"
+  },
+  "handoff": {
+    "destination_stage": "human_review",
+    "canonical_promotion_allowed": false
+  }
+}

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import math
 import re
 import sqlite3
 from dataclasses import dataclass
@@ -106,6 +107,38 @@ AUDIT_COLUMNS = (
     "disposition",
     "auditor",
 )
+INTENT_COLUMNS = (
+    "batch_key",
+    "candidate_key",
+    "claim_scope",
+    "problem_addressed",
+    "target_user",
+    "engineering_response",
+    "confidence",
+    "source_key",
+    "source_locator",
+    "evidence_note",
+    "limitations",
+    "researcher",
+)
+BENCHMARK_COLUMNS = (
+    "batch_key",
+    "candidate_key",
+    "comparison_group_key",
+    "benchmark_name",
+    "metric_name",
+    "result_value",
+    "result_unit",
+    "higher_is_better",
+    "system_configuration",
+    "test_date",
+    "result_provenance",
+    "confidence",
+    "source_key",
+    "source_locator",
+    "limitations",
+    "researcher",
+)
 NON_CANONICAL_STAGES = frozenset(
     {"planned", "scouting", "verification", "normalization", "audit", "human_review", "paused"}
 )
@@ -123,6 +156,17 @@ AUDIT_FINDING_TYPES = frozenset(
 )
 AUDIT_SEVERITIES = frozenset({"info", "low", "medium", "high"})
 AUDIT_DISPOSITIONS = frozenset({"open", "resolved_no_change", "follow_up"})
+INTENT_CLAIM_SCOPES = frozenset(
+    {"manufacturer_stated", "independently_interpreted", "inferred"}
+)
+BENCHMARK_PROVENANCE = frozenset(
+    {
+        "standards_body_vendor_submitted",
+        "independent_contemporary",
+        "manufacturer_claim",
+        "reproduced",
+    }
+)
 
 
 class IntakeError(ValueError):
@@ -134,6 +178,15 @@ class ImportResult:
     run_key: str
     already_imported: bool
     candidate_count: int
+    source_count: int
+
+
+@dataclass(frozen=True)
+class ContextImportResult:
+    run_key: str
+    already_imported: bool
+    intent_count: int
+    benchmark_count: int
     source_count: int
 
 
@@ -150,6 +203,10 @@ def _read_csv(path: Path, columns: tuple[str, ...], label: str) -> list[dict[str
                 )
             rows = []
             for row_number, row in enumerate(reader, start=2):
+                if None in row:
+                    raise IntakeError(
+                        f"{label} row {row_number} does not have exactly {len(columns)} columns"
+                    )
                 cleaned = {column: (row.get(column) or "").strip() for column in columns}
                 if any("\x00" in value or len(value) > MAX_FIELD_LENGTH for value in cleaned.values()):
                     raise IntakeError(f"{label} row {row_number} contains an unsafe or oversized field")
@@ -376,6 +433,323 @@ def import_batch(
             (stage, batch_id),
         )
     return ImportResult(run_key, False, len(candidates), len(sources))
+
+
+def _validate_context_rows(
+    intents: list[dict[str, str]], benchmarks: list[dict[str, str]]
+) -> str:
+    if not intents and not benchmarks:
+        raise IntakeError("context import has no intent claims or benchmark observations")
+    batch_keys = {row["batch_key"] for row in [*intents, *benchmarks]}
+    if len(batch_keys) != 1:
+        raise IntakeError("context files must contain exactly one shared batch_key")
+    batch_key = next(iter(batch_keys))
+    first_row = (intents or benchmarks)[0]
+    _require_key(batch_key, "context", first_row["_row_number"])
+
+    seen_intents: set[tuple[str, str, str]] = set()
+    for row in intents:
+        row_number = row["_row_number"]
+        _require_key(row["candidate_key"], "intent", row_number)
+        _require_key(row["source_key"], "intent source", row_number)
+        if row["claim_scope"] not in INTENT_CLAIM_SCOPES:
+            raise IntakeError(f"intent row {row_number} has invalid claim_scope")
+        if row["confidence"] not in CONFIDENCES:
+            raise IntakeError(f"intent row {row_number} has invalid confidence")
+        for required in (
+            "problem_addressed",
+            "target_user",
+            "engineering_response",
+            "evidence_note",
+            "researcher",
+        ):
+            if not row[required]:
+                raise IntakeError(f"intent row {row_number} requires {required}")
+        signature = (row["candidate_key"], row["claim_scope"], row["source_key"])
+        if signature in seen_intents:
+            raise IntakeError(
+                f"duplicate intent candidate/scope/source in row {row_number}"
+            )
+        seen_intents.add(signature)
+
+    seen_benchmarks: set[tuple[str, str, str, str, str]] = set()
+    comparison_groups: dict[str, tuple[str, str, str, str, str]] = {}
+    for row in benchmarks:
+        row_number = row["_row_number"]
+        _require_key(row["candidate_key"], "benchmark", row_number)
+        _require_key(row["comparison_group_key"], "benchmark comparison group", row_number)
+        _require_key(row["source_key"], "benchmark source", row_number)
+        if row["confidence"] not in CONFIDENCES:
+            raise IntakeError(f"benchmark row {row_number} has invalid confidence")
+        if row["result_provenance"] not in BENCHMARK_PROVENANCE:
+            raise IntakeError(f"benchmark row {row_number} has invalid result_provenance")
+        if row["higher_is_better"] not in {"true", "false"}:
+            raise IntakeError(f"benchmark row {row_number} requires higher_is_better true or false")
+        for required in (
+            "benchmark_name",
+            "metric_name",
+            "result_value",
+            "result_unit",
+            "system_configuration",
+            "researcher",
+        ):
+            if not row[required]:
+                raise IntakeError(f"benchmark row {row_number} requires {required}")
+        try:
+            value = float(row["result_value"])
+        except ValueError as error:
+            raise IntakeError(f"benchmark row {row_number} has a non-numeric result_value") from error
+        if not math.isfinite(value):
+            raise IntakeError(f"benchmark row {row_number} has a non-finite result_value")
+        signature = (
+            row["candidate_key"],
+            row["comparison_group_key"],
+            row["benchmark_name"],
+            row["metric_name"],
+            row["source_key"],
+        )
+        if signature in seen_benchmarks:
+            raise IntakeError(f"duplicate benchmark observation in row {row_number}")
+        seen_benchmarks.add(signature)
+        group_signature = (
+            row["benchmark_name"],
+            row["metric_name"],
+            row["result_unit"],
+            row["higher_is_better"],
+            row["system_configuration"],
+        )
+        previous_signature = comparison_groups.setdefault(
+            row["comparison_group_key"], group_signature
+        )
+        if previous_signature != group_signature:
+            raise IntakeError(
+                f"benchmark row {row_number} changes the metric or configuration inside comparison_group_key {row['comparison_group_key']}"
+            )
+    return batch_key
+
+
+def import_context(
+    db_path: Path | str,
+    intent_path: Path | str,
+    benchmark_path: Path | str,
+    source_path: Path | str,
+) -> ContextImportResult:
+    """Import non-canonical product-purpose and benchmark evidence."""
+    intent_file = Path(intent_path).resolve()
+    benchmark_file = Path(benchmark_path).resolve()
+    sources_file = Path(source_path).resolve()
+    intents = _read_csv(intent_file, INTENT_COLUMNS, "intent")
+    benchmarks = _read_csv(benchmark_file, BENCHMARK_COLUMNS, "benchmark")
+    sources = _read_csv(sources_file, SOURCE_COLUMNS, "context source")
+    batch_key = _validate_context_rows(intents, benchmarks)
+    _validate_sources(sources)
+    source_rows_by_key = {row["source_key"]: row for row in sources}
+    referenced_source_keys = {
+        row["source_key"] for row in [*intents, *benchmarks]
+    }
+    missing_source_keys = sorted(referenced_source_keys - set(source_rows_by_key))
+    if missing_source_keys:
+        raise IntakeError(
+            "context rows reference source keys absent from source file: "
+            + ", ".join(missing_source_keys)
+        )
+    digest = _digest((intent_file, benchmark_file, sources_file), "context")
+    run_key = f"{batch_key}-context-{digest[:12]}"
+
+    with connect(db_path) as connection:
+        batch = connection.execute(
+            "SELECT id FROM research_batches WHERE batch_key=?", (batch_key,)
+        ).fetchone()
+        if batch is None:
+            raise IntakeError(f"context batch is not staged: {batch_key}")
+        batch_id = int(batch["id"])
+        previous = connection.execute(
+            "SELECT run_key, intent_count, benchmark_count, source_count FROM context_import_runs WHERE research_batch_id=? AND input_digest=?",
+            (batch_id, digest),
+        ).fetchone()
+        if previous is not None:
+            return ContextImportResult(
+                previous["run_key"],
+                True,
+                previous["intent_count"],
+                previous["benchmark_count"],
+                previous["source_count"],
+            )
+
+        candidate_keys = {row["candidate_key"] for row in [*intents, *benchmarks]}
+        candidate_ids = {
+            row["candidate_key"]: int(row["id"])
+            for row in connection.execute(
+                "SELECT c.id, c.candidate_key FROM intake_candidate_records c JOIN research_import_runs r ON r.id=c.import_run_id WHERE r.research_batch_id=? AND c.candidate_key IN ({})".format(
+                    ",".join("?" for _ in candidate_keys)
+                ),
+                [batch_id, *sorted(candidate_keys)],
+            ).fetchall()
+        }
+        unknown_candidates = sorted(candidate_keys - set(candidate_ids))
+        if unknown_candidates:
+            raise IntakeError(
+                "context rows reference candidate keys not staged for this batch: "
+                + ", ".join(unknown_candidates)
+            )
+
+        comparison_group_keys = {row["comparison_group_key"] for row in benchmarks}
+        if comparison_group_keys:
+            existing_groups = connection.execute(
+                "SELECT comparison_group_key, benchmark_name, metric_name, result_unit, higher_is_better, system_configuration FROM benchmark_observations WHERE comparison_group_key IN ({}) GROUP BY comparison_group_key, benchmark_name, metric_name, result_unit, higher_is_better, system_configuration".format(
+                    ",".join("?" for _ in comparison_group_keys)
+                ),
+                sorted(comparison_group_keys),
+            ).fetchall()
+            expected_groups = {
+                row["comparison_group_key"]: (
+                    row["benchmark_name"],
+                    row["metric_name"],
+                    row["result_unit"],
+                    1 if row["higher_is_better"] == "true" else 0,
+                    row["system_configuration"],
+                )
+                for row in benchmarks
+            }
+            for existing_group in existing_groups:
+                existing_signature = (
+                    existing_group["benchmark_name"],
+                    existing_group["metric_name"],
+                    existing_group["result_unit"],
+                    existing_group["higher_is_better"],
+                    existing_group["system_configuration"],
+                )
+                if expected_groups[existing_group["comparison_group_key"]] != existing_signature:
+                    raise IntakeError(
+                        "comparison_group_key already exists with a different metric or configuration: "
+                        + existing_group["comparison_group_key"]
+                    )
+
+        source_ids: dict[str, int] = {}
+        for source in sources:
+            existing = connection.execute(
+                "SELECT * FROM sources WHERE source_key=?", (source["source_key"],)
+            ).fetchone()
+            existing_by_url = connection.execute(
+                "SELECT * FROM sources WHERE url=? ORDER BY id LIMIT 1", (source["url"],)
+            ).fetchone()
+            if existing is not None:
+                if (existing["url"] or "") != source["url"]:
+                    raise IntakeError(
+                        f"source_key points to a different URL than the existing source: {source['source_key']}"
+                    )
+                if int(existing["source_tier"]) != int(source["source_tier"]):
+                    raise IntakeError(
+                        f"source_tier disagrees with existing source: {source['source_key']}"
+                    )
+                source_ids[source["source_key"]] = int(existing["id"])
+            elif existing_by_url is not None:
+                if int(existing_by_url["source_tier"]) != int(source["source_tier"]):
+                    raise IntakeError(
+                        f"source_tier disagrees with source already registered at URL: {source['url']}"
+                    )
+                source_ids[source["source_key"]] = int(existing_by_url["id"])
+            else:
+                connection.execute(
+                    "INSERT INTO sources(source_key, title, publisher, source_type, source_tier, url, publication_date, accessed_date, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (
+                        source["source_key"],
+                        source["title"],
+                        source["publisher"] or None,
+                        source["source_type"],
+                        int(source["source_tier"]),
+                        source["url"],
+                        source["publication_date"] or None,
+                        source["accessed_date"],
+                        source["scope_note"],
+                    ),
+                )
+                source_ids[source["source_key"]] = int(
+                    connection.execute("SELECT last_insert_rowid()").fetchone()[0]
+                )
+
+        connection.execute(
+            "INSERT INTO context_import_runs(run_key, research_batch_id, input_digest, intent_path, benchmark_path, source_path, intent_count, benchmark_count, source_count, importer) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                run_key,
+                batch_id,
+                digest,
+                str(intent_file),
+                str(benchmark_file),
+                str(sources_file),
+                len(intents),
+                len(benchmarks),
+                len(sources),
+                "structura-context-intake-v1",
+            ),
+        )
+        context_run_id = int(
+            connection.execute("SELECT last_insert_rowid()").fetchone()[0]
+        )
+        for source_id in sorted(set(source_ids.values())):
+            connection.execute(
+                "INSERT INTO context_import_run_sources(context_import_run_id, source_id) VALUES (?, ?)",
+                (context_run_id, source_id),
+            )
+        for source in sources:
+            connection.execute(
+                "INSERT INTO context_source_records(context_import_run_id, source_id, source_row_number, source_key_raw, title_raw, publisher_raw, source_type_raw, source_tier_raw, url_raw, publication_date_raw, accessed_date_raw, scope_note_raw) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    context_run_id,
+                    source_ids[source["source_key"]],
+                    int(source["_row_number"]),
+                    source["source_key"],
+                    source["title"],
+                    source["publisher"] or None,
+                    source["source_type"],
+                    int(source["source_tier"]),
+                    source["url"],
+                    source["publication_date"] or None,
+                    source["accessed_date"],
+                    source["scope_note"],
+                ),
+            )
+        for row in intents:
+            connection.execute(
+                "INSERT INTO product_intent_claims(context_import_run_id, intake_candidate_record_id, claim_scope, problem_addressed, target_user, engineering_response, confidence, source_id, source_locator, evidence_note, limitations, researcher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    context_run_id,
+                    candidate_ids[row["candidate_key"]],
+                    row["claim_scope"],
+                    row["problem_addressed"],
+                    row["target_user"],
+                    row["engineering_response"],
+                    row["confidence"],
+                    source_ids[row["source_key"]],
+                    row["source_locator"] or None,
+                    row["evidence_note"],
+                    row["limitations"] or None,
+                    row["researcher"],
+                ),
+            )
+        for row in benchmarks:
+            connection.execute(
+                "INSERT INTO benchmark_observations(context_import_run_id, intake_candidate_record_id, comparison_group_key, benchmark_name, metric_name, result_value, result_unit, higher_is_better, system_configuration, test_date, result_provenance, confidence, source_id, source_locator, limitations, researcher) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    context_run_id,
+                    candidate_ids[row["candidate_key"]],
+                    row["comparison_group_key"],
+                    row["benchmark_name"],
+                    row["metric_name"],
+                    float(row["result_value"]),
+                    row["result_unit"],
+                    1 if row["higher_is_better"] == "true" else 0,
+                    row["system_configuration"],
+                    row["test_date"] or None,
+                    row["result_provenance"],
+                    row["confidence"],
+                    source_ids[row["source_key"]],
+                    row["source_locator"] or None,
+                    row["limitations"] or None,
+                    row["researcher"],
+                ),
+            )
+    return ContextImportResult(run_key, False, len(intents), len(benchmarks), len(sources))
 
 
 def _validate_verification(rows: list[dict[str, str]]) -> str:

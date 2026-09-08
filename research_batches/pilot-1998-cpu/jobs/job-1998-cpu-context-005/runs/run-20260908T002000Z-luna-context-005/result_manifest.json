@@ -1,0 +1,47 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "result",
+  "batch_id": "pilot-1998-cpu-gpu-hdd",
+  "job_id": "job-1998-cpu-context-005",
+  "run_id": "run-20260908T002000Z-luna-context-005",
+  "artifact_id": "artifact-job-1998-cpu-context-005-run-20260908T002000Z-luna-context-005",
+  "stage": "context_research",
+  "status": "submitted",
+  "started_at_utc": "2026-09-08T00:20:00Z",
+  "completed_at_utc": "2026-09-08T00:35:00Z",
+  "worker": {
+    "agent_id": "luna-context-005",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "tool_versions": ["web__run", "apply_patch", "exec_command"],
+    "independence_group": "cpu-context-research-005"
+  },
+  "inputs": [],
+  "outputs": [
+    {"path": "intent.csv", "sha256": "0dec0d0671ee284493a8b988c088fc36f05763d3b6ee6bee978d43a717fff0b1", "row_count": 22, "schema": "cpu-context-intent-v1"},
+    {"path": "benchmarks.csv", "sha256": "f629247a03d518ffa335dc5c791d78de98faf2c38b3cabab4980b4a6e1c21873", "row_count": 6, "schema": "cpu-context-benchmarks-v1"},
+    {"path": "sources.csv", "sha256": "4ef9e842a0b7e118ec198fdc40126836457275060a5470e63696244035a5afff", "row_count": 17, "schema": "structura-source-register-v1"},
+    {"path": "notes.md", "sha256": "62e240f85e27ef6ed225bdf542b0f1334f64f9ed619dbab9d62309abad383bc1", "row_count": null, "schema": "context-notes-markdown-v1"}
+  ],
+  "coverage": {
+    "record_keys_attempted": ["intel-pentium-ii-350", "intel-pentium-ii-400", "intel-celeron-266", "intel-pentium-ii-450", "intel-celeron-300a", "intel-celeron-333", "intel-pentium-ii-xeon-400", "amd-k6-2-family", "amd-k6-2-350", "amd-k6-2-400", "intel-pentium-ii-333", "intel-pentium-266", "intel-celeron-300", "intel-pentium-ii-xeon-450", "amd-k6-2-366", "amd-k6-2-380", "intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "amd-k6-300-mobile"],
+    "record_keys_completed": ["intel-pentium-ii-350", "intel-pentium-ii-400", "intel-celeron-266", "intel-pentium-ii-450", "intel-celeron-300a", "intel-celeron-333", "intel-pentium-ii-xeon-400", "amd-k6-2-family", "amd-k6-2-350", "amd-k6-2-400", "intel-pentium-ii-333", "intel-pentium-266", "intel-celeron-300", "intel-pentium-ii-xeon-450", "amd-k6-2-366", "amd-k6-2-380", "intel-mobile-pentium-ii-233", "intel-mobile-pentium-ii-266", "intel-mobile-pentium-ii-300", "intel-pentium-ii-overdrive-300", "intel-pentium-ii-overdrive-333", "amd-k6-300-mobile"],
+    "record_keys_blocked": [],
+    "unknowns": ["intel-pentium-266 rationale", "intel-mobile-pentium-ii-300 rationale", "detailed AMD 366/380 engineering delta", "benchmarks for remaining 19 keys"],
+    "conflicts": [],
+    "omissions_or_leads": []
+  },
+  "source_policy_used": {
+    "tiers_consulted": [1],
+    "primary_sources_used": ["intel-1998-dp041598", "intel-1998-dp082498", "intel-1998-sp062998", "intel-1998-dp012698", "intel-1998-dp060898", "intel-1998-wp100698", "intel-1998-mp040298", "intel-1998-mp091698", "intel-1998-dp081098", "intel-quickref-year", "amd-1998-q2-results", "amd-1998-q3-results", "amd-1998-q4-results"],
+    "retrospective_sources_used": ["amd-1998-q4-results"],
+    "independence_limitations": ["All sources are manufacturer-controlled; no benchmark row was retained without shared configuration and provenance."]
+  },
+  "quality": {
+    "self_approval_violation": false,
+    "canonical_sql_written": false,
+    "notes": "Context-only evidence package. Manufacturer-stated rationale is separated from inference; no benchmark comparison was asserted."
+  },
+  "handoff": {"ready_for_stage": "human_review", "required_follow_up": ["Decide whether to pursue independent contemporary benchmark sources for a defined comparison group."], "coordinator_decision": "pending"},
+  "retry": {"attempt_number": 1, "retry_reason": null, "supersedes_run_id": null}
+}

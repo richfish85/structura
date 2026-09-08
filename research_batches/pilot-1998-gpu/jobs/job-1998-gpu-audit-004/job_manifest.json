@@ -1,0 +1,118 @@
+{
+  "manifest_version": "0.1",
+  "manifest_type": "job",
+  "batch_id": "pilot-1998-gpu",
+  "job_id": "job-1998-gpu-audit-004",
+  "stage": "auditor",
+  "status": "accepted",
+  "created_at_utc": "2026-09-08T01:15:00Z",
+  "coordinator": "structura-root-coordinator",
+  "owner": {
+    "agent_id": "luna-scout-mobile-upgrade-03",
+    "model": "gpt-5.6-luna",
+    "capability_route": "luna",
+    "independence_group": "gpu-audit-004"
+  },
+  "scope": {
+    "record_keys": [
+      "intel-i740",
+      "intel-express-3d",
+      "nvidia-riva-128zx",
+      "nvidia-riva-tnt",
+      "matrox-mga-g200",
+      "ati-rage-128-gl",
+      "ati-rage-128-vr",
+      "3dfx-voodoo-banshee"
+    ],
+    "category": "GPU",
+    "time_boundary": "calendar year 1998 launch cohort",
+    "checks": [
+      "duplicates",
+      "chip-board-family boundaries",
+      "timing inheritance",
+      "scope/category errors",
+      "evidence gaps",
+      "omission leads"
+    ],
+    "exclusions": [
+      "new canonical candidates",
+      "normalization",
+      "verification conclusions",
+      "canonical promotion"
+    ]
+  },
+  "inputs": [
+    {
+      "artifact_id": "frozen-gpu-candidates",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/candidates.csv",
+      "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0"
+    },
+    {
+      "artifact_id": "frozen-gpu-sources",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/sources.csv",
+      "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1"
+    },
+    {
+      "artifact_id": "frozen-gpu-notes",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/notes.md",
+      "sha256": "5327be4b85ef87d41b09d862efd8144cf2bd538f3242f912647e495d61f38e67"
+    },
+    {
+      "artifact_id": "frozen-gpu-scout-result",
+      "path": "../../job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/result_manifest.json",
+      "sha256": "843ffe7d51d7c0dec51c6c1ce4b08adb38fdda65da390cd4449a453ae9ce69e0"
+    },
+    {
+      "artifact_id": "gpu-verification-report",
+      "path": "../../job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/verification.csv",
+      "sha256": "606911a67234ee0e7cb962c180511e58ca93002cb7c50e8d5669de5d148d5942"
+    },
+    {
+      "artifact_id": "gpu-verification-notes",
+      "path": "../../job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/notes.md",
+      "sha256": "6b00b4d84c8c732eb096fa3e2e8d87154c0b1e224bfb86e7a9a4d51267184fa4"
+    },
+    {
+      "artifact_id": "gpu-verification-result",
+      "path": "../../job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/result_manifest.json",
+      "sha256": "DDC22D4975C9D23CBA3DB1DC8CB7AF3158583E786E3F63C9CD91E9C713A96244"
+    }
+  ],
+  "source_policy": {
+    "access_date_utc": "2026-09-08",
+    "preferred_sources": [
+      "first-party",
+      "contemporary professional publications"
+    ],
+    "new_urls_allowed_for_omission_leads": true
+  },
+  "output_contract": {
+    "path": "runs/run-20260908T011500Z-luna-gpu-audit-004/audit.csv",
+    "schema": "structura-audit-report-v1",
+    "columns": [
+      "batch_key",
+      "finding_id",
+      "finding_type",
+      "severity",
+      "affected_candidate_key",
+      "proposed_candidate_key",
+      "finding",
+      "source_url",
+      "source_locator",
+      "source_evidence",
+      "recommended_next_action",
+      "disposition",
+      "auditor"
+    ]
+  },
+  "handoff": {
+    "destination_stage": "coordinator",
+    "required_human_approval": true,
+    "canonical_promotion_allowed": false
+  },
+  "accepted_result": {
+    "run_id": "run-20260908T011500Z-luna-gpu-audit-004",
+    "artifact_id": "artifact-job-1998-gpu-audit-004-run-20260908T011500Z-luna-gpu-audit-004",
+    "result_manifest_sha256": "8ecaaa3b4baec7279b29288398bfaa63e240275b3c469e2e3dff4186de14c14e"
+  }
+}
