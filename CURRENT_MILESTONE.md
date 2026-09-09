@@ -1,6 +1,6 @@
 # Current milestone
 
-Status: **active**
+Status: **complete**
 
 Milestone: **Public GitHub Pages checkpoint**
 
@@ -12,13 +12,13 @@ Make the Structura repository public and deploy the existing generated explorer 
 
 ## Acceptance criteria
 
-- [ ] Public-repository review finds no credentials or private material.
-- [ ] Repository visibility is public and its access/licensing boundary is documented.
-- [ ] One GitHub Actions workflow runs tests, builds Structura, selects the successful snapshot, and uploads only its generated `site/` files.
-- [ ] GitHub Pages uses the Actions workflow and reports a successful deployment.
-- [ ] The live project URL loads the home page, search assets, one historical dossier, and the connected SSD/component/evidence path.
-- [ ] Repository and deployed artifact expose no generated SQLite database.
-- [ ] Defined checks run once, followed by one bounded final review.
+- [x] Public-repository review finds no credentials or private material.
+- [x] Repository visibility is public and its access/licensing boundary is documented.
+- [x] One GitHub Actions workflow runs tests, builds Structura, selects the successful snapshot, and uploads only its generated `site/` files.
+- [x] GitHub Pages uses the Actions workflow and reports a successful deployment.
+- [x] The live project URL loads the home page, search assets, one historical dossier, and the connected SSD/component/evidence path.
+- [x] Repository and deployed artifact expose no generated SQLite database.
+- [x] Defined checks ran once, followed by one bounded final review.
 
 ## Allowed files and areas
 
