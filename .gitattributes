@@ -16,4 +16,6 @@ research_batches/pilot-1997-hdd/jobs/job-1997-hdd-verify-002/runs/run-20260908T0
 research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/audit.csv text eol=crlf
 research_batches/connected-970-evo/coordinator/normalized-v1/packet.json text eol=crlf
 research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json text eol=crlf
+research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/candidates.json text eol=crlf
+research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/result_manifest.json text eol=crlf
 research_batches/pilot-1998-cpu/jobs/job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/result_manifest.json text eol=crlf
