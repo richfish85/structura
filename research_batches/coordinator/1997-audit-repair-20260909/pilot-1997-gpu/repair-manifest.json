@@ -1,0 +1,94 @@
+{
+  "status": "structurally_corrected_not_fact_approved",
+  "coordinator": "structura-root",
+  "source": {
+    "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-audit-004/runs/run-20260908T041100Z-terra-1997-gpu-auditor-004/audit.csv",
+    "sha256": "2f8784f22990a9ea8bb487722c072e66fbb6f390eb495e588b9141cffc580db5"
+  },
+  "output": {
+    "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-gpu/audit.csv",
+    "sha256": "65cd5e8667f9532ce5339cd741003c614a8c4fa63448dc11856210de4b32cdf7",
+    "rows": 6
+  },
+  "changes": [
+    {
+      "finding_id": "gpu-aud-001",
+      "fields": {
+        "finding_type": {
+          "before": "timing_boundary",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",Retrospective April launch supports chip identity but does not establish exact day or first commercial shipment.",
+          "after": "Retrospective April launch supports chip identity but does not establish exact day or first commercial shipment."
+        }
+      }
+    },
+    {
+      "finding_id": "gpu-aud-002",
+      "fields": {
+        "finding_type": {
+          "before": "forecast_vs_shipment",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",Announcement and sampling are documented, while Q2 volume production remained planned.",
+          "after": "Announcement and sampling are documented, while Q2 volume production remained planned."
+        }
+      }
+    },
+    {
+      "finding_id": "gpu-aud-003",
+      "fields": {
+        "finding_type": {
+          "before": "granularity",
+          "after": "family_variant_overlap"
+        },
+        "finding": {
+          "before": ",Board-maker support announcement is not a 3Dlabs chip-shipment record; chip and board remain distinct.",
+          "after": "Board-maker support announcement is not a 3Dlabs chip-shipment record; chip and board remain distinct."
+        }
+      }
+    },
+    {
+      "finding_id": "gpu-aud-004",
+      "fields": {
+        "finding_type": {
+          "before": "channel_boundary",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Board sale window is late October; underlying RIVA 128 chip timing must not be inherited and PWR128P variants remain unresolved.",
+          "after": "Board sale window is late October; underlying RIVA 128 chip timing must not be inherited and PWR128P variants remain unresolved."
+        }
+      }
+    },
+    {
+      "finding_id": "gpu-aud-005",
+      "fields": {
+        "finding_type": {
+          "before": "channel_boundary",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Board family announcement and late-October shipment window do not establish exact day or separate variant shipments.",
+          "after": "Board family announcement and late-October shipment window do not establish exact day or separate variant shipments."
+        }
+      }
+    },
+    {
+      "finding_id": "gpu-aud-006",
+      "fields": {
+        "finding_type": {
+          "before": "forecast_vs_shipment",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",August availability was reported as planned; PCI/AGP and memory configurations remain unresolved.",
+          "after": "August availability was reported as planned; PCI/AGP and memory configurations remain unresolved."
+        }
+      }
+    }
+  ],
+  "note": "Existing audit categories classify the check, not proof of an error. Scope checks marked resolved_no_change remain no-change. Historical assertions and author attribution are retained; coordinator only repairs serialization and maps equivalent vocabulary."
+}

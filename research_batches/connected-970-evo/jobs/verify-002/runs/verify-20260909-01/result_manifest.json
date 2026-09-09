@@ -1,0 +1,66 @@
+{
+  "schema_version": "verify-connected-1",
+  "artifact_id": "artifact-verify-20260909-01",
+  "batch_id": "connected-970-evo",
+  "job_id": "verify-002",
+  "run_id": "verify-20260909-01",
+  "stage": "verification",
+  "status": "submitted",
+  "agent_id": "/root/ssd_verify",
+  "model": "gpt-6-astra",
+  "input_artifact_ids": [
+    "artifact-scout-20260909-01"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/candidates.json",
+      "sha256": "c64cbefbfac367e70c08439134156eb3d6a67966dc6303f9b78ba2f6b9e90fb8"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/notes.md",
+      "sha256": "1e2c2b366950b42dbc45bbac6105128071baf7755509872f3679f78ee6d21aee"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/result_manifest.json",
+      "sha256": "29197fdf722a8c773b6f351d63577125ad4350f519394cc67bb21a033a8acf99"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/sources.json",
+      "sha256": "03ebeecc5b4fc1a3ce0f2cb9d7fab0e5219cc34200ecd6f7ef6b26b53b8727e5"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "datasheet-page5.png",
+      "sha256": "73ff1f997a604506de4852d60aed6f163b7a03aa9b8d0cff42e0ece026827f39"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "e623cc76e1fac5e0c941889308bd66bca7a88496271ed56df5e39af8d9781e32"
+    },
+    {
+      "path": "source-datasheet.pdf",
+      "sha256": "e69b9cc8b4a44ed188c365f5720e53ae3668e32f888d21cf9ad39ee191d0b152"
+    },
+    {
+      "path": "verification.json",
+      "sha256": "967ff1820ea52799d0a09603389f1ea833b98e20c0296935686045dbc81a7af1"
+    }
+  ],
+  "validation": [
+    "All frozen scout manifest hashes matched",
+    "22 unique relationship verdicts",
+    "16 entity verdicts",
+    "Visual table check completed",
+    "No canonical approval"
+  ],
+  "counts": {
+    "relationships_total": 22,
+    "supported": 17,
+    "qualified": 5,
+    "unsupported": 0,
+    "entities": 16,
+    "comparison": 1,
+    "unknown": 1
+  }
+}

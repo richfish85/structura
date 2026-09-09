@@ -1,0 +1,85 @@
+{
+  "status": "structurally_corrected_not_fact_approved",
+  "coordinator": "structura-root",
+  "source": {
+    "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-audit-004/runs/run-20260908T041200Z-terra-1997-hdd-auditor-004/audit.csv",
+    "sha256": "7eb35439a29a077350f004e0f93ff095b2affa53c897065b65b41cbe9abe7f7b"
+  },
+  "output": {
+    "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/audit.csv",
+    "sha256": "1d36dfc84f324f545415f4f0c6fd1f61ee133e712f66b8fd0d2c7dffc1803dbf",
+    "rows": 5
+  },
+  "changes": [
+    {
+      "finding_id": "hdd-aud-001",
+      "fields": {
+        "finding": {
+          "before": ",Announcement and stated October mass production do not establish first commercial shipment or exact channel timing.",
+          "after": "Announcement and stated October mass production do not establish first commercial shipment or exact channel timing."
+        }
+      }
+    },
+    {
+      "finding_id": "hdd-aud-002",
+      "fields": {
+        "finding_type": {
+          "before": "forecast_vs_shipment",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",June samples and planned July production are prospective and OEM-only; completed shipment is not shown.,https://pc.watch.impress.co.jp/docs/article/970616/hdd.htm,1997-06-16 report",
+          "after": "June samples and planned July production are prospective and OEM-only; completed shipment is not shown."
+        },
+        "source_url": {
+          "before": "Report distinguishes samples",
+          "after": "https://pc.watch.impress.co.jp/docs/article/970616/hdd.htm"
+        },
+        "source_locator": {
+          "before": " scheduled production",
+          "after": "1997-06-16 report"
+        },
+        "source_evidence": {
+          "before": " and OEM-only supply.",
+          "after": "Report distinguishes samples, scheduled production, and OEM-only supply."
+        }
+      }
+    },
+    {
+      "finding_id": "hdd-aud-003",
+      "fields": {
+        "finding_type": {
+          "before": "forecast_vs_shipment",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",Late-June/late-July production and anticipated retail pricing are plans, not observed availability.",
+          "after": "Late-June/late-July production and anticipated retail pricing are plans, not observed availability."
+        }
+      }
+    },
+    {
+      "finding_id": "hdd-aud-004",
+      "fields": {
+        "finding": {
+          "before": ",Retrospective announcement and early-November mass production do not establish first delivery or retail shipment.",
+          "after": "Retrospective announcement and early-November mass production do not establish first delivery or retail shipment."
+        }
+      }
+    },
+    {
+      "finding_id": "hdd-aud-005",
+      "fields": {
+        "finding_type": {
+          "before": "timing_boundary",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",COMDEX announcement/exhibition was followed by systems expected at least three to four months later; no 1997 shipment is shown.",
+          "after": "COMDEX announcement/exhibition was followed by systems expected at least three to four months later; no 1997 shipment is shown."
+        }
+      }
+    }
+  ],
+  "note": "Existing audit categories classify the check, not proof of an error. Scope checks marked resolved_no_change remain no-change. Historical assertions and author attribution are retained; coordinator only repairs serialization and maps equivalent vocabulary."
+}

@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "scope": "1997 and 1998 bounded launch-cohort candidates, not market censuses",
+  "steps": [
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1998-cpu/01_scout_candidates.csv",
+          "sha256": "e3e7322be27583e905bea796cdd17015d1f35b6d6ff9fdaf7f8a3586f297435d"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-cpu/01_sources.csv",
+          "sha256": "14086a020421058606143c404a81e92b0ef85da9c87d7c5f7682542a10bd860a"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1998-cpu/02_verification.csv",
+          "sha256": "6a2a7dc198af0574c761568ca03359f016e17180a5919f0bfe8db5451a1db0b8"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1998-cpu/03_normalization_proposal.csv",
+          "sha256": "ab631ba4d6f6286af3eaa509b065e9d6741cb8f16f8ed0f07209cc26d0b7f1ba"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1998-cpu/04_audit_findings.csv",
+          "sha256": "ff58c2f03213ddaa557ba05a4e33eb23b2d1bf6d3d2c7d743259b7053b7daf84"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/candidates.csv",
+          "sha256": "448c287c5c31fc0625503279d111dd9b76121060a55756195052e5df212ef961"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-desktop-server-002/runs/run-20260908T000519Z-luna-desktop-server-02/sources.csv",
+          "sha256": "4d206fbe499e4df1fc38502c7fb71f32685e586f6bab58ca9dccbabda73fb859"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/candidates.csv",
+          "sha256": "46eeea4a9d5b15110aa26a52d06724446c3b3bed02485ac8739f5f8d397fb7b9"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-scout-mobile-upgrade-003/runs/run-20260908T000519Z-luna-mobile-upgrade-03/sources.csv",
+          "sha256": "56be5725291bc7863c137cc6d1c0a2c0916070b8d781aa2c3a0500c1e7a3f8ab"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/verification.csv",
+          "sha256": "2178754ecaabac228d44f893b06d23437813fb91032cd8c87eeb2cdf389680e4"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/intent.csv",
+          "sha256": "0dec0d0671ee284493a8b988c088fc36f05763d3b6ee6bee978d43a717fff0b1"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/benchmarks.csv",
+          "sha256": "f629247a03d518ffa335dc5c791d78de98faf2c38b3cabab4980b4a6e1c21873"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/sources.csv",
+          "sha256": "4ef9e842a0b7e118ec198fdc40126836457275060a5470e63696244035a5afff"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-normalize-omissions-006/runs/run-20260908T024000Z-terra-cpu-normalizer-omissions-006/normalization.csv",
+          "sha256": "ea1f4b7e4162e440cc39c46cc19a067d255558fee45762fb2cfb04a2766332bb"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1998-cpu/jobs/job-1998-cpu-audit-expanded-007/runs/run-20260908T012000Z-terra-cpu-audit-expanded-007/audit.csv",
+          "sha256": "7527d9e5f245fddbcf32ec7b873ee92af83ea5d513613903838b55202b23664a"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/candidates.csv",
+          "sha256": "0508f97daca6d401527faaeaad94f3c14b488da74c68d05b83ff786a9f9897d0"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-scout-001/runs/run-20260908T002100Z-terra-gpu-scout-001/sources.csv",
+          "sha256": "45714a2afab0da3b7b610ba8d3b3c83631246aad5d425286c80ece2660e4bce1"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-verify-002/runs/run-20260908T005000Z-luna-gpu-verify-002/verification.csv",
+          "sha256": "606911a67234ee0e7cb962c180511e58ca93002cb7c50e8d5669de5d148d5942"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-normalize-003/runs/run-20260908T020000Z-terra-gpu-normalizer-003/normalization.csv",
+          "sha256": "dc4445a82ea83f7eabd34d67073d2b0718684ed4280788b857ae5da3cfda0eb6"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-audit-004/runs/run-20260908T011500Z-luna-gpu-audit-004/audit.csv",
+          "sha256": "85f0870633f93111dd556b6151b4cf2ddec53032add234ef2e22db7b7d8de935"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/intent.csv",
+          "sha256": "7276d831c339c0bdf6ab126120cf0173f0cb79c8949a86fc6f187125731d7040"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/benchmarks.csv",
+          "sha256": "aa7ad24a5efede55c162abcae124201e7e701cfe94d7de1cf787af8eaaab438b"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/sources.csv",
+          "sha256": "71070df7137b2e97b5204fd39491c54bfa020acc032a71fb27c8e13462e579e9"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/candidates.csv",
+          "sha256": "084985c9559c320d263c3f31e8e333751a296cbb30367a430e8c86e8c951f742"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-scout-001/runs/run-20260908T003300Z-luna-hdd-01/sources.csv",
+          "sha256": "1ab1ffb75bf61210ff8180f80650a534c5fb60600d650a161a0562ac323a8984"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-verify-002/runs/run-20260908T010000Z-terra-hdd-verifier-002/verification.csv",
+          "sha256": "f969788ff67a37ff1875c0b821f8c51e8bbd8633ef7b644019f6521a19cc16a3"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-normalize-003/runs/run-20260908T020000Z-terra-hdd-normalizer-003/normalization.csv",
+          "sha256": "4ab19fe2e41ee2bfe6d4148330e33e8c5e11d3fc68b72ea355f739da04223864"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-audit-004/runs/run-20260908T011000Z-terra-hdd-audit-004/audit.csv",
+          "sha256": "444c6295f5e245a4f3ffd2c3b8a25081945860387b620ff7b6fa55333617c236"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/intent.csv",
+          "sha256": "74ce4c30f3bea824b2e2e5ade61e920764a29c1db7904d4d5bed3598dca1b6cb"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/benchmarks.csv",
+          "sha256": "aa7ad24a5efede55c162abcae124201e7e701cfe94d7de1cf787af8eaaab438b"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/sources.csv",
+          "sha256": "f9b5e5c2de25257487490e5f87209745ffecb0646d28cb630c4056843409d330"
+        }
+      }
+    },
+    {
+      "stage": "review-decisions",
+      "files": {
+        "decisions": {
+          "path": "research_batches/pilot-1998/02_REVIEW_DECISIONS_CPU.csv",
+          "sha256": "7cc013d2e4b72abe95d517e6152b286fc4d22a9da0fae1edfc339f9d1e6acafd"
+        }
+      }
+    },
+    {
+      "stage": "review-decisions",
+      "files": {
+        "decisions": {
+          "path": "research_batches/pilot-1998/03_REVIEW_DECISIONS_GPU.csv",
+          "sha256": "d937cfe313db0cadd87bf68ea388cff1618e92fac2da1f80f321ca2666ef9c8d"
+        }
+      }
+    },
+    {
+      "stage": "review-decisions",
+      "files": {
+        "decisions": {
+          "path": "research_batches/pilot-1998/04_REVIEW_DECISIONS_HDD.csv",
+          "sha256": "df082cb63bc8acac3ef215be7ea4b3bf89537849ceaf5a2860deea8db500ec3d"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-scout-001/runs/run-20260908T030000Z-luna-1997-cpu-scout-001/candidates.csv",
+          "sha256": "22a0db91c72887dbbfba7718cdfc4dfabcc11d3a5670ee00f01538d5d0cd21b1"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-scout-001/runs/run-20260908T030000Z-luna-1997-cpu-scout-001/sources.csv",
+          "sha256": "6c9ecd748e75e226bfdbfbcb0e55a9a101009165ec2e61da0d24d0305470dc9f"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-verify-002/runs/run-20260908T032000Z-terra-1997-cpu-verifier-002/verification.csv",
+          "sha256": "afb84bee94af083facb8d845c497f845d2808e74bb11ec2ee631338f180f843d"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-normalize-003/runs/run-20260908T040000Z-luna-1997-cpu-normalizer-003/normalization.csv",
+          "sha256": "3dbe46b413481da6618f153839e157e66a5c2ec175cde7a245f953e246c27a28"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-context-005/runs/run-20260908T043000Z-luna-context-005/intent.csv",
+          "sha256": "aca3d04b9718b11ae35777d99ee9f8e76cfef5fd8bb719bceaa2c73f688ef923"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-context-005/runs/run-20260908T043000Z-luna-context-005/benchmarks.csv",
+          "sha256": "aa7ad24a5efede55c162abcae124201e7e701cfe94d7de1cf787af8eaaab438b"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-context-005/runs/run-20260908T043000Z-luna-context-005/sources.csv",
+          "sha256": "2a66a46faa4f1f03b2d74f0a415fca73189283c76ec5e3290131a6fb0c24f71d"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-cpu/audit.csv",
+          "sha256": "933463ab3b5c4d87ea02e33808bb130f51955f5daaa343cba2af70f33379938f"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/candidates.csv",
+          "sha256": "270d53c2a19560b39cc1fc47425e4ff7ed0625f7b0c60fcc832285fd5b7234fd"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-scout-001/runs/run-20260908T013000Z-terra-1997-gpu-scout-001/sources.csv",
+          "sha256": "6d349ebf75eb382638955d05fe592298782e000c8d104538290d3e68a42d9334"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-verify-002/runs/run-20260908T014000Z-terra-1997-gpu-verify-002/verification.csv",
+          "sha256": "36b5f6f1af50ebeb13ebaecd505a7fbe688ca3ed89b51209c8f2d438631adcaf"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-normalize-003/runs/run-20260908T020000Z-terra-1997-gpu-normalizer-003/normalization.csv",
+          "sha256": "6ff18daa0943d06f966df2d7e3e49d0f07545710adcb485c5e5b24b021f7fead"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-context-005/runs/run-20260908T023000Z-terra-1997-gpu-context-005/intent.csv",
+          "sha256": "d2078ee81ffa6997a526a5db991b6675a16183c08444d5092e3f4c0cad70c993"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-context-005/runs/run-20260908T023000Z-terra-1997-gpu-context-005/benchmarks.csv",
+          "sha256": "aa7ad24a5efede55c162abcae124201e7e701cfe94d7de1cf787af8eaaab438b"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-gpu/jobs/job-1997-gpu-context-005/runs/run-20260908T023000Z-terra-1997-gpu-context-005/sources.csv",
+          "sha256": "5abc3258e7cb79deca89df5c0c1d515d558457066b04b14b41e692b731f3ce9b"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-gpu/audit.csv",
+          "sha256": "65cd5e8667f9532ce5339cd741003c614a8c4fa63448dc11856210de4b32cdf7"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/candidates.csv",
+          "sha256": "f39d95979acbf3b74dbec3075ed79f3c06abd20b8b54d019d700f3fa58daeff6"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-scout-001/runs/run-20260908T013000Z-terra-1997-hdd-scout-001/sources.csv",
+          "sha256": "ddc224442316bfa8aa1ff2ca1b46cdfa092622adacdebb6efb4f5a290e866622"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-verify-002/runs/run-20260908T014000Z-terra-1997-hdd-verify-002/verification.csv",
+          "sha256": "e8729d1a82bc8361622eab34234c646285aba3ba559cccb3d2bebe5022b77d41"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-normalize-003/runs/run-20260908T020000Z-terra-1997-hdd-normalizer-003/normalization.csv",
+          "sha256": "c50a17a8d83b1ce11ae2be9e4b639dc7504549f6a4e4a75a182e2f78ff56fbb5"
+        }
+      }
+    },
+    {
+      "stage": "context",
+      "files": {
+        "intent": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-context-005/runs/run-20260908T023000Z-terra-1997-hdd-context-005/intent.csv",
+          "sha256": "ac55fc5edd34463e4bf091026fc2c81e80e7e01d97faa07000acd40fc560b258"
+        },
+        "benchmarks": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-context-005/runs/run-20260908T023000Z-terra-1997-hdd-context-005/benchmarks.csv",
+          "sha256": "aa7ad24a5efede55c162abcae124201e7e701cfe94d7de1cf787af8eaaab438b"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-hdd/jobs/job-1997-hdd-context-005/runs/run-20260908T023000Z-terra-1997-hdd-context-005/sources.csv",
+          "sha256": "02be89bc82dd8ea558960e9edd00dae764caa135009e1a97fe8efe16e488270a"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/audit.csv",
+          "sha256": "1d36dfc84f324f545415f4f0c6fd1f61ee133e712f66b8fd0d2c7dffc1803dbf"
+        }
+      }
+    }
+  ],
+  "connected": {
+    "packet": {
+      "path": "research_batches/connected-970-evo/coordinator/normalized-v1/packet.json",
+      "sha256": "c25ab52e4654d5f2b50bd224c263901e659cab5bb3eb468b97b5d98dd5fcce62"
+    },
+    "verification": {
+      "path": "research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json",
+      "sha256": "967ff1820ea52799d0a09603389f1ea833b98e20c0296935686045dbc81a7af1"
+    }
+  }
+}

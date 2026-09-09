@@ -146,3 +146,15 @@ No scout candidate was verified, normalized, imported, or promoted.
 
 - Restructure the two OverDrive scout keys into one product plus output/compatibility assertions, or supply evidence that they were separately orderable products.
 - Decide whether Xeon 450 remains outside the cohort pending actual shipment/introduction evidence.
+
+
+## 2026-09-09 — First Connected Explorer checkpoint
+
+The owner approved the consolidated Sol/Astra direction: build connected understanding before further census expansion. The local implementation preserves the SQL authority and original research packets.
+
+- Adopted for this checkpoint: one manifest-driven build with retained SQL/site snapshots and atomic publication of the current pointer; reference navigation and dossiers over the existing cohorts.
+- Proposed ontology: MEMBER_OF_FAMILY, CONFIGURATION_OF and REVISION_OF distinguish capacity models, interface configurations and protocol revisions. All connected records and terms remain provisional; see `connected-ontology.md`.
+- Evidence scope: documented constituents are not physical package instances; a diagram is conceptual. Manufacturer specification comparisons are not independent benchmarks. Unknown revision-specific layout stays visible.
+- Pipeline repairs: 1997 coordinator copies preserve raw artifacts, hashes, repair diffs, author and disposition. Audit vocabulary repair does not equal substantive claim resolution.
+- Validation boundary: automated and agent-browser checks establish implementation behavior. Real-person usefulness is still untested; no participant result or canonical approval is inferred.
+- Next research follows a demonstrated explorer question. No new census year, graph database, 3D, accounts, pricing or scores are part of this checkpoint.

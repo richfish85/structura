@@ -1,0 +1,133 @@
+{
+  "status": "structurally_corrected_not_fact_approved",
+  "coordinator": "structura-root",
+  "source": {
+    "path": "research_batches/pilot-1997-cpu/jobs/job-1997-cpu-audit-004/runs/run-20260908T041000Z-terra-1997-cpu-auditor-004/audit.csv",
+    "sha256": "3706b3c2a1d5f7657219437b77236d10dbf50530e01d325471c0bf620b55eb0d"
+  },
+  "output": {
+    "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-cpu/audit.csv",
+    "sha256": "933463ab3b5c4d87ea02e33808bb130f51955f5daaa343cba2af70f33379938f",
+    "rows": 9
+  },
+  "changes": [
+    {
+      "finding_id": "cpu-aud-001",
+      "fields": {
+        "finding_type": {
+          "before": "scope_check",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Verified Intel desktop processor record; no material identity or timing discrepancy in frozen evidence.",
+          "after": "Verified Intel desktop processor record; no material identity or timing discrepancy in frozen evidence."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-002",
+      "fields": {
+        "finding_type": {
+          "before": "scope_check",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Verified Intel desktop processor record; no material identity or timing discrepancy in frozen evidence.",
+          "after": "Verified Intel desktop processor record; no material identity or timing discrepancy in frozen evidence."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-003",
+      "fields": {
+        "finding_type": {
+          "before": "timing_boundary",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",Processor introduction is distinct from planned workstation availability; do not collapse announcement and system availability.",
+          "after": "Processor introduction is distinct from planned workstation availability; do not collapse announcement and system availability."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-004",
+      "fields": {
+        "finding_type": {
+          "before": "scope_check",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Verified Intel desktop Pentium MMX record; no material discrepancy in frozen evidence.",
+          "after": "Verified Intel desktop Pentium MMX record; no material discrepancy in frozen evidence."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-005",
+      "fields": {
+        "finding_type": {
+          "before": "scope_boundary",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Mobile Pentium MMX 200 must remain distinct from desktop speed-grade records; package/mobile channel evidence does not prove broad desktop availability.",
+          "after": "Mobile Pentium MMX 200 must remain distinct from desktop speed-grade records; package/mobile channel evidence does not prove broad desktop availability."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-006",
+      "fields": {
+        "finding_type": {
+          "before": "scope_boundary",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Mobile Pentium MMX 233 must remain a mobile record; do not inherit desktop timing or channel.",
+          "after": "Mobile Pentium MMX 233 must remain a mobile record; do not inherit desktop timing or channel."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-007",
+      "fields": {
+        "finding_type": {
+          "before": "scope_boundary",
+          "after": "scope_error"
+        },
+        "finding": {
+          "before": ",Mobile Pentium MMX 120 is segment-specific and must not be merged with desktop Pentium MMX records.",
+          "after": "Mobile Pentium MMX 120 is segment-specific and must not be merged with desktop Pentium MMX records."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-008",
+      "fields": {
+        "finding_type": {
+          "before": "granularity",
+          "after": "family_variant_overlap"
+        },
+        "finding": {
+          "before": ",Embedded Pentium MMX 200 is an embedded/module record, not a desktop SKU; keep segment and channel boundaries explicit.",
+          "after": "Embedded Pentium MMX 200 is an embedded/module record, not a desktop SKU; keep segment and channel boundaries explicit."
+        }
+      }
+    },
+    {
+      "finding_id": "cpu-aud-009",
+      "fields": {
+        "finding_type": {
+          "before": "date_precision",
+          "after": "evidence_gap"
+        },
+        "finding": {
+          "before": ",AMD K6 evidence is family-level and quarter-precision; volume shipment timing must not be expanded to exact day or speed-grade records.",
+          "after": "AMD K6 evidence is family-level and quarter-precision; volume shipment timing must not be expanded to exact day or speed-grade records."
+        }
+      }
+    }
+  ],
+  "note": "Existing audit categories classify the check, not proof of an error. Scope checks marked resolved_no_change remain no-change. Historical assertions and author attribution are retained; coordinator only repairs serialization and maps equivalent vocabulary."
+}

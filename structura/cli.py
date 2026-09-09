@@ -24,6 +24,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
+    subparsers.add_parser("build", help="Rebuild the complete current reference from frozen research packets.")
+
     init_parser = subparsers.add_parser("init", help="Create or migrate a local SQLite database.")
     init_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
 
@@ -37,6 +39,7 @@ def build_parser() -> argparse.ArgumentParser:
     serve_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=8000)
+    serve_parser.add_argument("--review", action="store_true", help="Use the legacy SQL review interface.")
 
     import_parser = subparsers.add_parser("import-batch", help="Load one non-canonical research hand-off into SQLite.")
     import_parser.add_argument("--db", type=Path, default=DEFAULT_DB)
@@ -81,6 +84,33 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+
+    if args.command == "build":
+        from .build import build
+        try:
+            result = build()
+        except (ValueError, OSError) as error:
+            print(f"Build failed; current checkpoint unchanged: {error}")
+            return 1
+        status = result["status"]
+        print("Structura build passed")
+        for cohort in status["cohorts"]:
+            print(f"  {cohort['batch_key']}: {cohort['candidates']} candidates")
+        for key in ("canonical_entities", "relationships", "audit_findings", "reviewed_candidates"):
+            print(f"  {key.replace('_', ' ')}: {status[key]}")
+        print("Real-person usability trial: pending")
+        print("Run python -m structura serve to open the current reference.")
+        return 0
+
+    if args.command != "init":
+        from .build import current_snapshot
+        current = current_snapshot()
+        if current is not None and args.db == DEFAULT_DB:
+            args.db = current / "structura.db"
+        if args.command == "serve" and current is not None and not args.review and args.db == current / "structura.db":
+            from .explorer import serve_explorer
+            serve_explorer(current / "site", host=args.host, port=args.port, follow_current=True)
+            return 0
 
     if args.command == "init":
         path = initialize(args.db)

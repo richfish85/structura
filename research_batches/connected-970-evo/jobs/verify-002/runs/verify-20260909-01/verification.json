@@ -1,0 +1,404 @@
+{
+  "schema_version": "verify-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "verify-002",
+  "run_id": "verify-20260909-01",
+  "stage": "verification",
+  "status": "submitted",
+  "agent_id": "/root/ssd_verify",
+  "independent_of_agent": "/root/ssd_scout",
+  "canonical_approval": false,
+  "input_artifacts": [
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/candidates.json",
+      "sha256": "c64cbefbfac367e70c08439134156eb3d6a67966dc6303f9b78ba2f6b9e90fb8"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/notes.md",
+      "sha256": "1e2c2b366950b42dbc45bbac6105128071baf7755509872f3679f78ee6d21aee"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/result_manifest.json",
+      "sha256": "29197fdf722a8c773b6f351d63577125ad4350f519394cc67bb21a033a8acf99"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/sources.json",
+      "sha256": "03ebeecc5b4fc1a3ce0f2cb9d7fab0e5219cc34200ecd6f7ef6b26b53b8727e5"
+    }
+  ],
+  "input_manifest_hashes_match": true,
+  "relationship_verdicts": [
+    {
+      "record_key": "970evo-rel-001",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-002",
+      "verdict": "qualified",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1\u00e2\u20ac\u201c2 manufacturer attribution; p. 6 Product Lineup",
+      "reason": "Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation.",
+      "proposed_wording_correction": "Manufacturer attribution: Samsung Electronics; specimen and production site unverified.",
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-003",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-004",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-005",
+      "verdict": "qualified",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Cache is the manufacturer label. Detailed operational role is not established.",
+      "proposed_wording_correction": "Specified DRAM cache: 512MB LPDDR4. Do not equate it with TurboWrite or claim mapping-table/data-buffer functions from this source.",
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-006",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-007",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-008",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-009",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-010",
+      "verdict": "qualified",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1\u00e2\u20ac\u201c2 manufacturer attribution; p. 6 Product Lineup",
+      "reason": "Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation.",
+      "proposed_wording_correction": "Manufacturer attribution: Samsung Electronics; specimen and production site unverified.",
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-011",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-012",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-013",
+      "verdict": "qualified",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Cache is the manufacturer label. Detailed operational role is not established.",
+      "proposed_wording_correction": "Specified DRAM cache: 1GB LPDDR4. Do not equate it with TurboWrite or claim mapping-table/data-buffer functions from this source.",
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-014",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-015",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-016",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "reason": "Supported at manufacturer-declared configuration scope.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-017",
+      "verdict": "supported",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, footnote 2",
+      "reason": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-018",
+      "verdict": "supported",
+      "source_id": "pcisig-2024-webinar",
+      "locator": "p. 4, Evolution of PCI Express Specification",
+      "reason": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-019",
+      "verdict": "supported",
+      "source_id": "pcisig-2024-webinar",
+      "locator": "p. 3, PCI-SIG consortium explanation",
+      "reason": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-020",
+      "verdict": "qualified",
+      "source_id": "pcisig-m2-overview-verifier",
+      "locator": "PCI Express M.2 heading; Previous Approved Specifications, revisions 1.0 and 1.1",
+      "reason": "Indirect webinar attribution should be replaced by the direct specification catalog.",
+      "proposed_wording_correction": "M.2 form-factor specification published by PCI-SIG. Do not infer the device implements a particular M.2 revision.",
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-021",
+      "verdict": "supported",
+      "source_id": "nvmexpress-archives",
+      "locator": "Base Specification archive, NVMe 1.3 entries",
+      "reason": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    },
+    {
+      "record_key": "970evo-rel-022",
+      "verdict": "supported",
+      "source_id": "nvmexpress-specifications",
+      "locator": "NVMe Set of Specifications Overview, first paragraph",
+      "reason": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "proposed_wording_correction": null,
+      "canonical_approval": false
+    }
+  ],
+  "entity_verdicts": [
+    {
+      "record_key": "samsung-970-evo-500gb",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "samsung-970-evo-1tb",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "samsung-970-evo-family",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "samsung-electronics",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "samsung-phoenix",
+      "verdict": "qualified",
+      "reason": "Controller designation is supported. A multi-member controller family is not established.",
+      "proposed_correction": "Use controller_designation rather than controller_family until family membership evidence exists."
+    },
+    {
+      "record_key": "samsung-vnand-3bit",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "samsung-lpddr4-512mb",
+      "verdict": "qualified",
+      "reason": "Capacity/type specification, not an identified package or purchasable part number.",
+      "proposed_correction": "Keep component_specification and distinguish from specimen components."
+    },
+    {
+      "record_key": "samsung-lpddr4-1gb",
+      "verdict": "qualified",
+      "reason": "Capacity/type specification, not an identified package or purchasable part number.",
+      "proposed_correction": "Keep component_specification and distinguish from specimen components."
+    },
+    {
+      "record_key": "m2-2280",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "m2",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "pcie-gen3-x4",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "pcie",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "nvme-1-3",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "nvme",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "nvm-express-org",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    },
+    {
+      "record_key": "pci-sig",
+      "verdict": "supported",
+      "reason": "Identity and proposed conceptual role are consistent with cited primary sources; ontology remains proposed.",
+      "proposed_correction": null
+    }
+  ],
+  "comparison_verdict": {
+    "record_key": "970evo-500gb-vs-1tb",
+    "verdict": "supported",
+    "metrics": [
+      {
+        "metric": "dram_cache_source_label",
+        "left": "512MB LPDDR4",
+        "right": "1GB LPDDR4",
+        "note": "Raw source units retained without normalization."
+      },
+      {
+        "metric": "sequential_read_up_to_MB_s",
+        "left": 3400,
+        "right": 3400
+      },
+      {
+        "metric": "sequential_write_up_to_MB_s",
+        "left": 2300,
+        "right": 2500
+      },
+      {
+        "metric": "sequential_write_after_TurboWrite_region_MB_s",
+        "left": 600,
+        "right": 1200
+      }
+    ],
+    "source_id": "samsung-970evo-datasheet-r1",
+    "locator": "p.5 table visually inspected; footnote 3; p.6 testing configuration",
+    "limits": "Manufacturer up-to performance; TurboWrite-dependent writes; no independent measurements. Raw DRAM units retained."
+  },
+  "unresolved_claim_verdict": {
+    "record_key": "970evo-500gb-package-layout",
+    "verdict": "supported",
+    "status": "unknown",
+    "reason": "Reviewed sources do not establish revision-specific package identity, count or position. This is an evidence gap, not a claim that no such documentation exists."
+  },
+  "additional_sources": [
+    {
+      "source_id": "pcisig-m2-overview-verifier",
+      "url": "https://pcisig.com/specification-overview/pci-express-m2",
+      "publisher": "PCI-SIG",
+      "access_date": "2026-09-09",
+      "locator": "Heading, overview, previous approved specifications",
+      "purpose": "Direct M.2 specification publisher attribution"
+    }
+  ],
+  "sources_checked": [
+    "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung-NVMe-SSD-970-EVO-Data-Sheet_Rev.1.0.pdf",
+    "https://www.samsung.com/sec/support/model/MZ-V7E500BW/",
+    "https://nvmexpress.org/specifications/",
+    "https://nvmexpress.org/nvm-express-specification-archives/",
+    "https://pcisig.com/sites/default/files/files/PCIe_Specification_Webinar_Rev%206_FINAL_0.pdf"
+  ],
+  "visual_check": {
+    "method": "Downloaded original PDF, rendered p.5 with pypdfium2, inspected image with view_image",
+    "file": "datasheet-page5.png",
+    "pdf": "source-datasheet.pdf",
+    "result": "Merged cell boundaries confirmed for both capacities, DRAM and performance."
+  },
+  "counts": {
+    "relationships_total": 22,
+    "supported": 17,
+    "qualified": 5,
+    "unsupported": 0,
+    "entities": 16,
+    "comparison": 1,
+    "unknown": 1
+  },
+  "constraints": [
+    "No physical specimen inspected.",
+    "No exact controller or memory package identity inferred.",
+    "No standards conformance tests performed.",
+    "Manufacturer source agreement is not independent experimental corroboration.",
+    "Verification is not ontology approval or canonical promotion."
+  ],
+  "verified_at_utc": "2026-09-08T14:49:29.229329+00:00"
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "audit-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "audit-004",
+  "run_id": "audit-20260909-final-01",
+  "agent_id": "/root/final_connected_audit",
+  "stage": "audit",
+  "canonical_approval": false,
+  "status": "submitted",
+  "created_at_utc": "2026-09-09T00:47:13.662280+00:00",
+  "inputs": [
+    {
+      "path": "structura/connected.py",
+      "sha256": "c62eaee7020da1d546fcd319003f37f7a73f175d92fc99297cb17bc22738741e"
+    },
+    {
+      "path": "structura/explorer.py",
+      "sha256": "774c835bf8eb3ea23755c9e82d3a86f59d83f0dc922fbb32b6741a644f67ac70"
+    },
+    {
+      "path": "tests/test_connected_explorer.py",
+      "sha256": "3985d0fd9538970c776284d82056a05f74cf8ba536da2535a4b96eb99de209a7"
+    },
+    {
+      "path": "research_batches/connected-970-evo/coordinator/normalized-v1/packet.json",
+      "sha256": "c25ab52e4654d5f2b50bd224c263901e659cab5bb3eb468b97b5d98dd5fcce62"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/audit-003/runs/audit-20260909-01/audit.json",
+      "sha256": "242eb5ce6d37de2d83385b8b4e4da6f0547005acca85c37a7ab41d6e7e04cc4d"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json",
+      "sha256": "967ff1820ea52799d0a09603389f1ea833b98e20c0296935686045dbc81a7af1"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research_batches/connected-970-evo/jobs/audit-004/runs/audit-20260909-final-01/audit.json",
+      "sha256": "507dd28798879ad0a86a8dc4395e29e43d33b69cefcd2b4adf8a263cdfe1763e"
+    }
+  ],
+  "counts": {
+    "findings": 2,
+    "priority_2": 2
+  },
+  "source_policy": {
+    "web_access_used": false,
+    "new_relationships": false
+  },
+  "tools": [
+    "exec_command",
+    "Python standard library",
+    "structura.connected.validate_packet"
+  ]
+}

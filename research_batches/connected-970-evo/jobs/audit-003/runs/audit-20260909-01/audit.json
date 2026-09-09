@@ -1,0 +1,74 @@
+{
+  "schema_version": "audit-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "audit-003",
+  "run_id": "audit-20260909-01",
+  "agent_id": "/root/connected_audit",
+  "stage": "independent_audit",
+  "canonical_approval": false,
+  "status": "submitted_findings",
+  "scope": "Normalized packet versus scout and independent verifier, ontology, import gates, display implementation, current SQLite snapshot and faithful 1997 audit repair; no new external fact research or physical specimen inspection.",
+  "snapshot_audited": "data/builds/e0a27e3feae7b130-306820fb",
+  "findings": [
+    {
+      "id": "audit-001",
+      "priority": 1,
+      "category": "verification_binding",
+      "location": "structura/connected.py:validate_packet relationship/entity/claim loops",
+      "finding": "The gate matches independent verdicts by stable key but does not bind the assessed identity, endpoints, predicate or comparison content. Keeping a supported key while changing its factual meaning passes.",
+      "reproduction": [
+        "Replace relationships[0].object with pci-sig: ACCEPTED",
+        "Replace relationships[0].predicate with CONTAINS: ACCEPTED",
+        "Replace entities[0].name with Samsung 990 PRO 8TB: ACCEPTED",
+        "Replace claims[0].statement with Both SSDs write at 99999 MB/s.: ACCEPTED",
+        "Replace unresolved claim key with unverified-unknown: ACCEPTED"
+      ],
+      "impact": "A later normalization error can become a displayed independently assessed assertion although that content was never assessed. These are isolated in-memory validation probes; no altered packet was saved or imported.",
+      "recommendation": "Bind the normalization to the hashed scout factual tuples and explicit allowed ontology corrections, or independently assess a hash of the final normalized packet. Compare structured comparison metrics/endpoints/source/limits and unresolved key with the verifier; do not validate prose solely by key."
+    },
+    {
+      "id": "audit-002",
+      "priority": 2,
+      "category": "diagram_binding",
+      "location": "structura/connected.py:validate_packet visual_regions loop",
+      "finding": "The visual gate only requires existing endpoints. Replacing the NAND region entity with pci-sig passes, although there is no constituent relationship from the SSD to PCI-SIG.",
+      "impact": "The diagram can assert containment absent from the sourced graph.",
+      "recommendation": "Require every visible constituent region to resolve to an included appropriately assessed CONTAINS relationship, and validate label identity and finite bounded coordinates."
+    },
+    {
+      "id": "audit-003",
+      "priority": 2,
+      "category": "entity_evidence_display",
+      "location": "structura/explorer.py:connected_entity",
+      "finding": "Connected entity pages render descriptions and role notes but never render their entity_evidence. An entry with no outgoing edges or comparison has no direct evidence link for its identity; its incoming relationship is a different assertion.",
+      "impact": "The educational component journey stops short of direct identity provenance despite identity evidence existing in SQL.",
+      "recommendation": "Render entity identity evidence with source, locator and scope on each connected entry, retaining separate relationship evidence."
+    },
+    {
+      "id": "audit-004",
+      "priority": 2,
+      "category": "source_scope",
+      "location": "packet.json entities pcie and pcie-gen3-x4",
+      "finding": "Both descriptions include a device-specific use/configuration assertion, but their identity evidence points solely to the 2024 PCI-SIG consortium/interface-evolution webinar. The device interface relationship correctly cites the 970 EVO datasheet.",
+      "impact": "The entity evidence is overbroad for the text it accompanies; the generic standard source does not establish this particular SSD configuration.",
+      "recommendation": "Keep generic PCIe entity descriptions generic, and cite the Samsung datasheet for the specified-for-this-SSD sentence/configuration. Retain PCI-SIG evidence for interface/organization concepts."
+    }
+  ],
+  "positive_checks": [
+    "16 entities and 22 relationship keys correspond to scout and verifier.",
+    "Verifier qualifications on Phoenix designation, shared constituent descriptions, DRAM operational limits, manufacturer attribution, and direct M.2 publisher source are represented.",
+    "Comparison values and TurboWrite/manufacturer limits agree with verifier metrics.",
+    "Unresolved layout remains an unknown with contextual evidence; conceptual diagram disclaims scale, counts and positions.",
+    "Current database opened in SQLite read-only URI mode: integrity_check ok; 22 relationships; zero canonical entities.",
+    "CPU 9, GPU 6, HDD 5 repaired audit rows retain counts; all original/output hashes match manifests and every changed parsed field is logged.",
+    "HDD hdd-aud-002 repair correctly separates URL/locator from malformed finding and recombines comma-separated source evidence.",
+    "Repair retains dispositions, candidate keys, auditor attribution and substantive timing caveats."
+  ],
+  "repair_observation": "scope_check to scope_error is a vocabulary mapping whose no-change disposition is preserved. The current UI shows disposition alongside type; no false open discrepancy was identified from these resolved rows. Prefer a neutral check label in a future vocabulary revision, but this is not a blocker to the documented repair.",
+  "limitations": [
+    "No participant usability test",
+    "No physical hardware or independent performance measurements",
+    "No complete security audit",
+    "Mutations tested only validate_packet; importer execution for intentionally false variants was deliberately avoided"
+  ]
+}

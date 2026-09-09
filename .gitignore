@@ -13,6 +13,9 @@ data/*.db
 data/*.db-shm
 data/*.db-wal
 exports/
+data/builds/
+data/current.json
+data/.current-*.json
 
 # Local/editor files
 .env

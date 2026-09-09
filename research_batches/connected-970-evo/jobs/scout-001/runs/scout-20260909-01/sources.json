@@ -1,0 +1,106 @@
+[
+  {
+    "source_id": "samsung-970evo-datasheet-r1",
+    "url": "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung-NVMe-SSD-970-EVO-Data-Sheet_Rev.1.0.pdf",
+    "title": "Samsung V-NAND SSD 970 EVO — 2018 Data Sheet, Revision 1.0",
+    "publisher": "Samsung Electronics",
+    "publication_date": "2018-04",
+    "access_date": "2026-09-09",
+    "evidence_role": "manufacturer_specification",
+    "locators": [
+      {
+        "locator": "p. 5, Hardware Information; p. 6, Product Lineup",
+        "paraphrase": "MZ-V7E500 is the 500GB 970 EVO; MZ-V7E1T0 is 1TB. Both specify Phoenix, Samsung V-NAND 3bit MLC, M.2 2280, PCIe 3.0 x4 and NVMe 1.3. DRAM is 512MB LPDDR4 for 500GB; 1GB for 1TB."
+      },
+      {
+        "locator": "p. 5, footnote 2",
+        "paraphrase": "2280 denotes nominal 22mm width and 80mm length."
+      },
+      {
+        "locator": "p. 5, Performance rows and footnote 3; p. 6, testing configuration",
+        "paraphrase": "500GB/1TB sequential reads reach 3400MB/s; writes reach 2300/2500MB/s using TurboWrite, then 600/1200MB/s beyond its region. Values depend on firmware and host; tests use IOmeter 1.1.0, Windows 10 and an i7-7700K."
+      },
+      {
+        "locator": "p. 5, Warranty rows and footnotes 5–8",
+        "paraphrase": "500GB/1TB ratings are 300/600TBW. Limited warranty ends at five years or rated writes, whichever occurs first."
+      },
+      {
+        "locator": "p. 4, System Design Flexibility; p. 5, Hardware Information",
+        "paraphrase": "Package counts and locations for the 500GB variant are not stated in these sections."
+      }
+    ],
+    "limits": "Manufacturer assertions; not independent benchmarks. April 2018 is document revision date, not an inferred product launch date. PDF text extraction has merged table cells; 500GB values also checked as scout leads in the model-specific Samsung support page. Do not reuse possibly mistyped 1TB retail model code from p. 6."
+  },
+  {
+    "source_id": "samsung-mzv7e500-support",
+    "url": "https://www.samsung.com/sec/support/model/MZ-V7E500BW/",
+    "title": "970 EVO NVMe M.2 SSD 500GB — Samsung support",
+    "publisher": "Samsung Electronics",
+    "publication_date": null,
+    "access_date": "2026-09-09",
+    "evidence_role": "manufacturer_product_identity",
+    "locators": [
+      {
+        "locator": "Page heading and Specs > General Feature, items 2–9",
+        "paraphrase": "The MZ-V7E500 page identifies 500GB, M.2 2280, PCIe Gen 3.0 x4 with NVMe 1.3, Samsung V-NAND 3-bit MLC, Phoenix controller and Samsung 512MB Low Power DDR4 SDRAM."
+      }
+    ],
+    "limits": "Same publisher as datasheet, not independent corroboration. Korean support page includes English specification labels."
+  },
+  {
+    "source_id": "nvmexpress-specifications",
+    "url": "https://nvmexpress.org/specifications/",
+    "title": "Specifications",
+    "publisher": "NVM Express",
+    "publication_date": null,
+    "access_date": "2026-09-09",
+    "evidence_role": "standards_body_explanation",
+    "locators": [
+      {
+        "locator": "NVMe Set of Specifications Overview, first paragraph",
+        "paraphrase": "NVMe defines host communication with nonvolatile memory. NVM Express is the nonprofit consortium defining and managing the technology; PCIe is one supported transport."
+      }
+    ],
+    "limits": "Current overview; does not establish that a 2018 device implements current specification features."
+  },
+  {
+    "source_id": "nvmexpress-archives",
+    "url": "https://nvmexpress.org/nvm-express-specification-archives/",
+    "title": "NVM Express Specification Archives",
+    "publisher": "NVM Express",
+    "publication_date": null,
+    "access_date": "2026-09-09",
+    "evidence_role": "standards_revision_context",
+    "locators": [
+      {
+        "locator": "Base Specification archive, entries NVM Express 1.3a through 1.3d and Changes in NVMe Revision 1.3",
+        "paraphrase": "The archive separates historical NVMe 1.3 revisions from later NVMe over PCIe transport revisions."
+      }
+    ],
+    "limits": "The device's exact 1.3 letter revision is unknown; do not substitute transport specification 1.3 from 2025."
+  },
+  {
+    "source_id": "pcisig-2024-webinar",
+    "url": "https://pcisig.com/sites/default/files/files/PCIe_Specification_Webinar_Rev%206_FINAL_0.pdf",
+    "title": "Celebrating 20 Years of the PCIe Specification — PCI-SIG Webinar",
+    "publisher": "PCI-SIG",
+    "publication_date": "2024",
+    "access_date": "2026-09-09",
+    "evidence_role": "standards_body_explanation",
+    "locators": [
+      {
+        "locator": "p. 3, PCI-SIG: An Open Industry Consortium",
+        "paraphrase": "PCI-SIG defines PCI Express specifications and related form factors."
+      },
+      {
+        "locator": "p. 4, Evolution of PCI Express Specification",
+        "paraphrase": "PCIe includes widths such as x4 and multiple generations."
+      },
+      {
+        "locator": "p. 9, PCIe Architecture: One Base Specification, Multiple Form Factors",
+        "paraphrase": "M.2 is presented as a PCIe form-factor option."
+      }
+    ],
+    "limits": "Retrospective explanation; no specific host compatibility conclusion is proposed."
+  }
+]

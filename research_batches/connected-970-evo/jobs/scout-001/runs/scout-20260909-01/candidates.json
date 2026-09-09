@@ -1,0 +1,435 @@
+{
+  "schema_version": "scout-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "scout-001",
+  "run_id": "scout-20260909-01",
+  "stage": "scout",
+  "status": "candidate",
+  "entities": [
+    {
+      "record_key": "samsung-970-evo-500gb",
+      "raw_label": "Samsung 970 EVO 500 GB (MZ-V7E500)",
+      "proposed_entity_type": "product",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-970-evo-1tb",
+      "raw_label": "Samsung 970 EVO 1 TB (MZ-V7E1T0)",
+      "proposed_entity_type": "product",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-970-evo-family",
+      "raw_label": "Samsung 970 EVO",
+      "proposed_entity_type": "product_family",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-electronics",
+      "raw_label": "Samsung Electronics",
+      "proposed_entity_type": "company",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-phoenix",
+      "raw_label": "Samsung Phoenix controller",
+      "proposed_entity_type": "controller_family",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-vnand-3bit",
+      "raw_label": "Samsung V-NAND 3bit MLC",
+      "proposed_entity_type": "memory_technology",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-lpddr4-512mb",
+      "raw_label": "Samsung 512 MB LPDDR4 cache",
+      "proposed_entity_type": "component_specification",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "samsung-lpddr4-1gb",
+      "raw_label": "Samsung 1 GB LPDDR4 cache",
+      "proposed_entity_type": "component_specification",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "m2-2280",
+      "raw_label": "M.2 2280",
+      "proposed_entity_type": "form_factor",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "m2",
+      "raw_label": "M.2",
+      "proposed_entity_type": "form_factor_standard",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "pcie-gen3-x4",
+      "raw_label": "PCIe Gen 3.0 x4",
+      "proposed_entity_type": "interface_configuration",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "pcie",
+      "raw_label": "PCI Express",
+      "proposed_entity_type": "interface_standard",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "nvme-1-3",
+      "raw_label": "NVMe 1.3",
+      "proposed_entity_type": "protocol_revision",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "nvme",
+      "raw_label": "NVMe",
+      "proposed_entity_type": "protocol",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "nvm-express-org",
+      "raw_label": "NVM Express",
+      "proposed_entity_type": "standards_organization",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    },
+    {
+      "record_key": "pci-sig",
+      "raw_label": "PCI-SIG",
+      "proposed_entity_type": "standards_organization",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved"
+    }
+  ],
+  "relationship_candidates": [
+    {
+      "record_key": "970evo-rel-001",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "member_of_family",
+      "object": "samsung-970-evo-family",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-002",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "manufactured_by",
+      "object": "samsung-electronics",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1–2 manufacturer attribution; p. 6 Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-003",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "uses_controller",
+      "object": "samsung-phoenix",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-004",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "uses_nand",
+      "object": "samsung-vnand-3bit",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-005",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "uses_dram_cache",
+      "object": "samsung-lpddr4-512mb",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-006",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "has_form_factor",
+      "object": "m2-2280",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-007",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "has_interface",
+      "object": "pcie-gen3-x4",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-008",
+      "subject": "samsung-970-evo-500gb",
+      "proposed_predicate": "implements_protocol",
+      "object": "nvme-1-3",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-009",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "member_of_family",
+      "object": "samsung-970-evo-family",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-010",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "manufactured_by",
+      "object": "samsung-electronics",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1–2 manufacturer attribution; p. 6 Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-011",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "uses_controller",
+      "object": "samsung-phoenix",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-012",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "uses_nand",
+      "object": "samsung-vnand-3bit",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-013",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "uses_dram_cache",
+      "object": "samsung-lpddr4-1gb",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-014",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "has_form_factor",
+      "object": "m2-2280",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-015",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "has_interface",
+      "object": "pcie-gen3-x4",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-016",
+      "subject": "samsung-970-evo-1tb",
+      "proposed_predicate": "implements_protocol",
+      "object": "nvme-1-3",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-017",
+      "subject": "m2-2280",
+      "proposed_predicate": "variant_of",
+      "object": "m2",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, footnote 2",
+      "scope": "Nominal size designation; not a host fit claim.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-018",
+      "subject": "pcie-gen3-x4",
+      "proposed_predicate": "configuration_of",
+      "object": "pcie",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "pcisig-2024-webinar",
+      "locator": "p. 4, Evolution of PCI Express Specification",
+      "scope": "Generation and lane width; not a physical full-size x4 slot.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-019",
+      "subject": "pcie",
+      "proposed_predicate": "specified_by",
+      "object": "pci-sig",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "pcisig-2024-webinar",
+      "locator": "p. 3, PCI-SIG consortium explanation",
+      "scope": "Organization and standard kept distinct.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-020",
+      "subject": "m2",
+      "proposed_predicate": "specified_by",
+      "object": "pci-sig",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "pcisig-2024-webinar",
+      "locator": "p. 3 and p. 9",
+      "scope": "Candidate derived from body role and M.2 slide; verifier should prefer direct M.2 specification attribution.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-021",
+      "subject": "nvme-1-3",
+      "proposed_predicate": "revision_of",
+      "object": "nvme",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "nvmexpress-archives",
+      "locator": "Base Specification archive, NVMe 1.3 entries",
+      "scope": "Not NVMe over PCIe Transport Specification 1.3.",
+      "confidence": "scout_lead_primary_source"
+    },
+    {
+      "record_key": "970evo-rel-022",
+      "subject": "nvme",
+      "proposed_predicate": "specified_by",
+      "object": "nvm-express-org",
+      "status": "candidate",
+      "ontology_status": "proposed_not_approved",
+      "source_id": "nvmexpress-specifications",
+      "locator": "NVMe Set of Specifications Overview, first paragraph",
+      "scope": "Standards governance, not manufacture.",
+      "confidence": "scout_lead_primary_source"
+    }
+  ],
+  "comparison": {
+    "record_key": "970evo-500gb-vs-1tb",
+    "source_id": "samsung-970evo-datasheet-r1",
+    "locator": "p. 5, DRAM and sequential performance; footnote 3; p. 6 test configuration",
+    "left": "samsung-970-evo-500gb",
+    "right": "samsung-970-evo-1tb",
+    "metrics": [
+      {
+        "metric": "dram_cache_source_label",
+        "left": "512MB LPDDR4",
+        "right": "1GB LPDDR4",
+        "note": "Raw source units retained without normalization."
+      },
+      {
+        "metric": "sequential_read_up_to_MB_s",
+        "left": 3400,
+        "right": 3400
+      },
+      {
+        "metric": "sequential_write_up_to_MB_s",
+        "left": 2300,
+        "right": 2500
+      },
+      {
+        "metric": "sequential_write_after_TurboWrite_region_MB_s",
+        "left": 600,
+        "right": 1200
+      }
+    ],
+    "status": "candidate",
+    "qualification": "Manufacturer specification comparison, not measurements on our hardware. Retain TurboWrite condition and host/firmware dependence."
+  },
+  "unresolved_claims": [
+    {
+      "record_key": "970evo-500gb-package-layout",
+      "question": "What exact NAND/DRAM package count, part markings and board positions apply to a particular 500GB production revision?",
+      "status": "unknown",
+      "source_ids": [
+        "samsung-970evo-datasheet-r1",
+        "samsung-mzv7e500-support"
+      ],
+      "locator": "Datasheet pp. 4–5; support General Feature",
+      "reason": "These records specify component families and memory capacity but do not establish a specimen-specific layout.",
+      "visual_consequence": "Use labeled conceptual regions only, explicitly schematic. Do not imply teardown, scale or measured placement.",
+      "follow_up": "Source revision-matched official assembly documentation or an independently sourced specimen teardown; record provenance and image rights."
+    }
+  ]
+}

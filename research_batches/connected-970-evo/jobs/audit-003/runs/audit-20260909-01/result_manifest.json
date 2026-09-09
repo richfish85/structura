@@ -1,0 +1,79 @@
+{
+  "schema_version": "audit-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "audit-003",
+  "run_id": "audit-20260909-01",
+  "agent_id": "/root/connected_audit",
+  "stage": "audit",
+  "status": "submitted",
+  "canonical_approval": false,
+  "created_at_utc": "2026-09-08T15:01:14.941875+00:00",
+  "inputs": [
+    {
+      "path": "research_batches/connected-970-evo/coordinator/normalized-v1/packet.json",
+      "sha256": "dbee27cc0102007665613821ebae89f3fb7f57139f29402f7e996d15ed03d674"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/candidates.json",
+      "sha256": "c64cbefbfac367e70c08439134156eb3d6a67966dc6303f9b78ba2f6b9e90fb8"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/sources.json",
+      "sha256": "03ebeecc5b4fc1a3ce0f2cb9d7fab0e5219cc34200ecd6f7ef6b26b53b8727e5"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json",
+      "sha256": "967ff1820ea52799d0a09603389f1ea833b98e20c0296935686045dbc81a7af1"
+    },
+    {
+      "path": "docs/connected-ontology.md",
+      "sha256": "165f2a840dc7ad9082f5d59702ee23ccc718f2120f4fd64aa8ec7faae378b0dc"
+    },
+    {
+      "path": "structura/connected.py",
+      "sha256": "93cf774eaa7ee1c140fb067c95489fe9432cd7e2e560c85e50db25f956a20dd9"
+    },
+    {
+      "path": "structura/explorer.py",
+      "sha256": "6c3004cc8ceec14d92a14cebb5955a1b5026e43e81c20e397c59dfc38b9d236a"
+    },
+    {
+      "path": "data/current.json",
+      "sha256": "3eb6289fd507c31d2ff2cf64080338541bbeb419bfca0394c6f909f6e11c9827"
+    },
+    {
+      "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-cpu/repair-manifest.json",
+      "sha256": "4cabb974ee81b66833212fce3dd6d89d19778384c240550a0791d641d56a959c"
+    },
+    {
+      "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-gpu/repair-manifest.json",
+      "sha256": "4952148c10f5798f88385a7f115db3dcda9ece1f8446c7f9cf3c9e1dbfd3108e"
+    },
+    {
+      "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/repair-manifest.json",
+      "sha256": "007f108a675c8f3b1a44ed8c4cf1b2182f622bbe522b38d79d2667ae3574e46c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "research_batches/connected-970-evo/jobs/audit-003/runs/audit-20260909-01/audit.json",
+      "sha256": "242eb5ce6d37de2d83385b8b4e4da6f0547005acca85c37a7ab41d6e7e04cc4d"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/audit-003/runs/audit-20260909-01/notes.md",
+      "sha256": "149c5a4942d4ec0579b86ec01e2180effa94a7936b3f1d970a47f02047615647"
+    }
+  ],
+  "counts": {
+    "findings": 4,
+    "priority_1": 1,
+    "priority_2": 3
+  },
+  "validation": [
+    "JSON parse",
+    "Input and output SHA-256",
+    "Six isolated validation mutation probes",
+    "Read-only SQLite integrity check",
+    "All 20 corrected audit row deltas compared to manifests"
+  ]
+}

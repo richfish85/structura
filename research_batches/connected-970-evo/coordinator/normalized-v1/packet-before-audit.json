@@ -1,0 +1,561 @@
+{
+  "version": 1,
+  "key": "970-evo-connected-v1",
+  "canonical_approval": false,
+  "scout_agent": "/root/ssd_scout",
+  "normalizer": "/root",
+  "inputs": [
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/candidates.json",
+      "sha256": "c64cbefbfac367e70c08439134156eb3d6a67966dc6303f9b78ba2f6b9e90fb8"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/sources.json",
+      "sha256": "03ebeecc5b4fc1a3ce0f2cb9d7fab0e5219cc34200ecd6f7ef6b26b53b8727e5"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/scout-001/runs/scout-20260909-01/result_manifest.json",
+      "sha256": "29197fdf722a8c773b6f351d63577125ad4350f519394cc67bb21a033a8acf99"
+    },
+    {
+      "path": "research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json",
+      "sha256": "967ff1820ea52799d0a09603389f1ea833b98e20c0296935686045dbc81a7af1"
+    }
+  ],
+  "entities": [
+    {
+      "key": "samsung-970-evo-500gb",
+      "name": "Samsung 970 EVO 500 GB (MZ-V7E500)",
+      "type": "product",
+      "description": "A 500 GB SSD specified with M.2 2280, PCIe 3.0 x4 and NVMe 1.3.",
+      "role_note": "The 970 EVO uses three distinct descriptions: M.2 for physical format, PCIe for its interface, and NVMe for its protocol. This reference describes the manufacturer-declared model, not an inspected specimen.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup",
+      "category": "Storage",
+      "manufacturer": "Samsung",
+      "context_year": 2018,
+      "context_year_basis": "April 2018 datasheet revision, not an inferred release date.",
+      "model_number": "MZ-V7E500"
+    },
+    {
+      "key": "samsung-970-evo-1tb",
+      "name": "Samsung 970 EVO 1 TB (MZ-V7E1T0)",
+      "type": "product",
+      "description": "The 1 TB capacity model in the same 970 EVO product family.",
+      "role_note": "The 970 EVO uses three distinct descriptions: M.2 for physical format, PCIe for its interface, and NVMe for its protocol. This reference describes the manufacturer-declared model, not an inspected specimen.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup",
+      "category": "Storage",
+      "manufacturer": "Samsung",
+      "context_year": 2018,
+      "context_year_basis": "April 2018 datasheet revision, not an inferred release date.",
+      "model_number": "MZ-V7E1T0"
+    },
+    {
+      "key": "samsung-970-evo-family",
+      "name": "Samsung 970 EVO",
+      "type": "product_family",
+      "description": "Samsung’s 970 EVO SSD family; capacity models have different specifications.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "samsung-electronics",
+      "name": "Samsung Electronics",
+      "type": "company",
+      "description": "The manufacturer attributed on the 970 EVO documentation.",
+      "role_note": "Manufacturer attribution does not identify a fabrication site or every physical production operation.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "samsung-phoenix",
+      "name": "Samsung Phoenix controller",
+      "type": "component",
+      "description": "The controller designation listed for the 970 EVO.",
+      "role_note": "Samsung identifies the controller as Phoenix. Exact package markings, firmware and production-revision layout are not established here.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "samsung-vnand-3bit",
+      "name": "Samsung V-NAND 3bit MLC",
+      "type": "component",
+      "description": "The documented NAND storage constituent, labelled Samsung V-NAND 3bit MLC.",
+      "role_note": "This node describes the documented storage constituent. It is not an inventory of individual NAND packages from a physical specimen.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "samsung-lpddr4-512mb",
+      "name": "Samsung 512 MB LPDDR4 cache",
+      "type": "component",
+      "description": "512 MB LPDDR4, listed as DRAM cache for the 500 GB model.",
+      "role_note": "The source establishes capacity and memory type. It does not establish a package part number or the detailed operational role of this DRAM. Do not equate it with the separate TurboWrite behaviour.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "samsung-lpddr4-1gb",
+      "name": "Samsung 1 GB LPDDR4 cache",
+      "type": "component",
+      "description": "1 GB LPDDR4, listed as DRAM cache for the 1 TB model.",
+      "role_note": "The source establishes capacity and memory type. It does not establish a package part number or the detailed operational role of this DRAM. Do not equate it with the separate TurboWrite behaviour.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "m2-2280",
+      "name": "M.2 2280",
+      "type": "form_factor",
+      "description": "The nominal 22 × 80 mm mechanical format specified for this SSD.",
+      "role_note": "2280 describes nominal width and length. A matching size alone is not proof of host compatibility.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface; p. 6, Product Lineup"
+    },
+    {
+      "key": "m2",
+      "name": "M.2",
+      "type": "standard",
+      "description": "A form-factor specification, distinct from the PCIe interface and NVMe protocol.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "pcisig-m2-overview-verifier",
+      "locator": "PCI Express M.2 overview and previous approved specifications"
+    },
+    {
+      "key": "pcie-gen3-x4",
+      "name": "PCIe Gen 3.0 x4",
+      "type": "interface",
+      "description": "The generation and four-lane interface configuration specified for this SSD.",
+      "role_note": "Gen 3.0 and x4 describe interface generation and lane width. They do not mean the SSD occupies a full-size desktop x4 expansion slot.",
+      "source": "pcisig-2024-webinar",
+      "locator": "pp. 3–4, consortium and interface evolution"
+    },
+    {
+      "key": "pcie",
+      "name": "PCI Express",
+      "type": "interface",
+      "description": "PCI Express, the interface used by this device’s PCIe 3.0 x4 connection.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "pcisig-2024-webinar",
+      "locator": "pp. 3–4, consortium and interface evolution"
+    },
+    {
+      "key": "nvme-1-3",
+      "name": "NVMe 1.3",
+      "type": "protocol",
+      "description": "The NVMe protocol revision listed for the 970 EVO.",
+      "role_note": "This is the historical NVMe revision declared for the SSD. It is not the later NVMe over PCIe transport specification carrying a similar revision number.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Interface row"
+    },
+    {
+      "key": "nvme",
+      "name": "NVMe",
+      "type": "protocol",
+      "description": "A specification for host communication with nonvolatile memory.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "nvmexpress-specifications",
+      "locator": "NVMe Set of Specifications Overview"
+    },
+    {
+      "key": "nvm-express-org",
+      "name": "NVM Express",
+      "type": "organization",
+      "description": "The organization defining and managing NVMe specifications.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "nvmexpress-specifications",
+      "locator": "NVMe Set of Specifications Overview"
+    },
+    {
+      "key": "pci-sig",
+      "name": "PCI-SIG",
+      "type": "organization",
+      "description": "The industry organization responsible for PCI Express specifications.",
+      "role_note": "This is a documented reference concept. Follow the relationships to see its scope and sources.",
+      "source": "pcisig-2024-webinar",
+      "locator": "pp. 3–4, consortium and interface evolution"
+    }
+  ],
+  "sources": [
+    {
+      "key": "samsung-970evo-datasheet-r1",
+      "title": "Samsung V-NAND SSD 970 EVO — 2018 Data Sheet, Revision 1.0",
+      "url": "https://download.semiconductor.samsung.com/resources/data-sheet/Samsung-NVMe-SSD-970-EVO-Data-Sheet_Rev.1.0.pdf",
+      "publisher": "Samsung Electronics",
+      "access_date": "2026-09-09",
+      "publication_date": "2018-04",
+      "limits": "Manufacturer assertions; not independent benchmarks. April 2018 is document revision date, not an inferred product launch date. PDF text extraction has merged table cells; 500GB values also checked as scout leads in the model-specific Samsung support page. Do not reuse possibly mistyped 1TB retail model code from p. 6."
+    },
+    {
+      "key": "samsung-mzv7e500-support",
+      "title": "970 EVO NVMe M.2 SSD 500GB — Samsung support",
+      "url": "https://www.samsung.com/sec/support/model/MZ-V7E500BW/",
+      "publisher": "Samsung Electronics",
+      "access_date": "2026-09-09",
+      "publication_date": null,
+      "limits": "Same publisher as datasheet, not independent corroboration. Korean support page includes English specification labels."
+    },
+    {
+      "key": "nvmexpress-specifications",
+      "title": "Specifications",
+      "url": "https://nvmexpress.org/specifications/",
+      "publisher": "NVM Express",
+      "access_date": "2026-09-09",
+      "publication_date": null,
+      "limits": "Current overview; does not establish that a 2018 device implements current specification features."
+    },
+    {
+      "key": "nvmexpress-archives",
+      "title": "NVM Express Specification Archives",
+      "url": "https://nvmexpress.org/nvm-express-specification-archives/",
+      "publisher": "NVM Express",
+      "access_date": "2026-09-09",
+      "publication_date": null,
+      "limits": "The device's exact 1.3 letter revision is unknown; do not substitute transport specification 1.3 from 2025."
+    },
+    {
+      "key": "pcisig-2024-webinar",
+      "title": "Celebrating 20 Years of the PCIe Specification — PCI-SIG Webinar",
+      "url": "https://pcisig.com/sites/default/files/files/PCIe_Specification_Webinar_Rev%206_FINAL_0.pdf",
+      "publisher": "PCI-SIG",
+      "access_date": "2026-09-09",
+      "publication_date": "2024",
+      "limits": "Retrospective explanation; no specific host compatibility conclusion is proposed."
+    },
+    {
+      "key": "pcisig-m2-overview-verifier",
+      "title": "PCI Express M.2 specification overview",
+      "url": "https://pcisig.com/specification-overview/pci-express-m2",
+      "publisher": "PCI-SIG",
+      "access_date": "2026-09-09",
+      "publication_date": null,
+      "limits": "Direct specification-publisher attribution. Does not establish the particular M.2 revision implemented by this device."
+    }
+  ],
+  "relationships": [
+    {
+      "key": "970evo-rel-001",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "MEMBER_OF_FAMILY",
+      "object": "samsung-970-evo-family",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → member of family → Samsung 970 EVO. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-002",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "MANUFACTURED_BY",
+      "object": "samsung-electronics",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1–2 manufacturer attribution; p. 6 Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Manufacturer attribution: Samsung Electronics; specimen and production site unverified.",
+      "assessment": "qualified",
+      "verifier_note": "Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → manufactured by → Samsung Electronics. Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation."
+    },
+    {
+      "key": "970evo-rel-003",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "CONTAINS",
+      "object": "samsung-phoenix",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → uses controller → Samsung Phoenix controller. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-004",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "CONTAINS",
+      "object": "samsung-vnand-3bit",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → uses nand → Samsung V-NAND 3bit MLC. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-005",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "CONTAINS",
+      "object": "samsung-lpddr4-512mb",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position. Specified DRAM cache: 512MB LPDDR4. Do not equate it with TurboWrite or claim mapping-table/data-buffer functions from this source.",
+      "assessment": "qualified",
+      "verifier_note": "Cache is the manufacturer label. Detailed operational role is not established.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → uses dram cache → Samsung 512 MB LPDDR4 cache. Cache is the manufacturer label. Detailed operational role is not established."
+    },
+    {
+      "key": "970evo-rel-006",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "CONFORMS_TO",
+      "object": "m2-2280",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → has form factor → M.2 2280. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-007",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "COMMUNICATES_USING",
+      "object": "pcie-gen3-x4",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → has interface → PCIe Gen 3.0 x4. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-008",
+      "subject": "samsung-970-evo-500gb",
+      "predicate": "IMPLEMENTS",
+      "object": "nvme-1-3",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 500 GB (MZ-V7E500) → implements protocol → NVMe 1.3. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-009",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "MEMBER_OF_FAMILY",
+      "object": "samsung-970-evo-family",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 6, Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → member of family → Samsung 970 EVO. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-010",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "MANUFACTURED_BY",
+      "object": "samsung-electronics",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 1–2 manufacturer attribution; p. 6 Product Lineup",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Manufacturer attribution: Samsung Electronics; specimen and production site unverified.",
+      "assessment": "qualified",
+      "verifier_note": "Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → manufactured by → Samsung Electronics. Publisher and product attribution establish responsible manufacturer, not fabrication site or every physical production operation."
+    },
+    {
+      "key": "970evo-rel-011",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "CONTAINS",
+      "object": "samsung-phoenix",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → uses controller → Samsung Phoenix controller. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-012",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "CONTAINS",
+      "object": "samsung-vnand-3bit",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → uses nand → Samsung V-NAND 3bit MLC. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-013",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "CONTAINS",
+      "object": "samsung-lpddr4-1gb",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected. Constituent designation/specification only, not a uniquely identified package or a measured board position. Specified DRAM cache: 1GB LPDDR4. Do not equate it with TurboWrite or claim mapping-table/data-buffer functions from this source.",
+      "assessment": "qualified",
+      "verifier_note": "Cache is the manufacturer label. Detailed operational role is not established.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → uses dram cache → Samsung 1 GB LPDDR4 cache. Cache is the manufacturer label. Detailed operational role is not established."
+    },
+    {
+      "key": "970evo-rel-014",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "CONFORMS_TO",
+      "object": "m2-2280",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → has form factor → M.2 2280. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-015",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "COMMUNICATES_USING",
+      "object": "pcie-gen3-x4",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → has interface → PCIe Gen 3.0 x4. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-016",
+      "subject": "samsung-970-evo-1tb",
+      "predicate": "IMPLEMENTS",
+      "object": "nvme-1-3",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, Hardware Information / Interface",
+      "scope": "Manufacturer-declared 970 EVO configuration; exact physical specimen not inspected.",
+      "assessment": "supported",
+      "verifier_note": "Supported at manufacturer-declared configuration scope.",
+      "evidence": "Samsung 970 EVO 1 TB (MZ-V7E1T0) → implements protocol → NVMe 1.3. Supported at manufacturer-declared configuration scope."
+    },
+    {
+      "key": "970evo-rel-017",
+      "subject": "m2-2280",
+      "predicate": "CONFORMS_TO",
+      "object": "m2",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, footnote 2",
+      "scope": "Nominal size designation; not a host fit claim.",
+      "assessment": "supported",
+      "verifier_note": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "evidence": "M.2 2280 → variant of → M.2. Supported at standard/concept scope; no host compatibility conclusion."
+    },
+    {
+      "key": "970evo-rel-018",
+      "subject": "pcie-gen3-x4",
+      "predicate": "CONFIGURATION_OF",
+      "object": "pcie",
+      "source": "pcisig-2024-webinar",
+      "locator": "p. 4, Evolution of PCI Express Specification",
+      "scope": "Generation and lane width; not a physical full-size x4 slot.",
+      "assessment": "supported",
+      "verifier_note": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "evidence": "PCIe Gen 3.0 x4 → configuration of → PCI Express. Supported at standard/concept scope; no host compatibility conclusion."
+    },
+    {
+      "key": "970evo-rel-019",
+      "subject": "pcie",
+      "predicate": "STANDARDIZED_BY",
+      "object": "pci-sig",
+      "source": "pcisig-2024-webinar",
+      "locator": "p. 3, PCI-SIG consortium explanation",
+      "scope": "Organization and standard kept distinct.",
+      "assessment": "supported",
+      "verifier_note": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "evidence": "PCI Express → specified by → PCI-SIG. Supported at standard/concept scope; no host compatibility conclusion."
+    },
+    {
+      "key": "970evo-rel-020",
+      "subject": "m2",
+      "predicate": "STANDARDIZED_BY",
+      "object": "pci-sig",
+      "source": "pcisig-m2-overview-verifier",
+      "locator": "PCI Express M.2 heading; Previous Approved Specifications, revisions 1.0 and 1.1",
+      "scope": "Candidate derived from body role and M.2 slide; verifier should prefer direct M.2 specification attribution. M.2 form-factor specification published by PCI-SIG. Do not infer the device implements a particular M.2 revision.",
+      "assessment": "qualified",
+      "verifier_note": "Indirect webinar attribution should be replaced by the direct specification catalog.",
+      "evidence": "M.2 → specified by → PCI-SIG. Indirect webinar attribution should be replaced by the direct specification catalog."
+    },
+    {
+      "key": "970evo-rel-021",
+      "subject": "nvme-1-3",
+      "predicate": "REVISION_OF",
+      "object": "nvme",
+      "source": "nvmexpress-archives",
+      "locator": "Base Specification archive, NVMe 1.3 entries",
+      "scope": "Not NVMe over PCIe Transport Specification 1.3.",
+      "assessment": "supported",
+      "verifier_note": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "evidence": "NVMe 1.3 → revision of → NVMe. Supported at standard/concept scope; no host compatibility conclusion."
+    },
+    {
+      "key": "970evo-rel-022",
+      "subject": "nvme",
+      "predicate": "STANDARDIZED_BY",
+      "object": "nvm-express-org",
+      "source": "nvmexpress-specifications",
+      "locator": "NVMe Set of Specifications Overview, first paragraph",
+      "scope": "Standards governance, not manufacture.",
+      "assessment": "supported",
+      "verifier_note": "Supported at standard/concept scope; no host compatibility conclusion.",
+      "evidence": "NVMe → specified by → NVM Express. Supported at standard/concept scope; no host compatibility conclusion."
+    }
+  ],
+  "claims": [
+    {
+      "key": "970evo-500gb-vs-1tb",
+      "entity": "samsung-970-evo-500gb",
+      "related_entity": "samsung-970-evo-1tb",
+      "kind": "comparison",
+      "title": "Capacity changes more than storage space",
+      "statement": "Samsung specifies the 500 GB model with 512MB LPDDR4 and the 1 TB model with 1GB LPDDR4. Listed sequential reads are up to 3,400 and 3,400 MB/s respectively. Sequential writes are up to 2,300 versus 2,500 MB/s with TurboWrite; beyond the TurboWrite region, the listed rates are 600 versus 1,200 MB/s.",
+      "status": "qualified",
+      "limits": "Manufacturer specification comparison, not measurements on our hardware. Firmware, host and TurboWrite conditions matter. Datasheet tests use IOmeter 1.1.0, Windows 10 and an Intel Core i7-7700K. Raw source units retained.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "p. 5, DRAM and performance table, footnote 3; p. 6, test configuration",
+      "evidence_role": "supports",
+      "verifier_note": "Manufacturer up-to performance; TurboWrite-dependent writes; no independent measurements. Raw DRAM units retained."
+    },
+    {
+      "key": "970evo-500gb-package-layout",
+      "entity": "samsung-970-evo-500gb",
+      "kind": "unresolved",
+      "title": "Which packages are on a particular production revision?",
+      "statement": "What exact NAND/DRAM package count, part markings and board positions apply to a particular 500GB production revision?",
+      "status": "unknown",
+      "limits": "The reviewed documents establish constituent descriptions and capacities, not revision-specific package counts, markings or positions. Resolve with revision-matched assembly documentation or an attributable teardown with clear image rights. The diagram remains conceptual.",
+      "source": "samsung-970evo-datasheet-r1",
+      "locator": "pp. 4–5, System Design Flexibility and Hardware Information",
+      "evidence_role": "context",
+      "verifier_note": "Reviewed sources do not establish revision-specific package identity, count or position. This is an evidence gap, not a claim that no such documentation exists."
+    }
+  ],
+  "visual_regions": [
+    {
+      "entity": "samsung-vnand-3bit",
+      "parent": "samsung-970-evo-500gb",
+      "label": "V-NAND storage",
+      "x": 5,
+      "y": 30,
+      "width": 27,
+      "height": 48
+    },
+    {
+      "entity": "samsung-phoenix",
+      "parent": "samsung-970-evo-500gb",
+      "label": "Phoenix controller",
+      "x": 36,
+      "y": 30,
+      "width": 27,
+      "height": 48
+    },
+    {
+      "entity": "samsung-lpddr4-512mb",
+      "parent": "samsung-970-evo-500gb",
+      "label": "512 MB LPDDR4",
+      "x": 67,
+      "y": 30,
+      "width": 27,
+      "height": 48
+    }
+  ]
+}

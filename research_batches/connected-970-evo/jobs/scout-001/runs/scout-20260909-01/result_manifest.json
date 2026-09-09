@@ -1,0 +1,63 @@
+{
+  "schema_version": "scout-connected-1",
+  "batch_id": "connected-970-evo",
+  "job_id": "scout-001",
+  "run_id": "scout-20260909-01",
+  "artifact_id": "artifact-scout-20260909-01",
+  "stage": "scout",
+  "status": "submitted",
+  "agent_id": "/root/ssd_scout",
+  "model": "gpt-6-astra",
+  "tools": [
+    "web search/open/find/screenshot",
+    "exec_command",
+    "apply_patch"
+  ],
+  "input_artifact_ids": [],
+  "source_policy": {
+    "retrospective_allowed": true,
+    "web_used": true,
+    "access_date": "2026-09-09",
+    "archive_used": false,
+    "allowed_tiers": [
+      "manufacturer",
+      "standards_body"
+    ],
+    "primary_source_preference": true
+  },
+  "counts": {
+    "relationship_candidates": 22,
+    "unresolved_claims": 1,
+    "sources": 5,
+    "entities": 16,
+    "comparisons": 1
+  },
+  "artifacts": [
+    {
+      "path": "sources.json",
+      "sha256": "03ebeecc5b4fc1a3ce0f2cb9d7fab0e5219cc34200ecd6f7ef6b26b53b8727e5"
+    },
+    {
+      "path": "candidates.json",
+      "sha256": "c64cbefbfac367e70c08439134156eb3d6a67966dc6303f9b78ba2f6b9e90fb8"
+    },
+    {
+      "path": "notes.md",
+      "sha256": "1e2c2b366950b42dbc45bbac6105128071baf7755509872f3679f78ee6d21aee"
+    }
+  ],
+  "validation": [
+    "JSON parse passed",
+    "All relationship endpoints and sources resolved",
+    "Counts recorded",
+    "SHA256 generated"
+  ],
+  "limitations": [
+    "Scout only; verifier must independently check",
+    "No exact component package positions",
+    "No host compatibility assertion",
+    "No canonical or SQLite writes"
+  ],
+  "stopping_rule": "One exact 500GB model, 1TB comparator, 15-30 relationship leads, primary sources, one unresolved claim",
+  "submitted_at_utc": "2026-09-08T14:44:47.3743146Z"
+}
