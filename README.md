@@ -2,7 +2,9 @@
 
 Structura is an evidence-backed hardware reference: find a product, understand its parts, and follow the evidence. Graph-shaped knowledge is backed by one authoritative SQL store.
 
-Status: **First Connected Explorer implemented locally; real-person trial pending** (2026-09-09). All records remain provisional. No public deployment or claim of census completeness.
+Status: **First Connected Explorer published as a working reference; real-person trial pending** (2026-09-10). All records remain provisional. There is no claim of census completeness.
+
+Live reference: **https://richfish85.github.io/structura/**
 
 ## What
 
@@ -75,3 +77,7 @@ See [validation evidence](docs/connected-explorer-validation.md), the [milestone
 Run the bounded trial before expanding the dataset. Fix navigation or modelling problems exposed by those tasks, then research the smallest next set of relationships needed to answer them.
 
 Further context: [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), and [1997 repair status](research_batches/pilot-1997/00_STATUS.md).
+
+## Access and reuse
+
+The repository is public for transparency and portfolio review. It does not currently carry an open-source or dataset licence, and contributions are not yet being accepted. GitHub users may view and fork a public repository under GitHub's terms; no additional permission to reproduce, distribute, or create derivative works is granted here. See [NOTICE.md](NOTICE.md) for third-party material and source-rights boundaries.

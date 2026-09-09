@@ -1,52 +1,50 @@
 # Current milestone
 
-Status: **complete**  
-Milestone: **Agent control and repository reference layer**  
-Owner decision: 2026-09-10
+Status: **active**
 
-Future work must replace the fields in this file before implementation begins. Keep exactly one current milestone here; move useful history to `docs/decision-log.md` rather than accumulating active scopes.
+Milestone: **Public GitHub Pages checkpoint**
+
+Owner decision: 2026-09-10
 
 ## Scope
 
-Create a concise agent-control and documentation layer that reflects the repository's current implementation. No product, schema, research-data, or application behavior changes.
+Make the Structura repository public and deploy the existing generated explorer through GitHub Pages at zero platform cost. Publish only validated static output. Keep the repository source-visible without granting an open-source or dataset licence, and do not begin contribution features.
 
 ## Acceptance criteria
 
-- [x] Repository-wide agent rules define scope control, bounded delegation, one test pass, one final review, backlog routing, and stop conditions.
-- [x] Root architecture, schema, source-policy, milestone, and backlog documents have distinct responsibilities.
-- [x] The documents reflect migrations `001`–`011`, the manifest-driven snapshot build, read-only explorer, and non-canonical research workflow.
-- [x] Relative Markdown references among the six root documents resolve.
-- [x] One final bounded review is performed; non-blocking findings are recorded without starting another loop.
+- [ ] Public-repository review finds no credentials or private material.
+- [ ] Repository visibility is public and its access/licensing boundary is documented.
+- [ ] One GitHub Actions workflow runs tests, builds Structura, selects the successful snapshot, and uploads only its generated `site/` files.
+- [ ] GitHub Pages uses the Actions workflow and reports a successful deployment.
+- [ ] The live project URL loads the home page, search assets, one historical dossier, and the connected SSD/component/evidence path.
+- [ ] Repository and deployed artifact expose no generated SQLite database.
+- [ ] Defined checks run once, followed by one bounded final review.
 
 ## Allowed files and areas
 
-- `AGENTS.md`
-- `ARCHITECTURE.md`
-- `SCHEMA.md`
-- `SOURCE_POLICY.md`
 - `CURRENT_MILESTONE.md`
+- `README.md`
 - `BACKLOG.md`
+- `NOTICE.md`
+- `.github/workflows/pages.yml`
+- GitHub repository visibility, Pages configuration, and the resulting deployment
 
-No other file may change in this milestone.
+No application, schema, research packet, test, or generated reference file may be changed.
 
 ## Tests
 
 After integration, run once:
 
-1. A local Markdown-link check for the six allowed files.
-2. `git diff --check`.
-3. Confirm the diff contains only the six allowed files.
-
-Do not run the application suite: this milestone changes documentation only, and the prior product checkpoint was tested before its separate commit.
+1. `python -m unittest discover -s tests -v`
+2. `python -m structura build`
+3. Local inspection of the staged Pages artifact, including absence of database/research files.
+4. Workflow syntax/action-reference check and `git diff --check`.
+5. Live browser check after GitHub reports deployment success.
 
 ## Delegation rules
 
-Maximum one reviewer sub-agent. It receives only the six allowed documents plus the repository files needed to verify a specific factual claim. It may not edit files or recursively delegate.
+Maximum one read-only final reviewer. It receives only the workflow, publication documentation, milestone, and evidence from the defined checks. It may not edit files, recursively delegate, or initiate a second review.
 
 ## Stop conditions
 
-Stop immediately when the acceptance criteria and defined checks pass. Put non-blocking review findings in [BACKLOG.md](BACKLOG.md). Fix only a broken reference, material factual error, security issue, data-corruption risk, or contradiction that prevents these acceptance criteria. Do not start a second review cycle or another milestone.
-
-## Template for the next milestone
-
-Replace the milestone name, status, scope, criteria, allowed files, tests, delegation limit, and stop conditions above. Acceptance criteria must be observable; allowed areas and exclusions must be explicit; tests must name exact commands or checks.
+Stop when every acceptance criterion is met. A credential, unintended private artifact, failed test/build, failed Pages deployment, broken live route, or exposed database is milestone-blocking. Put other findings in [BACKLOG.md](BACKLOG.md). Do not begin contribution tooling, product work, licensing selection, Vercel setup, or another audit/fix/audit loop.
