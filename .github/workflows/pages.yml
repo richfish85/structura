@@ -3,6 +3,8 @@ name: Deploy Structura to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "CURRENT_MILESTONE.md"
   workflow_dispatch:
 
 concurrency:

@@ -26,6 +26,7 @@ Make the Structura repository public and deploy the existing generated explorer 
 - `README.md`
 - `BACKLOG.md`
 - `NOTICE.md`
+- `.gitattributes`
 - `.github/workflows/pages.yml`
 - GitHub repository visibility, Pages configuration, and the resulting deployment
 

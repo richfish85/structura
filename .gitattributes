@@ -4,3 +4,16 @@
 *.md text eol=lf
 *.py text eol=lf
 *.sql text eol=lf
+
+# Preserve the byte representation used by these frozen provenance hashes.
+research_batches/pilot-1998-cpu/jobs/job-1998-cpu-context-005/runs/run-20260908T002000Z-luna-context-005/intent.csv text eol=crlf
+research_batches/pilot-1998-gpu/jobs/job-1998-gpu-context-005/runs/run-20260908T022000Z-luna-gpu-context-005/intent.csv text eol=crlf
+research_batches/pilot-1998-hdd/jobs/job-1998-hdd-context-005/runs/run-20260908T022000Z-luna-hdd-context-005/intent.csv text eol=crlf
+research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-cpu/audit.csv text eol=crlf
+research_batches/pilot-1997-gpu/jobs/job-1997-gpu-verify-002/runs/run-20260908T014000Z-terra-1997-gpu-verify-002/verification.csv text eol=crlf
+research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-gpu/audit.csv text eol=crlf
+research_batches/pilot-1997-hdd/jobs/job-1997-hdd-verify-002/runs/run-20260908T014000Z-terra-1997-hdd-verify-002/verification.csv text eol=crlf
+research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/audit.csv text eol=crlf
+research_batches/connected-970-evo/coordinator/normalized-v1/packet.json text eol=crlf
+research_batches/connected-970-evo/jobs/verify-002/runs/verify-20260909-01/verification.json text eol=crlf
+research_batches/pilot-1998-cpu/jobs/job-1998-cpu-verify-omissions-004/runs/run-20260908T001533Z-terra-verifier-04/result_manifest.json text eol=crlf
