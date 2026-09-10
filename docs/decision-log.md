@@ -158,3 +158,12 @@ The owner approved the consolidated Sol/Astra direction: build connected underst
 - Pipeline repairs: 1997 coordinator copies preserve raw artifacts, hashes, repair diffs, author and disposition. Audit vocabulary repair does not equal substantive claim resolution.
 - Validation boundary: automated and agent-browser checks establish implementation behavior. Real-person usefulness is still untested; no participant result or canonical approval is inferred.
 - Next research follows a demonstrated explorer question. No new census year, graph database, 3D, accounts, pricing or scores are part of this checkpoint.
+
+## 2026-09-10 — First public use pathways locked
+
+The owner defined Structura's direction as a definitive hardware tracker built in three layers: authoritative SQL, evidence-bound visual confirmation and immediate public usefulness. Two initial use cases are approved as lenses over the same record:
+
+- **Can I keep this PC?** explains a 2026 Windows 11 readiness path for a working Windows 10 computer.
+- **Will this phone charging setup do what I expect?** explains the complete phone–cable–charger capability path.
+
+Neither pathway is a comparison site, recommendation engine or separate source of truth. Both must derive bounded results from shared tracked facts, expose evidence and constraints, preserve `unknown`, and use the implementation sequence in [pathway-implementation-plan.md](pathway-implementation-plan.md).

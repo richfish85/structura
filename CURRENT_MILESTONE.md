@@ -2,50 +2,47 @@
 
 Status: **complete**
 
-Milestone: **Public GitHub Pages checkpoint**
+Milestone: **Lock public use cases and pathway plan**
 
 Owner decision: 2026-09-10
 
 ## Scope
 
-Make the Structura repository public and deploy the existing generated explorer through GitHub Pages at zero platform cost. Publish only validated static output. Keep the repository source-visible without granting an open-source or dataset licence, and do not begin contribution features.
+Define two public entry pathways into Structura—the 2026 PC lifecycle question and the phone charging/capability question—and plan their implementation. Preserve Structura as the definitive evidence-backed hardware tracker: the pathways are derived views over shared SQL knowledge, not separate comparison products.
 
 ## Acceptance criteria
 
-- [x] Public-repository review finds no credentials or private material.
-- [x] Repository visibility is public and its access/licensing boundary is documented.
-- [x] One GitHub Actions workflow runs tests, builds Structura, selects the successful snapshot, and uploads only its generated `site/` files.
-- [x] GitHub Pages uses the Actions workflow and reports a successful deployment.
-- [x] The live project URL loads the home page, search assets, one historical dossier, and the connected SSD/component/evidence path.
-- [x] Repository and deployed artifact expose no generated SQLite database.
-- [x] Defined checks ran once, followed by one bounded final review.
+- [x] The product brief states the tracker, visual-confirmation and immediate-use layers.
+- [x] Both use cases have a fixed audience, question, input, result vocabulary, evidence boundary and non-goals.
+- [x] A shared interaction and data contract prevents duplicated pathway-specific truth.
+- [x] The implementation plan defines bounded stages, dependencies, acceptance gates and stop conditions.
+- [x] The decision is recorded and all new references resolve.
+- [x] One documentation check and one final review pass are complete.
 
 ## Allowed files and areas
 
 - `CURRENT_MILESTONE.md`
-- `README.md`
-- `BACKLOG.md`
-- `NOTICE.md`
-- `.gitattributes`
-- `.github/workflows/pages.yml`
-- GitHub repository visibility, Pages configuration, and the resulting deployment
+- `docs/product-brief.md`
+- `docs/public-use-cases.md`
+- `docs/pathway-implementation-plan.md`
+- `docs/decision-log.md`
+- `BACKLOG.md` only for non-blocking discoveries
 
-No application, schema, research packet, test, or generated reference file may be changed.
+No schema, application, research packet, test, generated site or deployment changes are allowed.
 
 ## Tests
 
 After integration, run once:
 
-1. `python -m unittest discover -s tests -v`
-2. `python -m structura build`
-3. Local inspection of the staged Pages artifact, including absence of database/research files.
-4. Workflow syntax/action-reference check and `git diff --check`.
-5. Live browser check after GitHub reports deployment success.
+1. Verify every relative Markdown link in the changed documents resolves.
+2. Search the changed documents for conflicting product claims and deprecated pathway names.
+3. Run `git diff --check`.
+4. Perform one final scope and consistency review.
 
 ## Delegation rules
 
-Maximum one read-only final reviewer. It receives only the workflow, publication documentation, milestone, and evidence from the defined checks. It may not edit files, recursively delegate, or initiate a second review.
+No delegation. This is a bounded documentation milestone.
 
 ## Stop conditions
 
-Stop when every acceptance criterion is met. A credential, unintended private artifact, failed test/build, failed Pages deployment, broken live route, or exposed database is milestone-blocking. Put other findings in [BACKLOG.md](BACKLOG.md). Do not begin contribution tooling, product work, licensing selection, Vercel setup, or another audit/fix/audit loop.
+Stop when the acceptance criteria are met and mark this milestone complete. Do not implement schema changes, evaluators, visual components, pathway pages or new research packets.
