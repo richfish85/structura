@@ -12,7 +12,7 @@ We need to know whether people can find hardware, understand a relationship and 
 
 ## How
 
-Start the local server as described in the README, then open http://127.0.0.1:8770/ on this computer. A remote participant can use a screen-sharing session controlled by the owner, or build a separately shared copy; the localhost URL is not a public link. No participants have been contacted by the agent.
+Send the participant the simplified [Group A handout](user-testing/group-a-live-explorer.md) and [response template](user-testing/response-template.md). Use the published reference at https://richfish85.github.io/structura/. No participants have been contacted by the agent.
 
 Read only: "This is a working hardware reference. Please say what you are looking for and what you expect to happen. We are testing the site, not you."
 

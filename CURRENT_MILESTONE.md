@@ -2,40 +2,41 @@
 
 Status: **complete**
 
-Milestone: **Lock public use cases and pathway plan**
+Milestone: **Simplified user-testing handouts**
 
 Owner decision: 2026-09-10
 
 ## Scope
 
-Define two public entry pathways into Structura—the 2026 PC lifecycle question and the phone charging/capability question—and plan their implementation. Preserve Structura as the definitive evidence-backed hardware tracker: the pathways are derived views over shared SQL knowledge, not separate comparison products.
+Create short, separable instructions for three participant groups: current explorer users, PC-pathway concept testers and phone-pathway concept testers. Keep facilitator guidance and expected-answer material outside participant handouts. Correct the existing trial's obsolete localhost-only instruction.
 
 ## Acceptance criteria
 
-- [x] The product brief states the tracker, visual-confirmation and immediate-use layers.
-- [x] Both use cases have a fixed audience, question, input, result vocabulary, evidence boundary and non-goals.
-- [x] A shared interaction and data contract prevents duplicated pathway-specific truth.
-- [x] The implementation plan defines bounded stages, dependencies, acceptance gates and stop conditions.
-- [x] The decision is recorded and all new references resolve.
-- [x] One documentation check and one final review pass are complete.
+- [x] A facilitator can select and distribute one handout without additional explanation.
+- [x] The live group tests only features currently published.
+- [x] PC and phone groups are clearly labelled as concept tests for planned features.
+- [x] Instructions avoid collecting names, contact details, account details, serial numbers or device identifiers.
+- [x] Each group returns comparable, concise feedback.
+- [x] Links resolve and one final documentation review is complete.
 
 ## Allowed files and areas
 
 - `CURRENT_MILESTONE.md`
-- `docs/product-brief.md`
-- `docs/public-use-cases.md`
-- `docs/pathway-implementation-plan.md`
-- `docs/decision-log.md`
-- `BACKLOG.md` only for non-blocking discoveries
+- `docs/usability-trial.md`
+- `docs/user-testing/README.md`
+- `docs/user-testing/group-a-live-explorer.md`
+- `docs/user-testing/group-b-pc-pathway.md`
+- `docs/user-testing/group-c-phone-pathway.md`
+- `docs/user-testing/response-template.md`
 
-No schema, application, research packet, test, generated site or deployment changes are allowed.
+No application, schema, research, test, generated-site or deployment changes are allowed.
 
 ## Tests
 
 After integration, run once:
 
-1. Verify every relative Markdown link in the changed documents resolves.
-2. Search the changed documents for conflicting product claims and deprecated pathway names.
+1. Verify relative Markdown links resolve.
+2. Check that participant handouts do not contain observer answers or request identifying information.
 3. Run `git diff --check`.
 4. Perform one final scope and consistency review.
 
@@ -45,4 +46,4 @@ No delegation. This is a bounded documentation milestone.
 
 ## Stop conditions
 
-Stop when the acceptance criteria are met and mark this milestone complete. Do not implement schema changes, evaluators, visual components, pathway pages or new research packets.
+Stop when the acceptance criteria are met and mark the milestone complete. Do not contact participants, record invented results, build prototypes or start pathway implementation.
