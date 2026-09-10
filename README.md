@@ -1,8 +1,8 @@
 # Structura
 
-Structura is an evidence-backed hardware reference: find a product, understand its parts, and follow the evidence. Graph-shaped knowledge is backed by one authoritative SQL store.
+Structura is an evidence-backed hardware tracker: a durable record of products, components, standards, capabilities, relationships and change over time. Find a product, understand its parts, and follow the evidence. Graph-shaped knowledge is backed by one authoritative SQL store.
 
-Status: **First Connected Explorer published as a working reference; real-person trial pending** (2026-09-10). All records remain provisional. There is no claim of census completeness.
+Status: **SQL foundation and First Connected Explorer published; reusable visual confirmation and real-person testing are next** (2026-09-10). All records remain provisional. There is no claim of census completeness.
 
 Live reference: **https://richfish85.github.io/structura/**
 
@@ -11,10 +11,19 @@ Live reference: **https://richfish85.github.io/structura/**
 - 54 historical candidates: 20 in the 1997 cohort and 34 in 1998, browsable by year, category and manufacturer.
 - A Samsung 970 EVO 500 GB reference, with 16 connected entities and 22 sourced, typed assertions across the bounded example.
 - Search, readable dossiers, component navigation, assertion evidence, a 500 GB / 1 TB comparison and an explicit unresolved production-layout question.
+- Two locked public-use concepts: PC lifecycle readiness and phone charging capability. Neither is implemented yet.
 
 ## Why
 
-The next research questions should come from trying to understand a device in the explorer. More rows alone do not prove the eventual visual database. This checkpoint joins the historical catalogue to a deeply documented example without changing the SQL authority or hiding uncertainty.
+Structura aims to become a definitive tracker through traceable identities, relationships, evidence, conflicts and known gaps. More rows alone do not prove that goal. The current checkpoint joins a historical catalogue to one deeply documented object; the next work tests whether people can understand that record visually and use it to answer a practical question.
+
+## Product direction
+
+1. **Tracked knowledge:** SQL remains authoritative.
+2. **Visual confirmation:** derived views reveal components, standards, relationships, evidence and unknowns.
+3. **Immediate use:** bounded pathways answer practical PC and phone questions from the shared record.
+
+Gamified testing, evidence-gathering quests and an object-centred community are exploratory possibilities. They are not current features or approved implementation scope. See the [roadmap](ROADMAP.md).
 
 ## How
 
@@ -58,7 +67,7 @@ Three relationship terms remain explicitly proposed: MEMBER_OF_FAMILY, CONFIGURA
 
 ## Threat and risk notes
 
-Research can be wrong or malicious. Imports retain provenance, reject hash or assertion mismatches, and cannot promote records automatically. The browser interface has no write routes; it escapes text, restricts source links and serves only generated reference assets. Manufacturer performance specifications are labelled as such. Source rights, canonical promotion rules, historical identity disputes and revision-specific package details remain unresolved. No accounts, purchases, compatibility guarantees, price feed or openness score are provided.
+Research can be wrong or malicious. Imports retain provenance, reject hash or assertion mismatches, and cannot promote records automatically. The browser interface has no write routes; it escapes text, restricts source links and serves only generated reference assets. Manufacturer performance specifications are labelled as such. Source rights, canonical promotion rules, historical identity disputes and revision-specific package details remain unresolved. No submissions, accounts, purchases, compatibility guarantees, price feed, gamification or social features are provided.
 
 ## Validation
 
@@ -74,9 +83,9 @@ See [validation evidence](docs/connected-explorer-validation.md), the [milestone
 
 ## Next step
 
-Run the bounded trial before expanding the dataset. Fix navigation or modelling problems exposed by those tasks, then research the smallest next set of relationships needed to answer them.
+Run the bounded [real-person trial](docs/usability-trial.md) before expanding the dataset. Use its findings to define the shared decision contract and the first reusable visual relationship path. The [testing pack](docs/user-testing/README.md) is ready to distribute.
 
-Further context: [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), and [1997 repair status](research_batches/pilot-1997/00_STATUS.md).
+Further context: [roadmap](ROADMAP.md), [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [public pathways](docs/public-use-cases.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), and [1997 repair status](research_batches/pilot-1997/00_STATUS.md).
 
 ## Access and reuse
 

@@ -1,10 +1,12 @@
 # Mini Demo Plan — SQL to Static HTML
 
-Status: implemented and locally validated
+Status: **implemented and retained as the SQL-to-static foundation**
 
 ## What
 
 Build a lightweight demonstration in which separately produced research outputs are validated into SQLite and rendered from SQLite as plain static HTML.
+
+This goal is complete. The current connected explorer and public Pages deployment build on this pipeline; this document remains the implementation record for the original mini demo.
 
 ```text
 agent-owned files

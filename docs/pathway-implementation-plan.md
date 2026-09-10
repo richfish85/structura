@@ -67,6 +67,8 @@ Run five short sessions per pathway with people unfamiliar with the model. Test 
 
 Add the smallest relationship or product set needed by repeated user questions. Candidate extensions include PC repairability and upgrade paths, then phone data, display, wireless charging and docking capabilities. Coverage counts, rankings, commerce and community features require separate milestones.
 
+Evidence-gathering quests, gamified participation and object-centred community features are exploratory later increments in the repository [roadmap](../ROADMAP.md). They must not be folded into pathway delivery without separate evidence-governance, privacy, abuse and moderation decisions.
+
 ## Milestone order
 
 1. Existing explorer trial.

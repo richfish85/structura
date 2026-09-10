@@ -2,43 +2,46 @@
 
 Status: **complete**
 
-Milestone: **Simplified user-testing handouts**
+Milestone: **Reconcile README, MVPs and roadmap**
 
 Owner decision: 2026-09-10
 
 ## Scope
 
-Create short, separable instructions for three participant groups: current explorer users, PC-pathway concept testers and phone-pathway concept testers. Keep facilitator guidance and expected-answer material outside participant handouts. Correct the existing trial's obsolete localhost-only instruction.
+Bring public and planning documentation up to the current product state. Distinguish completed foundations, the next visual/usability work, locked public pathways, and exploratory contribution, gamification and community ideas. Do not promote exploratory ideas into implementation commitments.
 
 ## Acceptance criteria
 
-- [x] A facilitator can select and distribute one handout without additional explanation.
-- [x] The live group tests only features currently published.
-- [x] PC and phone groups are clearly labelled as concept tests for planned features.
-- [x] Instructions avoid collecting names, contact details, account details, serial numbers or device identifiers.
-- [x] Each group returns comparable, concise feedback.
-- [x] Links resolve and one final documentation review is complete.
+- [x] README states the definitive hardware-tracker goal and current public checkpoint.
+- [x] Product brief and milestone documents identify completed and pending MVP work consistently.
+- [x] One concise roadmap separates `complete`, `next`, `planned` and `exploratory` work.
+- [x] Contribution, gamification and social/community ideas retain evidence, governance and privacy boundaries.
+- [x] Backlog and decision history reflect the current open questions.
+- [x] Links and status wording passed one documentation check and one final review.
 
 ## Allowed files and areas
 
 - `CURRENT_MILESTONE.md`
-- `docs/usability-trial.md`
-- `docs/user-testing/README.md`
-- `docs/user-testing/group-a-live-explorer.md`
-- `docs/user-testing/group-b-pc-pathway.md`
-- `docs/user-testing/group-c-phone-pathway.md`
-- `docs/user-testing/response-template.md`
+- `README.md`
+- `ROADMAP.md`
+- `BACKLOG.md`
+- `docs/product-brief.md`
+- `docs/mini-demo-plan.md`
+- `docs/first-connected-explorer.md`
+- `docs/pathway-implementation-plan.md`
+- `docs/decision-log.md`
 
-No application, schema, research, test, generated-site or deployment changes are allowed.
+No schema, application, research packet, test, generated-site or deployment changes are allowed.
 
 ## Tests
 
 After integration, run once:
 
-1. Verify relative Markdown links resolve.
-2. Check that participant handouts do not contain observer answers or request identifying information.
-3. Run `git diff --check`.
-4. Perform one final scope and consistency review.
+1. Verify relative Markdown links in changed documents.
+2. Check milestone/status terms for contradiction.
+3. Confirm exploratory work is not described as implemented or approved.
+4. Run `git diff --check`.
+5. Perform one final scope and consistency review.
 
 ## Delegation rules
 
@@ -46,4 +49,4 @@ No delegation. This is a bounded documentation milestone.
 
 ## Stop conditions
 
-Stop when the acceptance criteria are met and mark the milestone complete. Do not contact participants, record invented results, build prototypes or start pathway implementation.
+Stop when the acceptance criteria are met and mark this milestone complete. Do not implement visuals, pathways, submissions, scoring, accounts, moderation or community features.

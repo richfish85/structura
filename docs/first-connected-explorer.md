@@ -1,6 +1,6 @@
 # First Connected Explorer
 
-Status: local implementation delivered; real-person trial pending, 2026-09-09. Approved from the owner's consolidated Sol/Astra brief.
+Status: **implemented and publicly deployed; real-person trial pending** (updated 2026-09-10). Approved from the owner's consolidated Sol/Astra brief.
 
 ## What
 
@@ -12,7 +12,7 @@ The research pipeline is useful but does not yet demonstrate connected hardware 
 
 ## How
 
-Preserve Python, SQLite, immutable source packets, provisional records and a read-only interface. Deliver a local reference-site checkpoint with restrained typography, breadcrumbs, search, dossiers and a functional 2D schematic. Publication and licensing remain separate from this local milestone.
+Preserve Python, SQLite, immutable source packets, provisional records and a read-only interface. The delivered reference has restrained typography, breadcrumbs, search, dossiers and a functional 2D schematic. It was subsequently published through GitHub Pages; licensing and contributions remain separate decisions.
 
 ### Acceptance checklist
 
@@ -30,7 +30,7 @@ Preserve Python, SQLite, immutable source packets, provisional records and a rea
 
 The sample counts, Samsung model and component positions in the brief are illustrative, not evidence. Prefer Samsung 970 EVO 500 GB if primary documentation supports it. A schematic is not a teardown image or a claim about actual package placement. Candidate relationships remain explicitly provisional and are not blanket compatibility assertions.
 
-No Neo4j, CAD/3D, accounts, crowdsourcing, prices, scores, AI search, mass census expansion or elaborate branding in this milestone.
+No Neo4j, CAD/3D, accounts, crowdsourcing, prices, scores, AI search, mass census expansion or elaborate branding formed part of this completed milestone. Later visual, contribution and engagement ideas remain separate roadmap items.
 
 ## Validation and risks
 

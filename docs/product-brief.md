@@ -24,17 +24,21 @@ Definitive means identity-resolved, connected, time-aware and traceable—not in
 
 ## How
 
-### MVP 0 — product census
+### MVP 0 — SQL and evidence foundation · complete
 
-Start with the 1998 launch cohort for CPU, GPU, and HDD products: products newly introduced or first commercially shipped during 1998. Capture identity, manufacturer, category, model number, typed launch evidence, source quality, confidence, and conflicts. Do not claim coverage of older products that remained on sale during the year.
+The repository now has the authoritative SQLite foundation, evidence workflow, reproducible build, and bounded 1997/1998 CPU, GPU and storage cohorts. Historical records remain provisional and do not claim market-census completeness.
 
-### Ontology exercise
+### MVP 1 — connected explorer · complete, human trial pending
 
-Deeply model one ordinary object—an M.2 NVMe SSD or Ethernet NIC—across physical, mechanical, electrical, signal, protocol, command, logical, control, containment, compatibility, manufacturing, standardisation, and constraint relationships.
+The published explorer deeply models a Samsung 970 EVO example across product, family, components, form factor, interface, protocol, evidence and uncertainty. Automated and browser validation are complete; the real-person trial has not run.
 
-### Inspection interface
+### MVP 2 — reusable visual confirmation · next
 
-Use plain server-rendered HTML to test whether people can find entities, follow relationships, inspect evidence, and notice classification problems before selecting a visual identity.
+Use the trial findings and two worked public-pathway examples to define one reusable visual relationship path. It must reveal the decisive hardware relationship and its evidence without converting visual placement into a factual claim.
+
+### MVP 3 — immediate-use pathways · planned
+
+Implement the locked PC lifecycle and phone charging pathways as deterministic views over shared SQL knowledge. Later contribution, gamification and community increments remain exploratory until their governance and trust boundaries are approved.
 
 ### Product layers
 
@@ -44,7 +48,9 @@ Use plain server-rendered HTML to test whether people can find entities, follow 
 
 The first two immediate-use pathways are fixed in [public-use-cases.md](public-use-cases.md). Their staged delivery plan is [pathway-implementation-plan.md](pathway-implementation-plan.md).
 
-## Explicit non-goals for the local foundation
+The complete status ladder is maintained in the repository [roadmap](../ROADMAP.md).
+
+## Out of scope without a later milestone
 
 - complete hardware coverage
 - purchasing recommendations or price tracking
@@ -54,4 +60,4 @@ The first two immediate-use pathways are fixed in [public-use-cases.md](public-u
 - community accounts, moderation, or contribution workflows
 - automatic promotion of agent research
 - Neo4j or a second canonical data store
-- polished branding or production deployment
+- elaborate branding

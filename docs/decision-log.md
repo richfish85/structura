@@ -167,3 +167,18 @@ The owner defined Structura's direction as a definitive hardware tracker built i
 - **Will this phone charging setup do what I expect?** explains the complete phone–cable–charger capability path.
 
 Neither pathway is a comparison site, recommendation engine or separate source of truth. Both must derive bounded results from shared tracked facts, expose evidence and constraints, preserve `unknown`, and use the implementation sequence in [pathway-implementation-plan.md](pathway-implementation-plan.md).
+
+## 2026-09-10 — Broader participation direction recorded as exploratory
+
+The owner identified a possible larger product shape: the hardware database, visual/gamified participation and an object-centred social layer may eventually work together. This is a direction to evaluate, not approval to implement submissions, scoring, accounts or community features.
+
+Current boundary:
+
+- SQL and reviewed evidence remain authoritative.
+- Reusable visual confirmation is the next product increment; the current SSD schematic is its bounded proof of concept.
+- PC and phone pathways provide immediate-use tests over the shared record.
+- Usability incentives may reward completion and honest confusion.
+- Future evidence quests may reward participation and verified contribution, but points, popularity and social reactions cannot promote facts.
+- Public contribution requires a claim-level recognition model, licensing, privacy/redaction, independent review, abuse controls, moderation and a multi-user architecture decision.
+
+The status and ordering of these increments are maintained in the repository [roadmap](../ROADMAP.md).
