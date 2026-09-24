@@ -1,6 +1,6 @@
 # Current milestone
 
-Status: **active**
+Status: **complete**
 
 Milestone: **Two-axis hardware category browse**
 
@@ -12,13 +12,13 @@ Expand the public category experience with two browse axes: product form (`Works
 
 ## Acceptance criteria
 
-- [ ] The category page presents both axes with clear explanations and links.
-- [ ] Every requested label has a stable browse page, including empty planned-coverage pages.
-- [ ] Product-form assignments use only explicit source wording; functional roles remain separate from product-form categories.
-- [ ] Existing category, manufacturer, year, search, connected explorer, and dossier routes remain available.
-- [ ] Empty pages explain that no current records are mapped rather than implying no such hardware exists.
-- [ ] Generated links and search terms include the new pages, and the layout works at desktop and narrow widths.
-- [ ] Unit suite, generated build, one browser check, and one final scope review pass.
+- [x] The category page presents both axes with clear explanations and links.
+- [x] Every requested label has a stable browse page, including empty planned-coverage pages.
+- [x] Product-form assignments use only explicit source wording; functional roles remain separate from product-form categories.
+- [x] Existing category, manufacturer, year, search, connected explorer, and dossier routes remain available.
+- [x] Empty pages explain that no current records are mapped rather than implying no such hardware exists.
+- [x] Generated links and search terms include the new pages, and the layout works at desktop and narrow widths.
+- [x] Unit suite, generated build, one browser check, and one final scope review pass.
 
 ## Allowed files and areas
 
