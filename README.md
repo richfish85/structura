@@ -2,7 +2,7 @@
 
 Structura is an evidence-backed hardware tracker: a durable record of products, components, standards, capabilities, relationships and change over time. Find a product, understand its parts, and follow the evidence. Graph-shaped knowledge is backed by one authoritative SQL store.
 
-Status: **SQL foundation and First Connected Explorer published; a bounded SSD visual prototype is implemented in source** (2026-09-24). Real-person testing remains pending. All records remain provisional. There is no claim of census completeness.
+Status: **SQL foundation and First Connected Explorer published; a bounded SSD visual and component preview are implemented** (2026-09-24). Real-person testing remains pending. All records remain provisional. There is no claim of census completeness.
 
 Live reference: **https://richfish85.github.io/structura/**
 
@@ -11,7 +11,7 @@ Live reference: **https://richfish85.github.io/structura/**
 - 54 historical candidates: 20 in the 1997 cohort and 34 in 1998, browsable by year, category and manufacturer.
 - A Samsung 970 EVO 500 GB reference, with 16 connected entities and 22 sourced, typed assertions across the bounded example.
 - Search, readable dossiers, component navigation, assertion evidence, a 500 GB / 1 TB comparison and an explicit unresolved production-layout question.
-- An optional Three.js view on the 500 GB SSD dossier separates three documented constituents and links each selection to its existing relationship evidence. It is a conceptual model, not a verified board layout.
+- An optional Three.js view on the 500 GB SSD dossier separates three documented constituents, with constrained turning and a separation slider. A same-page component preview shows its current connections and evidence links before the full component page. Without JavaScript, the original links still work. The model is conceptual, not a verified board layout.
 - Two locked public-use concepts: PC lifecycle readiness and phone charging capability. Neither is implemented yet.
 
 ## Why

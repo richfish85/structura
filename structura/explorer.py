@@ -113,6 +113,60 @@ class ReferenceRenderer:
     def evidence(self, rows) -> str:
         return '<ul class="evidence-list">'+"".join(f'<li>{source_link(r["title"],r["url"])}<p class="fine">{esc(r.get("publisher", ""))} · {esc(r.get("locator", ""))}</p><p>{esc(r.get("evidence_note", ""))}</p></li>' for r in rows)+'</ul>'
 
+    def component_preview(self, regions) -> str:
+        # One inert HTML template per sourced constituent. The drawer is only
+        # navigation over the current SQL snapshot, not another data store.
+        templates = []
+        for part in regions:
+            key = part["entity_key"]
+            record = self.by_key[key]
+            eid = record["entity_id"]
+            incoming = [dict(row) for row in self.c.execute("""SELECT d.relationship_key,p.label,e.entity_key,e.name,d.assessment
+                FROM relationships r JOIN relationship_details d ON d.relationship_id=r.id
+                JOIN predicates p ON p.code=r.predicate_code JOIN entities e ON e.id=r.subject_id
+                WHERE r.object_id=? ORDER BY e.name,d.relationship_key""", (eid,))]
+            outgoing = [dict(row) for row in self.c.execute("""SELECT d.relationship_key,p.label,e.entity_key,e.name,d.assessment
+                FROM relationships r JOIN relationship_details d ON d.relationship_id=r.id
+                JOIN predicates p ON p.code=r.predicate_code JOIN entities e ON e.id=r.object_id
+                WHERE r.subject_id=? ORDER BY e.name,d.relationship_key""", (eid,))]
+
+            def connection_list(rows, direction):
+                if not rows:
+                    return '<p class="fine">No connections recorded in this direction.</p>'
+                items = []
+                for edge in rows:
+                    target = f'{quote(edge["entity_key"])}.html'
+                    relation = f'../relationships/{quote(edge["relationship_key"])}.html'
+                    items.append(
+                        f'<li><a href="{target}">{esc(edge["name"])}</a>'
+                        f'<span>{esc(edge["label"])} {"→ this component" if direction == "incoming" else "→"}</span>'
+                        f'<a class="component-preview-evidence" href="{relation}">Relationship and evidence →</a>'
+                        f'<small>{esc(edge["assessment"])} · provisional</small></li>'
+                    )
+                return '<ul class="component-preview-connections">'+''.join(items)+'</ul>'
+
+            templates.append(
+                f'<template id="component-preview-{esc(key)}">'
+                f'<p class="eyebrow">Component · sourced reference · provisional</p>'
+                f'<h2 id="component-preview-title">{esc(record["title"])}</h2>'
+                f'<h3>Connected from <span class="fine">({len(incoming)})</span></h3>'
+                f'{connection_list(incoming,"incoming")}'
+                f'<a class="component-preview-full" href="{quote(key)}.html">Open full component page →</a>'
+                f'<p>{esc(record["description"])}</p>'
+                f'<p class="component-preview-role">{esc(record["role_note"])}</p>'
+                f'<h3>Connects to <span class="fine">({len(outgoing)})</span></h3>'
+                f'{connection_list(outgoing,"outgoing")}'
+                f'<p class="component-preview-footnote">All connections shown are from this bounded snapshot. Follow a relationship for its scope and source.</p>'
+                '</template>'
+            )
+        return (
+            '<div id="component-preview-layer" class="component-preview-layer" hidden>'
+            '<div class="component-preview-backdrop" id="component-preview-backdrop" aria-hidden="true"></div>'
+            '<aside class="component-preview-panel" role="dialog" aria-modal="true" aria-labelledby="component-preview-title">'
+            '<button type="button" class="component-preview-close" id="component-preview-close">Close <span aria-hidden="true">×</span></button>'
+            '<div id="component-preview-content"></div></aside></div>' + ''.join(templates)
+        )
+
     def ssd_visual(self, regions, outgoing) -> str:
         # The visual is a view of existing containment assertions, never a
         # second source of component identity or physical placement.
@@ -140,12 +194,15 @@ class ReferenceRenderer:
             '<div id="visual-experience" class="visual-experience" hidden>'
             '<div class="visual-story"><p class="visual-kicker">INSIDE / 01 · CONCEPTUAL VIEW</p>'
             '<h3>One drive.<br>The parts we can trace.</h3>'
-            '<p class="visual-instruction">Select a part to see the relationship the sources support.</p>'
+            '<p class="visual-instruction">Select a part to open its connections here. Drag the model or use the turn buttons to inspect it.</p>'
             '<ol class="visual-parts">' + ''.join(picks) + '</ol></div>'
             '<div class="visual-stage"><p class="visual-stage-label">SAMSUNG 970 EVO 500 GB <span>CONCEPTUAL MODEL</span></p>'
             '<div id="visual-canvas" class="visual-canvas" aria-hidden="true">' + ''.join(callouts) + '</div>'
-            '<div class="visual-controls"><button type="button" id="visual-explode" aria-pressed="false">Explode layers</button>'
-            '<button type="button" id="visual-reset">Reset view</button></div>'
+            '<div class="visual-controls"><label class="visual-explosion-label" for="visual-explosion">Separate parts <output id="visual-explosion-value" for="visual-explosion">0%</output></label>'
+            '<input id="visual-explosion" type="range" min="0" max="100" value="0" step="1">'
+            '<div class="visual-control-buttons"><button type="button" id="visual-explode" aria-pressed="false">Explode layers</button>'
+            '<button type="button" id="visual-turn-left">Turn left</button><button type="button" id="visual-turn-right">Turn right</button>'
+            '<button type="button" id="visual-reset">Reset view</button></div></div>'
             '<p class="visual-stage-note">One block per constituent type · package count and placement unverified</p></div>'
             '<div class="visual-selection" aria-live="polite"><p class="visual-kicker">SELECTED RELATIONSHIP</p>'
             '<strong id="visual-selected-name">Choose a part above or in the model.</strong>'
@@ -207,6 +264,11 @@ class ReferenceRenderer:
         incoming = [dict(row) for row in self.c.execute("SELECT d.relationship_key,p.label,e.entity_key,e.name FROM relationships r JOIN relationship_details d ON d.relationship_id=r.id JOIN predicates p ON p.code=r.predicate_code JOIN entities e ON e.id=r.subject_id WHERE r.object_id=? ORDER BY e.name",(eid,))]
         claims = [dict(row) for row in self.c.execute("SELECT cl.*,s.title AS source_title,s.url FROM reference_claims cl JOIN sources s ON s.id=cl.source_id WHERE cl.entity_id=? OR cl.related_entity_id=? ORDER BY cl.kind,cl.claim_key",(eid,eid))]
         body = f'<p class="eyebrow">Connected hardware / {esc(r["entity_type_code"].replace("_"," "))}</p><h1>{esc(r["title"].split(" (")[0])}</h1><p class="lede">{esc(r["description"])}</p><span class="status">Sourced reference · provisional</span><nav class="sections" aria-label="On this page"><a href="#inside">Inside</a><a href="#overview">Overview</a><a href="#connections">Connections</a><a href="#evidence">Evidence</a></nav>'
+        if incoming and r["entity_type_code"] == "component":
+            body += '<aside class="connected-from" aria-label="Connected from"><h2>Connected from</h2><ul>'+''.join(
+                f'<li><a href="{quote(i["entity_key"])}.html">{esc(i["name"])}</a>'
+                f'<a href="../relationships/{quote(i["relationship_key"])}.html">{esc(i["label"])} · evidence →</a></li>'
+                for i in incoming)+'</ul></aside>'
         overview=f'<section id="overview"><h2>Overview</h2><p>{esc(r["role_note"])}</p>'
         if r["model_number"]: overview += f'<p><strong>Model:</strong> {esc(r["model_number"])}</p>'
         if r["context_year"]: overview += f'<p><strong>Document context:</strong> {r["context_year"]} · {esc(r["context_year_basis"])}</p>'
@@ -218,16 +280,22 @@ class ReferenceRenderer:
                 body += self.ssd_visual(regions, outgoing)
             body += f'<figure class="schematic"><p class="diagram-heading">{esc(r["title"].split(" (")[0])} · documented constituents</p><div class="diagram-grid" aria-label="Conceptual component map">'
             for v in regions:
-                body += f'<a class="diagram-node" href="{quote(v["entity_key"])}.html"><strong>{esc(v["label"])}</strong><span>Open component →</span></a>'
+                preview_key = f' data-component-preview-key="{esc(v["entity_key"])}"' if key == "samsung-970-evo-500gb" else ''
+                action = 'Open component page →' if preview_key else 'Open component →'
+                body += f'<a class="diagram-node" href="{quote(v["entity_key"])}.html"{preview_key}><strong>{esc(v["label"])}</strong><span>{action}</span></a>'
             body += '</div><figcaption>Conceptual diagram · not to scale · package counts and positions remain unverified.</figcaption></figure>'
         else:
             body += '<p>Use the connections below to see where this entity fits. No physical layout has been established for this entry.</p>'
-        body += '</section>'+overview+'<section id="connections"><h2>Connections</h2><p>Each arrow is a scoped assertion. Select its label for evidence, or its destination to keep exploring.</p><ul class="connections">'
+        body += '</section>'
+        if key == "samsung-970-evo-500gb" and regions:
+            body += self.component_preview(regions)
+        body += overview+'<section id="connections"><h2>Connections</h2><p>Each arrow is a scoped assertion. Select its label for evidence, or its destination to keep exploring.</p><ul class="connections">'
         for edge in outgoing:
-            body += f'<li><span class="relation-family">{esc(edge["relationship_family"])}</span><a class="edge" href="../relationships/{edge["relationship_key"]}.html">{esc(edge["label"])} <span aria-hidden="true">→</span></a><a class="target" href="{quote(edge["target_key"])}.html">{esc(edge["target_name"])}</a><span class="fine">{esc(edge["assessment"])} · provisional</span></li>'
+            preview_key = f' data-component-preview-key="{esc(edge["target_key"])}"' if key == "samsung-970-evo-500gb" and edge["predicate_code"] == "CONTAINS" else ''
+            body += f'<li><span class="relation-family">{esc(edge["relationship_family"])}</span><a class="edge" href="../relationships/{edge["relationship_key"]}.html">{esc(edge["label"])} <span aria-hidden="true">→</span></a><a class="target" href="{quote(edge["target_key"])}.html"{preview_key}>{esc(edge["target_name"])}</a><span class="fine">{esc(edge["assessment"])} · provisional</span></li>'
         if not outgoing: body += '<li>No outgoing assertions are included in this bounded example.</li>'
         body += '</ul>'
-        if incoming:
+        if incoming and r["entity_type_code"] != "component":
             body += '<h3>Connected from</h3><ul class="incoming">'+''.join(f'<li><a href="{quote(i["entity_key"])}.html">{esc(i["name"])}</a> <a href="../relationships/{i["relationship_key"]}.html">{esc(i["label"])} →</a> this entry</li>' for i in incoming)+'</ul>'
         body += '</section><section id="evidence"><h2>Claims, comparisons and evidence</h2>'
         identity_evidence=[dict(row) for row in self.c.execute('SELECT ee.*,s.title,s.url,s.publisher FROM entity_evidence ee JOIN sources s ON s.id=ee.source_id WHERE ee.entity_id=? ORDER BY ee.id',(eid,))]

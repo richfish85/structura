@@ -4,6 +4,8 @@ This file holds non-blocking discoveries. An entry is not permission to implemen
 
 ## Product and data
 
+- **Validate the richer SSD inspection and component panel with real users before broad rollout.** The owner-supplied HTML is an interaction benchmark, not evidence of an exact board layout. Test whether direct part selection, separation, and "Connected from" improve comprehension without implying verified placement.
+- **Research physical 970 EVO revisions before an observed-assembly model.** The current packet leaves package count, markings, positions, and DRAM operational detail unresolved. A revision-matched teardown or specimen and rights review would justify more faithful geometry or additional selectable layers.
 - **Run the deferred real-person explorer trial.** Three sessions and the task script remain pending in `docs/usability-trial.md`. Compare the enhanced SSD page with the preserved baseline before expanding the visual pattern into the PC and phone pathways.
 - **Define the canonical promotion procedure.** The schema has status fields and `review_events`, but the complete human approval transaction and policy for ontology promotion still need a future milestone.
 - **Resolve selected historical identity/event questions.** OverDrive product identity, Xeon 450 shipment status, and other open audit findings remain visible; choose a bounded subset rather than treating all findings as one task.

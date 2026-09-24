@@ -1,6 +1,12 @@
 # Visual adoption plan
 
-Status: **first SSD slice implemented in source; broader reuse and real-person validation pending** (2026-09-24)
+Status: **SSD benchmark refinement implemented; broader reuse and real-person validation pending** (2026-09-24)
+
+## Owner-supplied SSD benchmark
+
+The owner's `samsung_970_evo_500gb_exploded_3d.html` is a visual and interaction reference for this one product: a recognizable M.2 silhouette, direct part selection, adjustable separation, constrained turning, and contextual explanation. Its externally loaded older Three.js script, chat prompt hook, exact-looking package arrangement, and unsourced operational claims are not part of Structura's source of truth. In particular, the current research packet explicitly leaves package count, part markings, board positions, and the DRAM's detailed role unresolved. The adapted model keeps the pinned local Three.js version and labels its geometry schematic.
+
+The navigation benchmark is two steps: select a constituent on the SSD dossier to inspect its compact SQL-derived connection panel, then choose `Open full component page` when deeper claims are useful. Put `Connected from` at the top of that panel and near the top of a direct component visit. Keep the panel limited to connections present in the current snapshot; its relationship links lead to the existing scope and source pages. Standard links remain available when scripting or WebGL is unavailable.
 
 ## What to adopt
 

@@ -48,3 +48,45 @@
 @media(max-width:540px){.visual-story h3{font-size:2.1rem}.visual-parts{grid-template-columns:1fr;gap:0;border-top:1px solid #d5e0e5}.visual-pick{display:grid;grid-template-columns:2.2rem minmax(0,1fr);min-height:48px;border:0;border-bottom:1px solid #d5e0e5}.visual-stage{min-height:330px}.visual-canvas{min-height:275px}.visual-stage-label{top:.7rem;left:.8rem;right:.8rem;font-size:.66rem}.visual-controls{left:.7rem;right:.7rem;bottom:3.35rem}.visual-stage-note{left:.8rem;right:.8rem;bottom:.55rem;font-size:.65rem}.visual-callout{display:none}.visual-selection .fine{max-height:none}}
 @media(prefers-reduced-motion:reduce){.visual-callout{transition:none}}
 @media print{.visual-entry button,.visual-experience{display:none!important}}
+
+/* Connected component context stays close to the title and inside the SSD flow. */
+.connected-from{margin:1.4rem 0 0;padding:1rem 1.2rem;background:#f3f8fa;border-left:3px solid var(--accent);max-width:900px}
+.connected-from h2{font-size:1rem;margin:0 0 .45rem}
+.connected-from ul{list-style:none;margin:0;padding:0}
+.connected-from li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1rem;padding:.35rem 0}
+.connected-from li+li{border-top:1px solid var(--line)}
+.connected-from li a:last-child{font-size:.85rem}
+
+/* The supplied model informs inspection controls, not physical claims. */
+.visual-stage{min-height:590px}
+.visual-canvas{min-height:445px;touch-action:none;cursor:grab}
+.visual-canvas:active{cursor:grabbing}
+.visual-controls{display:block;bottom:2.7rem}
+.visual-explosion-label{display:flex;justify-content:space-between;gap:1rem;color:#28404b;font-size:.78rem;font-weight:700}
+.visual-explosion-label output{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+#visual-explosion{display:block;width:100%;min-height:28px;padding:0;margin:.3rem 0 .55rem;accent-color:#91b525;cursor:pointer}
+.visual-control-buttons{display:flex;gap:.4rem;flex-wrap:wrap}
+.visual-control-buttons button{min-height:38px;padding:.4rem .65rem}
+.visual-control-buttons button:last-child{background:#f8fbfc;color:#20313a}
+.visual-stage-note{bottom:.65rem}
+@media(max-width:850px){.visual-stage{min-height:500px}.visual-canvas{min-height:420px}}
+@media(max-width:540px){.visual-stage{min-height:455px}.visual-canvas{min-height:380px}.visual-control-buttons button{font-size:.75rem}.visual-stage-note{font-size:.6rem}}
+
+body.component-preview-open{overflow:hidden}
+.component-preview-layer{position:fixed;inset:0;z-index:30}
+.component-preview-backdrop{position:absolute;inset:0;background:#1225309c}
+.component-preview-panel{position:absolute;inset:0 0 0 auto;width:min(460px,100%);overflow:auto;overscroll-behavior:contain;background:#fff;box-shadow:-14px 0 40px #1225303d;padding:1.5rem clamp(1.25rem,3vw,2rem) 2.5rem}
+.component-preview-close{display:block;margin:0 0 2rem auto;background:#e9f2f5;color:var(--ink);border:1px solid var(--line);font-size:.85rem;font-weight:700}
+.component-preview-panel h2{font:700 clamp(1.8rem,3vw,2.3rem)/1.12 Georgia,serif;margin:.45rem 0 1.1rem}
+.component-preview-panel h3{font-size:1rem;margin:1.7rem 0 .5rem}
+.component-preview-panel p{font-size:.9rem;line-height:1.55}
+.component-preview-role{padding:.85rem 1rem;background:#f2f7f9;border-left:3px solid #a5c239}
+.component-preview-connections{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.component-preview-connections li{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.8rem 0;border-bottom:1px solid var(--line)}
+.component-preview-connections li>a:first-child{font-weight:700}
+.component-preview-connections li span,.component-preview-connections small{font-size:.8rem;color:var(--muted)}
+.component-preview-connections li .component-preview-evidence{font-size:.82rem}
+.component-preview-footnote{color:var(--muted);font-size:.8rem!important}
+.component-preview-full{display:block;margin-top:1.3rem;padding:.8rem 1rem;background:#1b303a;color:#fff;text-align:center;font-weight:700;text-decoration:none}
+.component-preview-full:hover{background:#315364;color:#fff}
+@media print{.component-preview-layer{display:none!important}}

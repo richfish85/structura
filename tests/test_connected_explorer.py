@@ -127,6 +127,35 @@ class ConnectedExplorerTests(unittest.TestCase):
         sibling=(site/'entities/samsung-970-evo-1tb.html').read_text(encoding='utf-8')
         self.assertNotIn('ssd-visual.js',sibling)
 
+    def test_ssd_component_preview_keeps_links_and_lists_current_connections(self):
+        site=self.snapshot/'site'
+        ssd=(site/'entities/samsung-970-evo-500gb.html').read_text(encoding='utf-8')
+        self.assertIn('id="component-preview-layer" class="component-preview-layer" hidden',ssd)
+        self.assertIn('id="visual-explosion" type="range"',ssd)
+        self.assertIn('id="visual-turn-left"',ssd)
+        self.assertIn('id="visual-turn-right"',ssd)
+        self.assertIn('Open component page →',ssd)
+        for key in ('samsung-phoenix','samsung-vnand-3bit','samsung-lpddr4-512mb'):
+            self.assertIn(f'href="{key}.html" data-component-preview-key="{key}"',ssd)
+            start=ssd.index(f'<template id="component-preview-{key}">')
+            end=ssd.index('</template>',start)
+            preview=ssd[start:end]
+            self.assertLess(preview.index('Connected from'),preview.index('Connects to'))
+            self.assertIn(f'href="{key}.html">Open full component page',preview)
+            with connect(self.db,read_only=True) as c:
+                relations=c.execute('''SELECT d.relationship_key FROM relationships r
+                    JOIN relationship_details d ON d.relationship_id=r.id
+                    JOIN entities e ON e.id=r.object_id WHERE e.entity_key=?
+                    UNION SELECT d.relationship_key FROM relationships r
+                    JOIN relationship_details d ON d.relationship_id=r.id
+                    JOIN entities e ON e.id=r.subject_id WHERE e.entity_key=?''',(key,key)).fetchall()
+            for relation in relations:
+                self.assertIn(f'../relationships/{relation[0]}.html',preview)
+        component=(site/'entities/samsung-lpddr4-512mb.html').read_text(encoding='utf-8')
+        self.assertEqual(component.count('class="connected-from"'),1)
+        self.assertLess(component.index('class="connected-from"'),component.index('<section id="inside">'))
+        self.assertIn('970evo-rel-005.html',component)
+
     def test_reference_server_is_read_only_and_cannot_expose_database(self):
         app=create_reference_app(self.snapshot/'site')
         dbhash=hashlib.sha256(self.db.read_bytes()).hexdigest()

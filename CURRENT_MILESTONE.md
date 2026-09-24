@@ -1,59 +1,46 @@
 # Current milestone
 
-Status: **complete**
+Status: **active**
 
-Milestone: **Connected SSD visual prototype**
+Milestone: **SSD model benchmark and connected component preview**
 
 Owner decision: 2026-09-24
 
 ## Scope
 
-Add one Three.js visual to the Samsung 970 EVO 500 GB dossier. Use the owner's new references for a spacious technical illustration, separated layers, clear part labels, and concise record cards. Keep the current dossier, component links, relationships, and evidence flow usable without WebGL or JavaScript. Do not expand to another product or pathway.
+Use the owner's `samsung_970_evo_500gb_exploded_3d.html` as an interaction and visual benchmark for the Samsung 970 EVO 500 GB only. Improve its existing conceptual Three.js model with useful inspection and explosion controls, without importing unsupported physical or operational claims. On that dossier, a normal click on a constituent opens a same-page component panel; the panel shows its recorded incoming and outgoing connections, relationship evidence links, and a clear link to its full page. Keep ordinary links functional without JavaScript. Bring "Connected from" near the top of the standalone component page.
 
 ## Acceptance criteria
 
-- [x] The SSD dossier offers an opt-in 3D view with assembled, exploded, and reset states.
-- [x] Controller, NAND, and cache selections use the existing SQL entity and relationship keys and open their existing evidence pages.
-- [x] The scene and labels state that geometry is conceptual and does not establish package counts or positions.
-- [x] The semantic component cards and dossier navigation work without 3D.
-- [x] The visual adapts to narrow screens, keyboard use, reduced motion, and WebGL failure.
-- [x] The dependency is pinned, local, licensed, and included in generated static snapshots.
-- [x] Existing tests, build checks, one browser validation pass, and one final independent review pass succeed.
-- [x] The public Pages build succeeds and the live SSD dossier is verified.
+- [ ] The SSD visual adopts the reference's useful inspection and exploded-view cues while plainly marking unverified geometry.
+- [ ] Every selectable part and connection is derived from existing SQL keys and evidence; no supplied HTML claim is promoted into data.
+- [ ] A normal click on an SSD constituent link opens a readable same-page preview, with an explicit full-page action and all currently recorded incoming/outgoing connections.
+- [ ] Modified-click, no-JavaScript, and WebGL-failure paths still reach the existing component pages; the panel closes by button, Escape, and backdrop and restores focus.
+- [ ] Standalone connected component pages put incoming parent context near the top without duplicating it below.
+- [ ] Desktop/mobile, keyboard, reduced-motion, and link behavior pass browser verification.
+- [ ] Unit suite, generated build/link checks, one final scope/provenance/accessibility review, public Pages deployment, and live page verification pass.
 
 ## Allowed files and areas
 
 - `CURRENT_MILESTONE.md`
-- `README.md`
-- `ROADMAP.md`
 - `BACKLOG.md`
-- `docs/decision-log.md`
-- `docs/product-brief.md`
-- `docs/pathway-implementation-plan.md`
+- `README.md`
 - `docs/visual-adoption-plan.md`
-- `NOTICE.md`
-- `structura/build.py`
 - `structura/explorer.py`
-- `structura/assets/`
+- `structura/assets/ssd-visual.js`
+- `structura/assets/reference.css`
 - `tests/test_connected_explorer.py`
 
-No schema, research packet, historical dossier, contribution, pathway, or deployment configuration changes are allowed.
+No schema, research packet, historical dossier, or other product/pathway changes.
 
 ## Tests
 
-After integration, run once:
-
-1. Run the existing unit suite and `python -m structura build` once after integration.
-2. Check generated links and the local Three.js asset path.
-3. Validate desktop and narrow-screen interaction, keyboard selection, reduced motion, disabled JavaScript, and simulated WebGL failure in one browser pass.
-4. Verify relative documentation links and run `git diff --check`.
-5. Perform one final scope, provenance, and accessibility review.
-6. Verify the public Pages build and live dossier after the push.
+After integration, run the repository unit suite and generated build once. Check generated links, JS syntax, desktop/mobile browser behavior, keyboard/focus, reduced motion, no-JavaScript/WebGL fallback, and one final review. Re-run affected checks only after a blocking correction. Verify public Pages and the live dossier after publishing.
 
 ## Delegation rules
 
-No delegation. Keep the implementation bounded to one dossier.
+No delegation. Keep this benchmark to one product.
 
 ## Stop conditions
 
-Stop when the acceptance criteria are met and mark this milestone complete. Do not extend the visual to other devices or begin pathway screens, submissions, scoring, accounts, or community features.
+Mark complete and stop when acceptance criteria pass. Defer real-person validation and broader component-panel rollout to a later milestone.
