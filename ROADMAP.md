@@ -1,6 +1,6 @@
 # Structura roadmap
 
-Status labels are deliberate: `complete`, `next`, `planned` and `exploratory` are not interchangeable. Each implementation increment requires its own milestone before work begins.
+Status labels are deliberate: `complete`, `in progress`, `next`, `planned` and `exploratory` are not interchangeable. Each implementation increment requires its own milestone before work begins.
 
 ## Goal
 
@@ -20,14 +20,18 @@ Build a definitive evidence-backed hardware tracker: identity-resolved, connecte
 - Samsung 970 EVO example connecting product, family, components, form factor, interface and protocol.
 - Automated and live-browser validation complete; real-person usefulness remains unproven.
 
-## MVP 2 — Reusable visual confirmation · next
+## MVP 2 — Reusable visual confirmation · in progress
 
-1. Run the existing three-person explorer trial.
-2. Define the shared intent-to-evidence decision contract with one PC and one phone worked example.
-3. Build one reusable visual relationship path using the connected SSD.
-4. Confirm that a new user can identify the decisive relationship and open its evidence.
+The owner approved moving visual work ahead of the unavailable baseline participants on 2026-09-16. The published explorer remains the comparison baseline.
+
+1. One opt-in Three.js visual relationship path is implemented on the connected SSD dossier.
+2. The current dossier, component list, connections and evidence routes remain the fallback and baseline.
+3. Run the deferred trial against the enhanced page and record whether the visual improves comprehension.
+4. Define the shared intent-to-evidence decision contract with one PC and one phone worked example.
 
 Visuals are derived explanations. Position, appearance and animation do not create hardware facts.
+
+See the [visual adoption plan](docs/visual-adoption-plan.md).
 
 ## MVP 3 — Immediate-use pathways · planned
 
@@ -52,4 +56,4 @@ Do not begin with a generic social feed, global authority score, raw-submission 
 
 ## Current next action
 
-Distribute the [user-testing pack](docs/user-testing/README.md) and complete the three-person live-explorer baseline. Do not start MVP 2 implementation until the findings are recorded and a new milestone is approved.
+Run the deferred [real-person trial](docs/usability-trial.md) when participants are available. Use the results before expanding the visual system into the PC and phone pathways.

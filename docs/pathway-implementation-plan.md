@@ -6,13 +6,25 @@ Status: **approved sequence; implementation not started**
 
 Build one reusable intent-to-evidence path over the SQL authority. PC and phone screens may use different language, but they must share identity, relationship, constraint, evidence, status and result rules. Do not create hand-written verdict pages or independent compatibility tables.
 
-## Stage 0 — Baseline the explorer
+## Stage 0 — Preserve the explorer baseline
 
-Run the existing [real-person trial](usability-trial.md) against the published connected explorer. Record navigation and evidence-comprehension failures before changing the shared visual language.
+Retain the published connected explorer and its validation evidence as the baseline. The owner approved beginning a bounded visual prototype before the unavailable participants can run the existing [real-person trial](usability-trial.md).
 
-**Gate:** Three sessions are recorded and repeated failures are identified. Stop if users cannot distinguish a device, component, relationship and evidence source; repair that foundation before pathway work.
+**Gate:** The visual prototype must preserve the current page's navigation, semantic component list, connections and evidence paths in fallback states.
 
-## Stage 1 — Define the shared decision contract
+## Stage 1 — Prove visual confirmation
+
+Create one reusable relationship-path view using the current SSD example first, following the [visual adoption plan](visual-adoption-plan.md). It must show selected object, related parts or standards, direction of each relationship, evidence state and unresolved links. Detailed language remains behind progressive disclosure, with a text equivalent for every visual.
+
+**Gate:** Automated browser validation covers the full fallback contract.
+
+## Stage 2 — Validate the visual foundation
+
+When participants are available, run the deferred [real-person trial](usability-trial.md) against the enhanced page and preserved baseline.
+
+**Gate:** Stop before pathway implementation if repeated results show that users cannot identify a device, component, relationship and evidence source or mistake conceptual geometry for physical layout.
+
+## Stage 3 — Define the shared decision contract
 
 Work two complete examples on paper and against the current schema: one PC configuration and one phone–charger–cable combination. Define the minimum representation for:
 
@@ -27,13 +39,7 @@ Prefer derived findings over a coarse stored `COMPATIBLE_WITH` assertion. Propos
 
 **Gate:** The same contract expresses both worked examples without pathway-specific truth stores or unsupported inference.
 
-## Stage 2 — Prove visual confirmation
-
-Create one reusable relationship-path view using the current SSD example first. It must show selected object, related parts or standards, direction of each relationship, evidence state and unresolved links. Detailed language remains behind progressive disclosure, with a text equivalent for every visual.
-
-**Gate:** New users can identify the decisive relationship and its evidence. Diagram position is never interpreted as a physical-layout claim.
-
-## Stage 3 — Build two bounded evidence packets
+## Stage 4 — Build two bounded evidence packets
 
 Research through the existing scout, verifier, normalizer, auditor and human-review boundary.
 
@@ -44,13 +50,13 @@ Select examples for evidence quality and distinct reasoning paths, not brand cov
 
 **Gate:** Every displayed finding traces to evidence; every missing decisive fact produces `unknown` rather than a guessed verdict.
 
-## Stage 4 — Implement the shared pathway shell
+## Stage 5 — Implement the shared pathway shell
 
 Add a task-first entry: identify device(s), choose intent, view result, expand the visual path, then inspect evidence. Implement the result engine as deterministic queries over the authoritative snapshot. Render static, shareable result examples before considering accounts, live device detection or user submissions.
 
 **Gate:** Both pathways use the same evaluator and visual components. Rebuilding from the frozen manifest reproduces the pages and result categories.
 
-## Stage 5 — Test immediate usability
+## Stage 6 — Test immediate usability
 
 Run five short sessions per pathway with people unfamiliar with the model. Test whether they can:
 
@@ -63,7 +69,7 @@ Run five short sessions per pathway with people unfamiliar with the model. Test 
 
 **Gate:** At least four of five participants per pathway complete the core explanation unassisted. Any repeated serious misconception blocks expansion.
 
-## Stage 6 — Expand from observed demand
+## Stage 7 — Expand from observed demand
 
 Add the smallest relationship or product set needed by repeated user questions. Candidate extensions include PC repairability and upgrade paths, then phone data, display, wireless charging and docking capabilities. Coverage counts, rankings, commerce and community features require separate milestones.
 
@@ -71,11 +77,11 @@ Evidence-gathering quests, gamified participation and object-centred community f
 
 ## Milestone order
 
-1. Existing explorer trial.
-2. Shared decision contract and schema-gap proposal.
-3. Reusable visual relationship path.
+1. Connected-SSD visual relationship path with the current explorer preserved as fallback.
+2. Deferred explorer trial when participants are available.
+3. Shared decision contract and schema-gap proposal.
 4. Bounded PC and phone research packets.
 5. Shared pathway shell and deterministic evaluation.
-6. Two real-person trials and evidence-led refinement.
+6. Two pathway trials and evidence-led refinement.
 
 Each item is a separate milestone with its own allowed files, tests and stop condition. Do not begin the next automatically.

@@ -105,6 +105,28 @@ class ConnectedExplorerTests(unittest.TestCase):
         self.assertIn('970evo-500gb-package-layout',ssd)
         self.assertIn('600 versus 1,200 MB/s',ssd)
 
+    def test_ssd_visual_is_optional_and_bound_to_existing_relationships(self):
+        site=self.snapshot/'site'
+        ssd=(site/'entities/samsung-970-evo-500gb.html').read_text(encoding='utf-8')
+        self.assertIn('id="visual-open" hidden',ssd)
+        self.assertIn('id="visual-experience" class="visual-experience" hidden',ssd)
+        self.assertIn('type="module" src="../assets/ssd-visual.js"',ssd)
+        self.assertIn('class="diagram-node"',ssd)
+        self.assertIn('One block per constituent type · package count and placement unverified',ssd)
+        for key,relation in (
+            ('samsung-phoenix','970evo-rel-003'),
+            ('samsung-vnand-3bit','970evo-rel-004'),
+            ('samsung-lpddr4-512mb','970evo-rel-005'),
+        ):
+            self.assertIn(f'data-part-key="{key}"',ssd)
+            self.assertIn(f'data-evidence-href="../relationships/{relation}.html"',ssd)
+            self.assertTrue((site/f'relationships/{relation}.html').is_file())
+        for asset in ('ssd-visual.js','vendor/three/three.module.js',
+                      'vendor/three/three.core.js','vendor/three/LICENSE'):
+            self.assertTrue((site/'assets'/asset).is_file(),asset)
+        sibling=(site/'entities/samsung-970-evo-1tb.html').read_text(encoding='utf-8')
+        self.assertNotIn('ssd-visual.js',sibling)
+
     def test_reference_server_is_read_only_and_cannot_expose_database(self):
         app=create_reference_app(self.snapshot/'site')
         dbhash=hashlib.sha256(self.db.read_bytes()).hexdigest()

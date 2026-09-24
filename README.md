@@ -2,7 +2,7 @@
 
 Structura is an evidence-backed hardware tracker: a durable record of products, components, standards, capabilities, relationships and change over time. Find a product, understand its parts, and follow the evidence. Graph-shaped knowledge is backed by one authoritative SQL store.
 
-Status: **SQL foundation and First Connected Explorer published; reusable visual confirmation and real-person testing are next** (2026-09-10). All records remain provisional. There is no claim of census completeness.
+Status: **SQL foundation and First Connected Explorer published; a bounded SSD visual prototype is implemented in source** (2026-09-24). Real-person testing remains pending. All records remain provisional. There is no claim of census completeness.
 
 Live reference: **https://richfish85.github.io/structura/**
 
@@ -11,6 +11,7 @@ Live reference: **https://richfish85.github.io/structura/**
 - 54 historical candidates: 20 in the 1997 cohort and 34 in 1998, browsable by year, category and manufacturer.
 - A Samsung 970 EVO 500 GB reference, with 16 connected entities and 22 sourced, typed assertions across the bounded example.
 - Search, readable dossiers, component navigation, assertion evidence, a 500 GB / 1 TB comparison and an explicit unresolved production-layout question.
+- An optional Three.js view on the 500 GB SSD dossier separates three documented constituents and links each selection to its existing relationship evidence. It is a conceptual model, not a verified board layout.
 - Two locked public-use concepts: PC lifecycle readiness and phone charging capability. Neither is implemented yet.
 
 ## Why
@@ -83,7 +84,7 @@ See [validation evidence](docs/connected-explorer-validation.md), the [milestone
 
 ## Next step
 
-Run the bounded [real-person trial](docs/usability-trial.md) before expanding the dataset. Use its findings to define the shared decision contract and the first reusable visual relationship path. The [testing pack](docs/user-testing/README.md) is ready to distribute.
+Compare the connected SSD visual with the published explorer baseline in the [real-person trial](docs/usability-trial.md) when participants are available. The [visual adoption plan](docs/visual-adoption-plan.md) records the first implementation boundary, and the [testing pack](docs/user-testing/README.md) remains ready to distribute.
 
 Further context: [roadmap](ROADMAP.md), [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [public pathways](docs/public-use-cases.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), and [1997 repair status](research_batches/pilot-1997/00_STATUS.md).
 

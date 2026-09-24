@@ -182,3 +182,19 @@ Current boundary:
 - Public contribution requires a claim-level recognition model, licensing, privacy/redaction, independent review, abuse controls, moderation and a multi-user architecture decision.
 
 The status and ordering of these increments are maintained in the repository [roadmap](../ROADMAP.md).
+
+## 2026-09-16 — Visual confirmation may precede the baseline trial
+
+The owner overruled the requirement to wait for the three-person explorer trial because reliable participants are not currently available. Visual work may proceed as one bounded, opt-in enhancement on the connected SSD while the published page remains the fallback and comparison baseline. The current visual recommendation is:
+
+- Adopt the exploded technical-illustration language: recognizable hardware, separated layers, restrained materials and a focused information card.
+- Borrow active-part highlighting and synchronized explanation from game-like references, but do not add character performance, theatrical sequencing or a game loop to the evidence explorer.
+- Use Three.js for browser interaction, procedural templates by default and GLB only where product-specific geometry materially improves understanding.
+- Label fidelity explicitly. The first SSD view is conceptual and cannot imply exact package count or board position.
+- Run the deferred trial after the prototype and before expanding the pattern into the locked PC and phone pathways.
+
+The complete boundary and first implementation slice are in [visual-adoption-plan.md](visual-adoption-plan.md).
+
+## 2026-09-24 — First Three.js SSD slice
+
+The owner supplied additional visual references and asked to begin the Three.js implementation. The first slice is confined to the Samsung 970 EVO 500 GB dossier. It uses a pale technical stage, bold concise headings, restrained accent colour, and an exploded view with component callouts. Part selection follows the existing SQL containment assertions to their evidence pages. The model remains explicitly conceptual; neither its positions nor its generic package shapes establish a production layout. Three.js is pinned and bundled locally under its own MIT licence.

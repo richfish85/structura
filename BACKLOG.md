@@ -4,7 +4,7 @@ This file holds non-blocking discoveries. An entry is not permission to implemen
 
 ## Product and data
 
-- **Run the real-person explorer trial.** Three sessions and the task script remain pending in `docs/usability-trial.md`. Use observed failures to choose later navigation or modelling work.
+- **Run the deferred real-person explorer trial.** Three sessions and the task script remain pending in `docs/usability-trial.md`. Compare the enhanced SSD page with the preserved baseline before expanding the visual pattern into the PC and phone pathways.
 - **Define the canonical promotion procedure.** The schema has status fields and `review_events`, but the complete human approval transaction and policy for ontology promotion still need a future milestone.
 - **Resolve selected historical identity/event questions.** OverDrive product identity, Xeon 450 shipment status, and other open audit findings remain visible; choose a bounded subset rather than treating all findings as one task.
 - **Choose code, data, and contribution licences before accepting contributions or encouraging reuse.** The repository is publicly visible without an open-source/data licence; `NOTICE.md` records the current boundary. A future contribution milestone should also cover image rights, takedown handling, governance, and redistribution.

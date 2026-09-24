@@ -91,7 +91,9 @@ def build(root: Path = PROJECT_ROOT, manifest_path: Path | None = None) -> dict:
     # Preserve every previous successful snapshot. Neither raw packets nor an old
     # database are edited by a rebuild. Failed snapshots cannot become current.
     identity = hashlib.sha256(manifest_path.read_bytes())
-    for path in sorted([*(root / "schema").glob("*.sql"), *(root / "structura").rglob("*.py"), *(root / "structura/assets").glob("*")]):
+    for path in sorted([*(root / "schema").glob("*.sql"), *(root / "structura").rglob("*.py"), *(root / "structura/assets").rglob("*")]):
+        if not path.is_file():
+            continue
         identity.update(path.relative_to(root).as_posix().encode())
         identity.update(path.read_bytes())
     build_id = identity.hexdigest()[:16] + "-" + uuid.uuid4().hex[:8]

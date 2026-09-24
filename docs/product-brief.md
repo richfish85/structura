@@ -32,9 +32,9 @@ The repository now has the authoritative SQLite foundation, evidence workflow, r
 
 The published explorer deeply models a Samsung 970 EVO example across product, family, components, form factor, interface, protocol, evidence and uncertainty. Automated and browser validation are complete; the real-person trial has not run.
 
-### MVP 2 — reusable visual confirmation · next
+### MVP 2 — reusable visual confirmation · in progress
 
-Use the trial findings and two worked public-pathway examples to define one reusable visual relationship path. It must reveal the decisive hardware relationship and its evidence without converting visual placement into a factual claim.
+The first opt-in Three.js relationship view is implemented on the connected SSD. The published explorer remains the fallback and comparison baseline. Use the deferred trial and two worked public-pathway examples to refine the shared pattern. The visual reveals a hardware relationship and its evidence without converting placement into a factual claim. See the [visual adoption plan](visual-adoption-plan.md).
 
 ### MVP 3 — immediate-use pathways · planned
 

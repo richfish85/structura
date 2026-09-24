@@ -5,6 +5,7 @@ import html
 import json
 import mimetypes
 import re
+import shutil
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
@@ -90,7 +91,7 @@ class ReferenceRenderer:
             items.append(f'<li><a class="record-link" href="{self.link(r,prefix)}"><span class="eyebrow">{esc(tag)}</span><strong>{esc(r["title"])}</strong><span>{esc(r["description"])}</span></a></li>')
         return '<ul class="records">'+"".join(items)+'</ul>' if items else '<p class="empty">No records in this view yet.</p>'
 
-    def page(self, path: str, title: str, body: str, description: str = "", crumbs: list | None = None):
+    def page(self, path: str, title: str, body: str, description: str = "", crumbs: list | None = None, module: str | None = None):
         prefix = "../" * (len(Path(path).parts)-1)
         def a(url, text): return f'<a href="{prefix}{url}">{text}</a>'
         breadcrumbs = a("index.html", "Home")
@@ -99,8 +100,9 @@ class ReferenceRenderer:
         nav = '<nav aria-label="Main">'+"".join(a(url,label) for url,label in [("years.html","By year"),("categories.html","By category"),("manufacturers.html","By manufacturer"),("connected.html","Connected hardware")])+'</nav>'
         search = f'''<form class="search" action="{prefix}search.html" role="search"><label for="site-query" class="sr-only">Search hardware, companies or standards</label><input id="site-query" name="q" type="search" placeholder="Search hardware, companies, standards…" autocomplete="off"><button type="submit">Search</button></form>'''
         description = description or title + " — evidence and context in Structura."
+        extra_script = f'<script type="module" src="{prefix}assets/{esc(module)}"></script>' if module else ''
         document = f'''<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="{esc(description)}"><title>{esc(title)} · Structura</title><link rel="stylesheet" href="{prefix}assets/reference.css"><script defer src="{prefix}assets/search-index.js"></script><script defer src="{prefix}assets/reference.js"></script></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="{esc(description)}"><title>{esc(title)} · Structura</title><link rel="stylesheet" href="{prefix}assets/reference.css"><script defer src="{prefix}assets/search-index.js"></script><script defer src="{prefix}assets/reference.js"></script>{extra_script}</head>
 <body data-root="{prefix}"><a class="skip" href="#main">Skip to content</a><header><div class="masthead">{a('index.html','<span class="wordmark">Structura</span>')}<span class="edition">Hardware reference · working edition</span></div>{search}{nav}</header>
 <main id="main" tabindex="-1"><nav class="breadcrumbs" aria-label="Breadcrumb">{breadcrumbs}</nav>{body}</main>
 <footer><div><strong>Structura</strong><p>Evidence-backed hardware knowledge. This working edition retains provisional records and open questions.</p></div><nav aria-label="Research and site information">{a('sources.html','Sources')}{a('discrepancies.html','Discrepancies')}{a('method.html','Method')}{a('about.html','About')}{a('sitemap.html','Sitemap')}</nav><p class="fine">Read-only reference · Sources retain their own rights · No claim of census completeness</p></footer></body></html>'''
@@ -110,6 +112,48 @@ class ReferenceRenderer:
 
     def evidence(self, rows) -> str:
         return '<ul class="evidence-list">'+"".join(f'<li>{source_link(r["title"],r["url"])}<p class="fine">{esc(r.get("publisher", ""))} · {esc(r.get("locator", ""))}</p><p>{esc(r.get("evidence_note", ""))}</p></li>' for r in rows)+'</ul>'
+
+    def ssd_visual(self, regions, outgoing) -> str:
+        # The visual is a view of existing containment assertions, never a
+        # second source of component identity or physical placement.
+        edges = {edge["target_key"]: edge for edge in outgoing if edge["predicate_code"] == "CONTAINS"}
+        expected = {"samsung-phoenix", "samsung-vnand-3bit", "samsung-lpddr4-512mb"}
+        if {part["entity_key"] for part in regions} != expected or any(key not in edges for key in expected):
+            return ""
+        picks = []
+        callouts = []
+        for number, part in enumerate(regions, 1):
+            edge = edges[part["entity_key"]]
+            picks.append(
+                f'<li><button type="button" class="visual-pick" data-part-key="{esc(part["entity_key"])}" '
+                f'data-part-label="{esc(part["label"])}" data-part-name="{esc(part["name"])}" '
+                f'data-assessment="{esc(edge["assessment"])}" data-scope="{esc(edge["scope"])}" '
+                f'data-evidence-href="../relationships/{quote(edge["relationship_key"])}.html" '
+                f'data-component-href="{quote(part["entity_key"])}.html" aria-pressed="false">'
+                f'<span class="visual-number">{number:02d}</span><span>{esc(part["label"])}</span><span aria-hidden="true">↗</span></button></li>'
+            )
+            callouts.append(f'<span class="visual-callout" data-callout-for="{esc(part["entity_key"])}">{esc(part["label"])}</span>')
+        return (
+            '<div class="visual-entry"><p class="visual-entry-copy">Explore a conceptual model of documented constituent types and follow each one to its source.</p>'
+            '<button type="button" id="visual-open" hidden>Explore in 3D <span aria-hidden="true">↗</span></button>'
+            '<p id="visual-availability" class="fine" role="status"></p></div>'
+            '<div id="visual-experience" class="visual-experience" hidden>'
+            '<div class="visual-story"><p class="visual-kicker">INSIDE / 01 · CONCEPTUAL VIEW</p>'
+            '<h3>One drive.<br>The parts we can trace.</h3>'
+            '<p class="visual-instruction">Select a part to see the relationship the sources support.</p>'
+            '<ol class="visual-parts">' + ''.join(picks) + '</ol></div>'
+            '<div class="visual-stage"><p class="visual-stage-label">SAMSUNG 970 EVO 500 GB <span>CONCEPTUAL MODEL</span></p>'
+            '<div id="visual-canvas" class="visual-canvas" aria-hidden="true">' + ''.join(callouts) + '</div>'
+            '<div class="visual-controls"><button type="button" id="visual-explode" aria-pressed="false">Explode layers</button>'
+            '<button type="button" id="visual-reset">Reset view</button></div>'
+            '<p class="visual-stage-note">One block per constituent type · package count and placement unverified</p></div>'
+            '<div class="visual-selection" aria-live="polite"><p class="visual-kicker">SELECTED RELATIONSHIP</p>'
+            '<strong id="visual-selected-name">Choose a part above or in the model.</strong>'
+            '<p id="visual-selected-status">The visual is a guide to the existing record.</p>'
+            '<p id="visual-selected-scope" class="fine"></p>'
+            '<div class="visual-selection-links"><a id="visual-evidence-link" hidden>Open relationship and evidence →</a>'
+            '<a id="visual-component-link" hidden>Open component →</a></div></div></div>'
+        )
 
     def historical(self, r):
         key, cid = r["entity_key"], r["id"]
@@ -170,6 +214,8 @@ class ReferenceRenderer:
         body += '<section id="inside"><h2>Inside</h2>'
         regions = [dict(row) for row in self.c.execute("SELECT v.*,e.entity_key,e.name FROM visual_regions v JOIN entities e ON e.id=v.entity_id WHERE parent_entity_id=? ORDER BY x",(eid,))]
         if regions:
+            if key == "samsung-970-evo-500gb":
+                body += self.ssd_visual(regions, outgoing)
             body += f'<figure class="schematic"><p class="diagram-heading">{esc(r["title"].split(" (")[0])} · documented constituents</p><div class="diagram-grid" aria-label="Conceptual component map">'
             for v in regions:
                 body += f'<a class="diagram-node" href="{quote(v["entity_key"])}.html"><strong>{esc(v["label"])}</strong><span>Open component →</span></a>'
@@ -193,7 +239,8 @@ class ReferenceRenderer:
                 body += f'<p><a href="{quote(other["entity_key"])}.html">Compare with {esc(other["name"])} →</a></p>'
             body += '</article>'
         body += '<p>Relationship evidence is attached to each arrow above. These assessments do not constitute canonical approval.</p></section>'
-        self.page(f'entities/{key}.html',r["title"],body,r["description"],[("connected.html","Connected hardware")])
+        self.page(f'entities/{key}.html',r["title"],body,r["description"],[("connected.html","Connected hardware")],
+                  module="ssd-visual.js" if key == "samsung-970-evo-500gb" else None)
 
     def relationship_pages(self):
         for row in self.c.execute("""SELECT r.*,d.*,p.label,s.name AS subject_name,s.entity_key AS subject_key,o.name AS object_name,o.entity_key AS object_key
@@ -262,8 +309,11 @@ class ReferenceRenderer:
 def render_explorer(db: Path, output: Path, status: dict) -> None:
     output.mkdir(parents=True,exist_ok=False)
     assets=output/'assets';assets.mkdir()
-    for name in ('reference.css','reference.js'):
-        (assets/name).write_bytes((PROJECT_ROOT/'structura/assets'/name).read_bytes())
+    for source in (PROJECT_ROOT/'structura/assets').rglob('*'):
+        if source.is_file():
+            target=assets/source.relative_to(PROJECT_ROOT/'structura/assets')
+            target.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copyfile(source,target)
     with connect(db,read_only=True) as c:
         ReferenceRenderer(c,output,status).render()
     (output/'build-status.json').write_text(json.dumps(status,indent=2)+'\n',encoding='utf-8')
