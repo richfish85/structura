@@ -156,6 +156,28 @@ class ConnectedExplorerTests(unittest.TestCase):
         self.assertLess(component.index('class="connected-from"'),component.index('<section id="inside">'))
         self.assertIn('970evo-rel-005.html',component)
 
+    def test_category_hub_exposes_product_forms_and_functional_roles(self):
+        site=self.snapshot/'site'
+        hub=(site/'categories.html').read_text(encoding='utf-8')
+        for label, path in (
+            ('Workstations','product-form/workstations.html'),('Servers','product-form/servers.html'),
+            ('Laptops','product-form/laptops.html'),('Smartphones','product-form/smartphones.html'),
+            ('Smart Devices','product-form/smart-devices.html'),('IoT Devices','product-form/iot-devices.html'),
+            ('Game Consoles','product-form/game-consoles.html'),('Input','functional-role/input.html'),
+            ('Processing','functional-role/processing.html'),('Storage','functional-role/storage.html'),
+            ('Output','functional-role/output.html')):
+            self.assertIn(label,hub)
+            self.assertTrue((site/'categories'/path).is_file(),path)
+        self.assertTrue((site/'categories/product-form.html').is_file())
+        self.assertTrue((site/'categories/functional-role.html').is_file())
+        workstations=(site/'categories/product-form/workstations.html').read_text(encoding='utf-8')
+        self.assertIn('Intel Pentium II Xeon processor 400 MHz',workstations)
+        empty=(site/'categories/product-form/smartphones.html').read_text(encoding='utf-8')
+        self.assertIn('planned coverage lane',empty)
+        processing=(site/'categories/functional-role/processing.html').read_text(encoding='utf-8')
+        self.assertIn('Intel Pentium II Xeon processor 400 MHz',processing)
+        self.assertIn('3Dlabs PERMEDIA 2 graphics processor',processing)
+
     def test_reference_server_is_read_only_and_cannot_expose_database(self):
         app=create_reference_app(self.snapshot/'site')
         dbhash=hashlib.sha256(self.db.read_bytes()).hexdigest()

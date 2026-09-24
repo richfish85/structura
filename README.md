@@ -11,6 +11,7 @@ Live reference: **https://richfish85.github.io/structura/**
 - 54 historical candidates: 20 in the 1997 cohort and 34 in 1998, browsable by year, category and manufacturer.
 - A Samsung 970 EVO 500 GB reference, with 16 connected entities and 22 sourced, typed assertions across the bounded example.
 - Search, readable dossiers, component navigation, assertion evidence, a 500 GB / 1 TB comparison and an explicit unresolved production-layout question.
+- The category hub now offers two derived browse axes: product form (from explicit source wording) and functional role (from the normalized technical category). Empty lanes stay visible as planned coverage.
 - An optional Three.js view on the 500 GB SSD dossier separates three documented constituents, with constrained turning and a separation slider. A same-page component preview shows its current connections and evidence links before the full component page. Without JavaScript, the original links still work. The model is conceptual, not a verified board layout.
 - Two locked public-use concepts: PC lifecycle readiness and phone charging capability. Neither is implemented yet.
 

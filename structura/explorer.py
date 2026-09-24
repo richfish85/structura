@@ -44,6 +44,35 @@ def category(value: str) -> str:
     return value or "Unclassified"
 
 
+PRODUCT_FORM_CATEGORIES = (
+    ("Workstations", (r"\bworkstations?\b",)),
+    ("Servers", (r"\bservers?\b",)),
+    ("Laptops", (r"\bnotebook(?:s)?\b", r"\bmobile pc(?:s)?\b")),
+    ("Smartphones", (r"\bsmartphones?\b", r"\bmobile phones?\b")),
+    ("Smart Devices", (r"\bsmart devices?\b",)),
+    ("IoT Devices", (r"\biot\b", r"\binternet of things\b")),
+    ("Game Consoles", (r"\bgame consoles?\b",)),
+)
+
+FUNCTIONAL_ROLE_CATEGORIES = ("Input", "Processing", "Storage", "Output")
+
+
+def browse_taxonomy(r: dict) -> tuple[list[str], list[str]]:
+    """Return cautious discovery tags, never new factual assertions."""
+    text = " ".join(str(r.get(field) or "") for field in (
+        "product_type_raw", "market_scope_raw", "title", "description", "short_description"
+    )).lower()
+    forms = [label for label, patterns in PRODUCT_FORM_CATEGORIES
+             if any(re.search(pattern, text) for pattern in patterns)]
+    value = str(r.get("category") or "")
+    roles = []
+    if value in {"CPU", "GPU", "Processing"}:
+        roles.append("Processing")
+    if value in {"Storage", "HDD", "SSD"} or re.search(r"\b(?:hdd|ssd|storage|hard disk)\b", text):
+        roles.append("Storage")
+    return forms, roles
+
+
 def source_link(title: str, url: str | None) -> str:
     safe = safe_external_url(url)
     return f'<a href="{esc(safe)}" rel="noreferrer">{esc(title)} <span aria-hidden="true">↗</span></a>' if safe else esc(title)
@@ -90,6 +119,13 @@ class ReferenceRenderer:
             tag = "Connected reference" if r["kind"] == "connected" else f'{r["year"]} cohort · {r["category"]}'
             items.append(f'<li><a class="record-link" href="{self.link(r,prefix)}"><span class="eyebrow">{esc(tag)}</span><strong>{esc(r["title"])}</strong><span>{esc(r["description"])}</span></a></li>')
         return '<ul class="records">'+"".join(items)+'</ul>' if items else '<p class="empty">No records in this view yet.</p>'
+
+    def taxonomy_directory(self, title: str, intro: str, values: list[tuple[str, str, int]]) -> str:
+        items = ''.join(
+            f'<li><a href="{path}"><strong>{esc(label)}</strong><span>{count} current records →</span></a></li>'
+            for label, path, count in values
+        )
+        return f'<h2>{esc(title)}</h2><p>{esc(intro)}</p><ul class="directory taxonomy-directory">{items}</ul>'
 
     def page(self, path: str, title: str, body: str, description: str = "", crumbs: list | None = None, module: str | None = None):
         prefix = "../" * (len(Path(path).parts)-1)
@@ -321,7 +357,7 @@ class ReferenceRenderer:
     def render(self):
         historical = [r for r in self.records if r["kind"]=="historical"]
         connected = [r for r in self.records if r["kind"]=="connected"]
-        body = '<h1>An evidence-backed map of computer hardware.</h1><p class="lede">Find a product. Understand its parts. Follow the evidence.</p><div class="home-columns"><section><h2>Explore by year</h2><div class="year-links"><a href="years/1997.html">1997 <span>Launch-cohort research →</span></a><a href="years/1998.html">1998 <span>Launch-cohort research →</span></a></div><h2>Explore by category</h2><div class="pills"><a href="categories/cpu.html">CPU</a><a href="categories/gpu.html">GPU</a><a href="categories/storage.html">Storage</a></div></section><section class="feature"><span class="eyebrow">Connected example</span><h2>One SSD. Three different descriptions.</h2><p>M.2 names its physical format. PCIe describes its interface. NVMe describes its command protocol.</p>'
+        body = '<h1>An evidence-backed map of computer hardware.</h1><p class="lede">Find a product. Understand its parts. Follow the evidence.</p><div class="home-columns"><section><h2>Explore by year</h2><div class="year-links"><a href="years/1997.html">1997 <span>Launch-cohort research →</span></a><a href="years/1998.html">1998 <span>Launch-cohort research →</span></a></div><h2>Explore by category</h2><div class="pills"><a href="categories.html">Product forms and functional roles →</a><a href="categories/cpu.html">CPU</a><a href="categories/gpu.html">GPU</a><a href="categories/storage.html">Storage</a></div></section><section class="feature"><span class="eyebrow">Connected example</span><h2>One SSD. Three different descriptions.</h2><p>M.2 names its physical format. PCIe describes its interface. NVMe describes its command protocol.</p>'
         if connected: body += '<p><a class="primary-link" href="entities/samsung-970-evo-500gb.html">Explore the Samsung 970 EVO →</a></p><p class="fine">Follow its components, interface and protocol to their sources.</p>'
         else: body += '<p>The connected example is being prepared. Browse the historical catalogue below.</p>'
         body += '</section></div><section><h2>From the yearbook</h2>'+self.cards(historical[:6])+'</section>'
@@ -334,7 +370,31 @@ class ReferenceRenderer:
             self.page(f'years/{year}.html',year,f'<p class="eyebrow">Historical catalogue</p><h1>{year}</h1><p class="lede">{len(rows)} candidate records across CPU, GPU and storage. Event evidence remains attached to each dossier.</p><div class="pills">{links}</div>'+self.cards(rows,'../'),crumbs=[('years.html','By year')])
             for cat in ['CPU','GPU','Storage']:
                 self.page(f'years/{year}-{slug(cat)}.html',f'{year} · {cat}',f'<h1>{year} · {cat}</h1><p>Bounded research cohort. Proposed identity and release timing are shown on each record.</p>'+self.cards([r for r in rows if r["category"]==cat],'../'),crumbs=[('years.html','By year'),(f'years/{year}.html',year)])
-        for group, field, label in [('categories','category','By category'),('manufacturers','manufacturer','By manufacturer')]:
+        product_forms = {label: [r for r in self.records if label in browse_taxonomy(r)[0]] for label, _ in PRODUCT_FORM_CATEGORIES}
+        functional_roles = {label: [r for r in self.records if label in browse_taxonomy(r)[1]] for label in FUNCTIONAL_ROLE_CATEGORIES}
+        taxonomy_intro = 'These are discovery views over the current snapshot. A zero count means this edition has not mapped a record to that lane yet; it does not mean the hardware does not exist.'
+        product_links = [(label, f'categories/product-form/{slug(label)}.html', len(rows)) for label, rows in product_forms.items()]
+        role_links = [(label, f'categories/functional-role/{slug(label)}.html', len(rows)) for label, rows in functional_roles.items()]
+        category_body = '<h1>By category</h1><p class="lede">Browse hardware by the kind of product it belongs to and the role it plays in a system.</p>'
+        category_body += self.taxonomy_directory('Product form', 'What kind of product or environment is this associated with? Tags require explicit wording in the current source fields.', product_links)
+        category_body += self.taxonomy_directory('Functional role', 'What role does the record play in the hardware path? This view is separate from product form and may contain several roles as coverage grows.', role_links)
+        category_body += '<h2>Current technical category</h2><p>The original normalized category view remains available for CPU, GPU and Storage records.</p><div class="pills"><a href="categories/cpu.html">CPU</a><a href="categories/gpu.html">GPU</a><a href="categories/storage.html">Storage</a></div>'
+        self.page('categories.html','By category',category_body)
+        self.page('categories/product-form.html','Product form', '<h1>Product form</h1><p class="lede">'+esc(taxonomy_intro)+'</p>'+self.taxonomy_directory('Product form lanes','These labels describe the product or environment named by the evidence.',[(label, f'product-form/{slug(label)}.html', len(rows)) for label, rows in product_forms.items()]), crumbs=[('categories.html','By category')])
+        self.page('categories/functional-role.html','Functional role', '<h1>Functional role</h1><p class="lede">'+esc(taxonomy_intro)+'</p>'+self.taxonomy_directory('Functional role lanes','These labels describe a role in a hardware path and are separate from product form.',[(label, f'functional-role/{slug(label)}.html', len(rows)) for label, rows in functional_roles.items()]), crumbs=[('categories.html','By category')])
+        technical_values = sorted({r['category'] for r in self.records if r.get('category')})
+        for value in technical_values:
+            rows = [r for r in self.records if r.get('category') == value]
+            self.page(f'categories/{slug(value)}.html', value, f'<h1>{esc(value)}</h1><p class="lede">Original normalized technical category. Product form and functional role are separate discovery views.</p>'+self.cards(rows, '../'), crumbs=[('categories.html','By category')])
+        for label, rows in product_forms.items():
+            content = f'<p class="eyebrow">Product form</p><h1>{esc(label)}</h1><p class="lede">{esc(taxonomy_intro)}</p>'
+            content += self.cards(rows, '../../') if rows else f'<p class="empty">No current records are mapped to {esc(label)}. This is a planned coverage lane for future sourced research.</p>'
+            self.page(f'categories/product-form/{slug(label)}.html', label, content, crumbs=[('categories.html','By category'),('categories/product-form.html','Product form')])
+        for label, rows in functional_roles.items():
+            content = f'<p class="eyebrow">Functional role</p><h1>{esc(label)}</h1><p class="lede">{esc(taxonomy_intro)}</p>'
+            content += self.cards(rows, '../../') if rows else f'<p class="empty">No current records are mapped to {esc(label)}. This is a planned coverage lane for future sourced research.</p>'
+            self.page(f'categories/functional-role/{slug(label)}.html', label, content, crumbs=[('categories.html','By category'),('categories/functional-role.html','Functional role')])
+        for group, field, label in [('manufacturers','manufacturer','By manufacturer')]:
             values=sorted({r[field] for r in self.records if r.get(field)})
             self.page(group+'.html',label,f'<h1>{label}</h1><p>Browse proposed catalogue labels. Original source wording remains available in every dossier.</p><ul class="directory">'+''.join(f'<li><a href="{group}/{slug(v)}.html">{esc(v)} <span>{sum(r.get(field)==v for r in self.records)} records →</span></a></li>' for v in values)+'</ul>')
             for value in values:
@@ -345,7 +405,10 @@ class ReferenceRenderer:
             self.historical(r) if r['kind']=='historical' else self.connected_entity(r)
         self.relationship_pages()
         self.research_pages()
-        index=[{'title':r['title'],'description':r['description'],'key':r['entity_key'],'url':'entities/'+quote(r['entity_key'])+'.html','terms':' '.join(str(r.get(k) or '') for k in ['title','entity_key','manufacturer','category','year','model_number','product_name_raw','model_number_raw','description'])} for r in self.records]
+        index=[]
+        for r in self.records:
+            forms, roles = browse_taxonomy(r)
+            index.append({'title':r['title'],'description':r['description'],'key':r['entity_key'],'url':'entities/'+quote(r['entity_key'])+'.html','terms':' '.join(str(r.get(k) or '') for k in ['title','entity_key','manufacturer','category','year','model_number','product_name_raw','model_number_raw','description']+forms+roles)})
         for label in sorted({r['manufacturer'] for r in self.records if r.get('manufacturer')}):
             index.append({'title':label,'description':'Manufacturer records','key':slug(label),'url':'manufacturers/'+slug(label)+'.html','terms':label})
         (self.root/'assets/search-index.js').write_text('window.structuraSearch = '+json.dumps(index,ensure_ascii=False).replace('<','\\u003c')+';\n',encoding='utf-8')
