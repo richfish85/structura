@@ -48,7 +48,7 @@ PRODUCT_FORM_CATEGORIES = (
     ("Workstations", (r"\bworkstations?\b",)),
     ("Servers", (r"\bservers?\b",)),
     ("Laptops", (r"\bnotebook(?:s)?\b", r"\bmobile pc(?:s)?\b")),
-    ("Smartphones", (r"\bsmartphones?\b", r"\bmobile phones?\b")),
+    ("Phones", (r"\bphones?\b", r"\bmobile phones?\b", r"\bsmartphones?\b")),
     ("Smart Devices", (r"\bsmart devices?\b",)),
     ("IoT Devices", (r"\biot\b", r"\binternet of things\b")),
     ("Game Consoles", (r"\bgame consoles?\b",)),
@@ -64,6 +64,11 @@ def browse_taxonomy(r: dict) -> tuple[list[str], list[str]]:
     )).lower()
     forms = [label for label, patterns in PRODUCT_FORM_CATEGORIES
              if any(re.search(pattern, text) for pattern in patterns)]
+    proposal = str((r.get("normalization") or {}).get("normalized_category") or "")
+    phone_path = [part.strip() for part in proposal.split("/") if part.strip()]
+    if phone_path and phone_path[0].lower() == "phones":
+        if "Phones" not in forms: forms.append("Phones")
+        r["phone_path"] = phone_path
     value = str(r.get("category") or "")
     roles = []
     if value in {"CPU", "GPU", "Processing"}:
@@ -90,9 +95,12 @@ def load_records(c) -> list[dict]:
         r["normalization"] = dict(norm) if norm else None
         r["title"] = norm["normalized_display_name"] if norm else r["product_name_raw"]
         r["manufacturer"] = company(norm["normalized_manufacturer"] if norm else r["manufacturer_raw"])
-        r["category"] = category(norm["normalized_category"] if norm else r["product_type_raw"])
+        proposed_category = norm["normalized_category"] if norm else r["product_type_raw"]
         match = re.search(r"\b(1997|1998)\b", r["batch_key"])
-        r["year"] = match.group(1) if match else None
+        r["category"] = "Phones" if str(proposed_category or "").lower().startswith("phones /") else category(proposed_category)
+        r["cohort_year"] = match.group(1) if match else None
+        event_year = re.search(r"\b(1997|1998)\b", str(norm["normalized_launch_date"] or "") if norm else "")
+        r["year"] = event_year.group(1) if event_year else (match.group(1) if match else None)
         r["kind"] = "historical"
         r["description"] = f"{r['category']} · {r['manufacturer']} · {r['year']} research cohort"
         records.append(r)
@@ -117,7 +125,10 @@ class ReferenceRenderer:
         items = []
         for r in records:
             tag = "Connected reference" if r["kind"] == "connected" else f'{r["year"]} cohort · {r["category"]}'
-            items.append(f'<li><a class="record-link" href="{self.link(r,prefix)}"><span class="eyebrow">{esc(tag)}</span><strong>{esc(r["title"])}</strong><span>{esc(r["description"])}</span></a></li>')
+            card = f'<span class="eyebrow">{esc(tag)}</span><strong>{esc(r["title"])}</strong><span>{esc(r["description"])}</span>'
+            if r.get("phone_path"):
+                card += f'<small>{esc(" · ".join(r["phone_path"][1:]))} · proposed classification</small>'
+            items.append(f'<li><a class="record-link" href="{self.link(r,prefix)}">{card}</a></li>')
         return '<ul class="records">'+"".join(items)+'</ul>' if items else '<p class="empty">No records in this view yet.</p>'
 
     def taxonomy_directory(self, title: str, intro: str, values: list[tuple[str, str, int]]) -> str:
@@ -260,6 +271,8 @@ class ReferenceRenderer:
         flags = f'<a class="status" href="#uncertainty">{esc(reviews[0]["discrepancy_level"])} · reviewed discrepancy</a>' if reviews else '<span class="status">Candidate · no owner discrepancy decision</span>'
         body = f'<p class="eyebrow">{esc(r["year"])} research cohort / {esc(r["category"])}</p><h1>{esc(r["title"])}</h1><p class="lede">{esc(r["manufacturer"])} · {esc(n["entity_granularity"].replace("_"," ") if n else "Identity under review")}</p>{flags}'
         body += '<nav class="sections" aria-label="On this page"><a href="#overview">Overview</a><a href="#purpose">Why it existed</a><a href="#performance">Performance</a><a href="#release">Release evidence</a><a href="#uncertainty">Open questions</a><a href="#evidence">Evidence</a></nav>'
+        if n and str(n["normalized_category"]).lower().startswith("phones /"):
+            body += f'<p class="status">Proposed phone classification · {esc(n["normalized_category"].replace(" / "," · "))}</p>'
         body += f'<section id="overview"><h2>What it was</h2><p>{esc(r["title"])} is recorded in the {esc(r["year"])} {esc(r["category"])} research cohort under {esc(r["manufacturer"])}. The current display name and classification are normalization proposals.</p><dl class="facts"><dt>Source product name</dt><dd>{esc(r["product_name_raw"])}</dd><dt>Source model number</dt><dd>{esc(r["model_number_raw"] or "Not established")}</dd><dt>Source manufacturer</dt><dd>{esc(r["manufacturer_raw"])}</dd><dt>Research scope</dt><dd>{esc(r["market_scope_raw"] or "See release evidence")}</dd></dl></section>'
         body += '<section id="purpose"><h2>Why it existed</h2>'
         for p in purposes:
@@ -365,11 +378,14 @@ class ReferenceRenderer:
         self.page('index.html','Hardware reference',body,'Explore historical computer hardware and one connected SSD through sourced relationships.')
         self.page('years.html','By year','<h1>By year</h1><p class="lede">Browse the bounded launch-cohort research. A cohort label does not resolve every release date.</p><div class="year-links"><a href="years/1997.html">1997 →</a><a href="years/1998.html">1998 →</a></div>')
         for year in ['1997','1998']:
-            rows=[r for r in historical if r["year"]==year]
+            rows=[r for r in historical if r["cohort_year"]==year]
             links=''.join(f'<a href="{year}-{slug(cat)}.html">{cat} ({sum(r["category"]==cat for r in rows)})</a>' for cat in ['CPU','GPU','Storage'])
             self.page(f'years/{year}.html',year,f'<p class="eyebrow">Historical catalogue</p><h1>{year}</h1><p class="lede">{len(rows)} candidate records across CPU, GPU and storage. Event evidence remains attached to each dossier.</p><div class="pills">{links}</div>'+self.cards(rows,'../'),crumbs=[('years.html','By year')])
             for cat in ['CPU','GPU','Storage']:
                 self.page(f'years/{year}-{slug(cat)}.html',f'{year} · {cat}',f'<h1>{year} · {cat}</h1><p>Bounded research cohort. Proposed identity and release timing are shown on each record.</p>'+self.cards([r for r in rows if r["category"]==cat],'../'),crumbs=[('years.html','By year'),(f'years/{year}.html',year)])
+            phone_rows=[r for r in historical if r.get("category")=="Phones" and r.get("year")==year]
+            if phone_rows:
+                self.page(f'years/{year}-phones.html',f'{year} · Phones',f'<h1>{year} · Phones</h1><p class="lede">Phone models with a proposed introduction, launch or availability event in {year}. Cohort year and commercial delivery are distinct; see each dossier for source detail.</p>'+self.cards(phone_rows,'../'),crumbs=[('years.html','By year'),(f'years/{year}.html',year)])
         product_forms = {label: [r for r in self.records if label in browse_taxonomy(r)[0]] for label, _ in PRODUCT_FORM_CATEGORIES}
         functional_roles = {label: [r for r in self.records if label in browse_taxonomy(r)[1]] for label in FUNCTIONAL_ROLE_CATEGORIES}
         taxonomy_intro = 'These are discovery views over the current snapshot. A zero count means this edition has not mapped a record to that lane yet; it does not mean the hardware does not exist.'
@@ -388,8 +404,35 @@ class ReferenceRenderer:
             self.page(f'categories/{slug(value)}.html', value, f'<h1>{esc(value)}</h1><p class="lede">Original normalized technical category. Product form and functional role are separate discovery views.</p>'+self.cards(rows, '../'), crumbs=[('categories.html','By category')])
         for label, rows in product_forms.items():
             content = f'<p class="eyebrow">Product form</p><h1>{esc(label)}</h1><p class="lede">{esc(taxonomy_intro)}</p>'
+            if label == "Phones":
+                content += '<p>Historical smartphone classification follows documented operating environment and application functions; capacitive touch is not a requirement for earlier eras.</p>'
+                content += self.taxonomy_directory('Phone classes','Choose a computing class, then filter by physical form.', [(name, f'phones/{slug(name)}.html', sum(1 for r in rows if len(r.get("phone_path", [])) > 1 and r["phone_path"][1].lower() == name.lower())) for name in ("Smartphones", "Legacy Phones")])
             content += self.cards(rows, '../../') if rows else f'<p class="empty">No current records are mapped to {esc(label)}. This is a planned coverage lane for future sourced research.</p>'
             self.page(f'categories/product-form/{slug(label)}.html', label, content, crumbs=[('categories.html','By category'),('categories/product-form.html','Product form')])
+        self.page('categories/product-form/smartphones.html','Smartphones', '<h1>Smartphones</h1><p class="lede">This browse lane moved under Phones, where Smartphones and Legacy Phones are separated by functional class.</p><p><a href="phones/smartphones.html">Browse Smartphones under Phones →</a></p>', crumbs=[('categories.html','By category'),('categories/product-form.html','Product form')])
+        phone_forms = {
+            "Smartphones": ("Slab", "Foldable", "Slider / QWERTY", "Clamshell / Flip"),
+            "Legacy Phones": ("Bar / Brick", "Clamshell / Flip", "Slider"),
+        }
+        def phone_form_label(value):
+            return {"clamshell": "Clamshell / Flip", "bar": "Bar / Brick"}.get(value.lower(), value)
+        for class_name, forms_for_class in phone_forms.items():
+            class_rows = [r for r in self.records if len(r.get("phone_path", [])) > 1 and r["phone_path"][0].lower() == "phones" and r["phone_path"][1].lower() == class_name.lower()]
+            base = f'categories/product-form/phones/{slug(class_name)}'
+            form_links = []
+            for form_name in forms_for_class:
+                form_rows = [r for r in class_rows if len(r.get("phone_path", [])) > 2 and phone_form_label(r["phone_path"][2]).lower() == form_name.lower()]
+                form_links.append((form_name, f'{slug(class_name)}/{slug(form_name)}.html', len(form_rows)))
+            class_intro = ("Devices with a documented operating environment and application functions; era-specific input methods vary." if class_name == "Smartphones" else "Devices primarily built around telephony, messaging and purpose-specific functions on a phone platform.")
+            body = f'<p class="eyebrow">Phones · functional classification</p><h1>{esc(class_name)}</h1><p class="lede">{class_intro}</p>'
+            body += self.taxonomy_directory('Physical form factors','Descriptive browse filters. A body shape alone does not determine the functional class.', form_links)
+            body += self.cards(class_rows, '../../../') if class_rows else '<p class="empty">No current records are mapped to this phone class. This remains a planned coverage lane.</p>'
+            self.page(f'{base}.html', class_name, body, crumbs=[('categories.html','By category'),('categories/product-form.html','Product form'),('categories/product-form/phones.html','Phones')])
+            for form_name, relative_path, _ in form_links:
+                form_rows = [r for r in class_rows if len(r.get("phone_path", [])) > 2 and phone_form_label(r["phone_path"][2]).lower() == form_name.lower()]
+                form_body = f'<p class="eyebrow">Phones · {esc(class_name)}</p><h1>{esc(form_name)}</h1><p class="lede">Physical form filter within {esc(class_name)}. The label does not assert internal layout, exact placement, or release timing.</p>'
+                form_body += self.cards(form_rows, '../../../../') if form_rows else '<p class="empty">No current records are mapped to this form factor. This is a planned coverage lane.</p>'
+                self.page(f'categories/product-form/phones/{relative_path}', f'{class_name} · {form_name}', form_body, crumbs=[('categories.html','By category'),('categories/product-form/phones.html','Phones'),(f'{base}.html',class_name)])
         for label, rows in functional_roles.items():
             content = f'<p class="eyebrow">Functional role</p><h1>{esc(label)}</h1><p class="lede">{esc(taxonomy_intro)}</p>'
             content += self.cards(rows, '../../') if rows else f'<p class="empty">No current records are mapped to {esc(label)}. This is a planned coverage lane for future sourced research.</p>'
@@ -408,7 +451,8 @@ class ReferenceRenderer:
         index=[]
         for r in self.records:
             forms, roles = browse_taxonomy(r)
-            index.append({'title':r['title'],'description':r['description'],'key':r['entity_key'],'url':'entities/'+quote(r['entity_key'])+'.html','terms':' '.join(str(r.get(k) or '') for k in ['title','entity_key','manufacturer','category','year','model_number','product_name_raw','model_number_raw','description']+forms+roles)})
+            phone_terms = ' '.join(r.get('phone_path', []))
+            index.append({'title':r['title'],'description':r['description'],'key':r['entity_key'],'url':'entities/'+quote(r['entity_key'])+'.html','terms':' '.join(str(r.get(k) or '') for k in ['title','entity_key','manufacturer','category','year','model_number','product_name_raw','model_number_raw','description']+forms+roles)+ ' ' + phone_terms})
         for label in sorted({r['manufacturer'] for r in self.records if r.get('manufacturer')}):
             index.append({'title':label,'description':'Manufacturer records','key':slug(label),'url':'manufacturers/'+slug(label)+'.html','terms':label})
         (self.root/'assets/search-index.js').write_text('window.structuraSearch = '+json.dumps(index,ensure_ascii=False).replace('<','\\u003c')+';\n',encoding='utf-8')

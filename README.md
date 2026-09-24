@@ -8,10 +8,10 @@ Live reference: **https://richfish85.github.io/structura/**
 
 ## What
 
-- 54 historical candidates: 20 in the 1997 cohort and 34 in 1998, browsable by year, category and manufacturer.
+- 60 historical candidates: 23 in the 1997 cohort and 37 in 1998, browsable by year, category and manufacturer.
 - A Samsung 970 EVO 500 GB reference, with 16 connected entities and 22 sourced, typed assertions across the bounded example.
 - Search, readable dossiers, component navigation, assertion evidence, a 500 GB / 1 TB comparison and an explicit unresolved production-layout question.
-- The category hub now offers two derived browse axes: product form (from explicit source wording) and functional role (from the normalized technical category). Empty lanes stay visible as planned coverage.
+- The category hub offers product-form and functional-role discovery lanes. Phones now opens into Smartphones and Legacy Phones, with physical form-factor filters; historical smartphones use documented operating environment and applications, not touch input, as the classification basis. Six provisional Nokia phone candidates cover 1997–1998, with announcement and delivery events kept distinct. This is a representative sample, not a census.
 - An optional Three.js view on the 500 GB SSD dossier separates three documented constituents, with constrained turning and a separation slider. A same-page component preview shows its current connections and evidence links before the full component page. Without JavaScript, the original links still work. The model is conceptual, not a verified board layout.
 - Two locked public-use concepts: PC lifecycle readiness and phone charging capability. Neither is implemented yet.
 
@@ -87,7 +87,7 @@ See [validation evidence](docs/connected-explorer-validation.md), the [milestone
 
 Compare the connected SSD visual with the published explorer baseline in the [real-person trial](docs/usability-trial.md) when participants are available. The [visual adoption plan](docs/visual-adoption-plan.md) records the first implementation boundary, and the [testing pack](docs/user-testing/README.md) remains ready to distribute.
 
-Further context: [roadmap](ROADMAP.md), [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [public pathways](docs/public-use-cases.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), and [1997 repair status](research_batches/pilot-1997/00_STATUS.md).
+Further context: [roadmap](ROADMAP.md), [product brief](docs/product-brief.md), [architecture](docs/architecture.md), [public pathways](docs/public-use-cases.md), [research protocol](docs/multi-agent-research-protocol.md), [decision log](docs/decision-log.md), [1997 repair status](research_batches/pilot-1997/00_STATUS.md), and [1997–1998 phones pilot](research_batches/pilot-1997-1998-phones/00_STATUS.md).
 
 ## Access and reuse
 

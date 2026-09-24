@@ -38,10 +38,10 @@ class ConnectedExplorerTests(unittest.TestCase):
 
     def test_complete_current_dataset_is_noncanonical_connected_and_sourced(self):
         status=self.result['status']
-        self.assertEqual(status['historical_candidates'],54)
+        self.assertEqual(status['historical_candidates'],60)
         self.assertEqual(status['relationships'],22)
         self.assertEqual(status['canonical_entities'],0)
-        self.assertEqual(status['audit_findings'],76)
+        self.assertEqual(status['audit_findings'],79)
         self.assertEqual(status['usability_trial'],'pending_real_participants')
         with connect(self.db,read_only=True) as c:
             self.assertEqual(validate(c),[])
@@ -161,7 +161,7 @@ class ConnectedExplorerTests(unittest.TestCase):
         hub=(site/'categories.html').read_text(encoding='utf-8')
         for label, path in (
             ('Workstations','product-form/workstations.html'),('Servers','product-form/servers.html'),
-            ('Laptops','product-form/laptops.html'),('Smartphones','product-form/smartphones.html'),
+            ('Laptops','product-form/laptops.html'),('Phones','product-form/phones.html'),
             ('Smart Devices','product-form/smart-devices.html'),('IoT Devices','product-form/iot-devices.html'),
             ('Game Consoles','product-form/game-consoles.html'),('Input','functional-role/input.html'),
             ('Processing','functional-role/processing.html'),('Storage','functional-role/storage.html'),
@@ -172,8 +172,14 @@ class ConnectedExplorerTests(unittest.TestCase):
         self.assertTrue((site/'categories/functional-role.html').is_file())
         workstations=(site/'categories/product-form/workstations.html').read_text(encoding='utf-8')
         self.assertIn('Intel Pentium II Xeon processor 400 MHz',workstations)
-        empty=(site/'categories/product-form/smartphones.html').read_text(encoding='utf-8')
+        empty=(site/'categories/product-form/phones/smartphones/foldable.html').read_text(encoding='utf-8')
         self.assertIn('planned coverage lane',empty)
+        self.assertTrue((site/'categories/product-form/phones/smartphones.html').is_file())
+        self.assertTrue((site/'categories/product-form/phones/legacy-phones.html').is_file())
+        self.assertTrue((site/'categories/product-form/phones/smartphones/clamshell-flip.html').is_file())
+        self.assertTrue((site/'categories/product-form/phones/legacy-phones/bar-brick.html').is_file())
+        old_smartphones=(site/'categories/product-form/smartphones.html').read_text(encoding='utf-8')
+        self.assertIn('phones/smartphones.html',old_smartphones)
         processing=(site/'categories/functional-role/processing.html').read_text(encoding='utf-8')
         self.assertIn('Intel Pentium II Xeon processor 400 MHz',processing)
         self.assertIn('3Dlabs PERMEDIA 2 graphics processor',processing)

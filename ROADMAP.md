@@ -12,6 +12,7 @@ Build a definitive evidence-backed hardware tracker: identity-resolved, connecte
 - Bounded scout, verifier, normalizer, auditor and human-review workflow.
 - Claim-level provenance, uncertainty, discrepancies and reproducible builds.
 - 1997 and 1998 CPU, GPU and storage research cohorts retained as provisional records.
+- Six Nokia phone models are staged as provisional 1997–1998 research candidates under an era-aware Phones → Smartphones / Legacy Phones browse hierarchy. This is a sample, not a census.
 
 ## MVP 1 — Connected explorer · complete, human trial pending
 
@@ -57,3 +58,5 @@ Do not begin with a generic social feed, global authority score, raw-submission 
 ## Current next action
 
 Run the deferred [real-person trial](docs/usability-trial.md) when participants are available. Use the results before expanding the visual system into the PC and phone pathways.
+
+Phone category definitions, form-factor filters and the bounded 1997–1998 research packet are documented in the [phones pilot status](research_batches/pilot-1997-1998-phones/00_STATUS.md).

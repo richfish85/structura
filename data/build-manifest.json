@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "scope": "1997 and 1998 bounded launch-cohort candidates, not market censuses",
+  "scope": "1997 and 1998 bounded launch-cohort candidates, including six provisional phone introduction candidates; not market censuses",
   "steps": [
     {
       "stage": "batch",
@@ -421,6 +421,86 @@
         "audit": {
           "path": "research_batches/coordinator/1997-audit-repair-20260909/pilot-1997-hdd/audit.csv",
           "sha256": "1d36dfc84f324f545415f4f0c6fd1f61ee133e712f66b8fd0d2c7dffc1803dbf"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1997-1998-phones/01_candidates_1997.csv",
+          "sha256": "ab88fd4e1e52a98e3418372c66d2fc72964788df2f8a04ace0a4f7e2eda95d78"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-1998-phones/01_sources_1997.csv",
+          "sha256": "45161efacb13ebdac5b4f403fcf8985d87cc0b5c5f2c0bcc35a07d99fbb34191"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1997-1998-phones/02_verification_1997.csv",
+          "sha256": "f87f47386e7176d30b91b859213da7b3bf1102dea0ff24ffb82cf7789d2243fe"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1997-1998-phones/03_normalization_1997.csv",
+          "sha256": "cb4e1fe3b7384fdbe185faa83639e8fa5555041af9ba3c2dac0e17f960ad33ce"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1997-1998-phones/04_audit_1997.csv",
+          "sha256": "745d205418d7554725d2b0e2bdea33a66d81bd7d0826e07f93214937dcaad82f"
+        }
+      }
+    },
+    {
+      "stage": "batch",
+      "files": {
+        "candidates": {
+          "path": "research_batches/pilot-1997-1998-phones/01_candidates_1998.csv",
+          "sha256": "81cf92d1e079a25e226a9f1c3356e79fea45eaa53f2e18c6ee93a0b7d7cb9d62"
+        },
+        "sources": {
+          "path": "research_batches/pilot-1997-1998-phones/01_sources_1998.csv",
+          "sha256": "0ccf77ee6a5df8be8e2e44925edc7fd8c8799548ecd640798d1e9577b6b9c58b"
+        }
+      }
+    },
+    {
+      "stage": "verification",
+      "files": {
+        "verification": {
+          "path": "research_batches/pilot-1997-1998-phones/02_verification_1998.csv",
+          "sha256": "ba5048c8a0046143cab931fc23cf1a8d1c603ab2e9fd349d89656b2502873bc8"
+        }
+      }
+    },
+    {
+      "stage": "normalization",
+      "files": {
+        "normalization": {
+          "path": "research_batches/pilot-1997-1998-phones/03_normalization_1998.csv",
+          "sha256": "449a75662fb894564d6dba8f87fefa2a2f258ae7825a5f106e46e7698b06355e"
+        }
+      }
+    },
+    {
+      "stage": "audit",
+      "files": {
+        "audit": {
+          "path": "research_batches/pilot-1997-1998-phones/04_audit_1998.csv",
+          "sha256": "98c10824666ccb3dfba8ad801c050719377194c510f8ab3f9fd7afee12859d55"
         }
       }
     }
