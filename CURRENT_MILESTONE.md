@@ -1,6 +1,6 @@
 # Current milestone
 
-Status: **active**
+Status: **complete**
 
 Milestone: **SSD model benchmark and connected component preview**
 
@@ -12,13 +12,13 @@ Use the owner's `samsung_970_evo_500gb_exploded_3d.html` as an interaction and v
 
 ## Acceptance criteria
 
-- [ ] The SSD visual adopts the reference's useful inspection and exploded-view cues while plainly marking unverified geometry.
-- [ ] Every selectable part and connection is derived from existing SQL keys and evidence; no supplied HTML claim is promoted into data.
-- [ ] A normal click on an SSD constituent link opens a readable same-page preview, with an explicit full-page action and all currently recorded incoming/outgoing connections.
-- [ ] Modified-click, no-JavaScript, and WebGL-failure paths still reach the existing component pages; the panel closes by button, Escape, and backdrop and restores focus.
-- [ ] Standalone connected component pages put incoming parent context near the top without duplicating it below.
-- [ ] Desktop/mobile, keyboard, reduced-motion, and link behavior pass browser verification.
-- [ ] Unit suite, generated build/link checks, one final scope/provenance/accessibility review, public Pages deployment, and live page verification pass.
+- [x] The SSD visual adopts the reference's useful inspection and exploded-view cues while plainly marking unverified geometry.
+- [x] Every selectable part and connection is derived from existing SQL keys and evidence; no supplied HTML claim is promoted into data.
+- [x] A normal click on an SSD constituent link opens a readable same-page preview, with an explicit full-page action and all currently recorded incoming/outgoing connections.
+- [x] Modified-click, no-JavaScript, and WebGL-failure paths still reach the existing component pages; the panel closes by button, Escape, and backdrop and restores focus.
+- [x] Standalone connected component pages put incoming parent context near the top without duplicating it below.
+- [x] Desktop/mobile, keyboard, reduced-motion, and link behavior pass browser verification.
+- [x] Unit suite, generated build/link checks, one final scope/provenance/accessibility review, public Pages deployment, and live page verification pass.
 
 ## Allowed files and areas
 
