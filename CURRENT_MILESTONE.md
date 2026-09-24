@@ -1,6 +1,6 @@
 # Current milestone
 
-Status: **active**
+Status: **complete**
 
 Milestone: **Connected SSD visual prototype**
 
@@ -12,14 +12,14 @@ Add one Three.js visual to the Samsung 970 EVO 500 GB dossier. Use the owner's n
 
 ## Acceptance criteria
 
-- [ ] The SSD dossier offers an opt-in 3D view with assembled, exploded, and reset states.
-- [ ] Controller, NAND, and cache selections use the existing SQL entity and relationship keys and open their existing evidence pages.
-- [ ] The scene and labels state that geometry is conceptual and does not establish package counts or positions.
-- [ ] The semantic component cards and dossier navigation work without 3D.
-- [ ] The visual adapts to narrow screens, keyboard use, reduced motion, and WebGL failure.
-- [ ] The dependency is pinned, local, licensed, and included in generated static snapshots.
-- [ ] Existing tests, build checks, one browser validation pass, and one final independent review pass succeed.
-- [ ] The public Pages build succeeds and the live SSD dossier is verified.
+- [x] The SSD dossier offers an opt-in 3D view with assembled, exploded, and reset states.
+- [x] Controller, NAND, and cache selections use the existing SQL entity and relationship keys and open their existing evidence pages.
+- [x] The scene and labels state that geometry is conceptual and does not establish package counts or positions.
+- [x] The semantic component cards and dossier navigation work without 3D.
+- [x] The visual adapts to narrow screens, keyboard use, reduced motion, and WebGL failure.
+- [x] The dependency is pinned, local, licensed, and included in generated static snapshots.
+- [x] Existing tests, build checks, one browser validation pass, and one final independent review pass succeed.
+- [x] The public Pages build succeeds and the live SSD dossier is verified.
 
 ## Allowed files and areas
 
